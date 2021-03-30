@@ -1,3 +1,4 @@
 module.exports = {
-    mongoURI: 'mongodb+srv://adorgan:rAr6uMCpkim-S7f@cluster0.oj90x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-}
+  mongoURI:
+    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.oj90x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+};

@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 const db = require('./config/keys').mongoURI;
 // const db = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.oj90x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-console.log(db);
+
 mongoose
   .connect(db, {
     useNewUrlParser: true,

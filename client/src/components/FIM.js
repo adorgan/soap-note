@@ -1,17 +1,35 @@
 import React, { useState, useReducer, useEffect } from "react";
 import FimScore from "./FimScore";
+async function postData(url = "", data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
 
+const defaultState = {
+  dressing: "",
+  grooming: "",
+  bathing: "",
+  feeding: "",
+  toileting: "",
+  toilet_transfer: "",
+  tub_transfer: "",
+};
 const formReducer = (state, event) => {
   if (event.reset) {
-    return {
-      dressing: "",
-      grooming: "",
-      bathing: "",
-      feeding: "",
-      toileting: "",
-      toilet_transfer: "",
-      tub_transfer: "",
-    };
+    return defaultState
   }
   return {
     ...state,
@@ -21,15 +39,7 @@ const formReducer = (state, event) => {
 
 function FIM() {
   const [submitting, setSubmitting] = useState(false);
-  const [formData, setFormData] = useReducer(formReducer, {});
-  
-  //set form data to default values on page load
-  useEffect(() => {
-      console.log('useeffect');
-      setFormData({
-          reset: true
-      })
-  },[]);
+  const [formData, setFormData] = useReducer(formReducer, defaultState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -39,15 +49,18 @@ function FIM() {
         alert('Complete form entirely!');
     }
     else{
-        setSubmitting(true);
+        // setSubmitting(true);
 
-        setTimeout(() => {
-        setSubmitting(false);
-        console.log(formData);
-        setFormData({
-            reset: false,
+        // setTimeout(() => {
+        // setSubmitting(false);
+        // console.log(formData);
+        // setFormData({
+        //     reset: false,
+        // });
+        // }, 3000);
+        postData("/fim", formData).then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
         });
-        }, 3000);
     }
 
   };

@@ -38,6 +38,7 @@ const formReducer = (state, event) => {
 };
 
 function FIM() {
+  const [showFimBlurb, setShowFimBlurb] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useReducer(formReducer, defaultState);
 
@@ -59,6 +60,8 @@ function FIM() {
         // });
         // }, 3000);
         postData("/fim", formData).then((data) => {
+          setShowFimBlurb(true);
+          document.getElementById('fim_blurb').innerHTML = data;
           console.log(data); // JSON data parsed by `data.json()` call
         });
     }
@@ -130,6 +133,7 @@ function FIM() {
         </fieldset>
         <button type="submit">Submit</button>
       </form>
+      {showFimBlurb && <div contentEditable="true" id="fim_blurb"></div>}
     </div>
   );
 }

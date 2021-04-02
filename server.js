@@ -2,14 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const path = require('path');
-const cors = require('cors');
+const path = require("path");
+const cors = require("cors");
 const app = express();
-app.use(cors())
+app.use(cors());
 
 app.use(bodyParser.json());
 
-const db = require('./config/keys').mongoURI;
+const db = require("./config/keys").mongoURI;
 // const db = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.oj90x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 mongoose
@@ -20,38 +20,60 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-const addFim = (total, num) =>{
-    return total + num;
-}
-app.post("/fim", (req, res) => {
-  fimScoring = {
-      'independent': 7,
-      'modified independent': 6,
-      'supervision': 5,
-      'minimum assistance': 4,
-      'moderate assistance': 3,
-      'maximum assistance': 2,
-      'dependent': 1
-  };
-  nums = [];
-  Object.values(req.body).forEach((val)=>{
-      nums.push(fimScoring[val]);
-  })
-  
-  res.json(nums.reduce(addFim));
+//helper function for adding fim score array
+const addFim = (total, num) => {
+  return total + num;
+};
 
+//calculates fim score and blurb
+app.post("/fim", (req, res) => {
+  
+  fimScoring = {
+    'independent': 7,
+    "modified independent": 6,
+    'supervision': 5,
+    "minimum assistance": 4,
+    "moderate assistance": 3,
+    "maximum assistance": 2,
+    'dependent': 1,
+  };
+
+  adlCategories = [
+    "dressing",
+    "grooming",
+    "bathing",
+    "feeding",
+    "toileting",
+    "toilet transfer",
+    "tub transfer",
+  ];
+
+  //create array of all ADL FIM scores to calculate total and % impaired
+  fimScoreArr = [];
+  Object.values(req.body).forEach((val) => {
+    fimScoreArr.push(fimScoring[val]);
+  });
+  let totalFimScore = fimScoreArr.reduce(addFim);
+
+  //build string of ADL and fim scores with total score
+  let fimString = "Functional Independence Measure: ";
+  for (let i=0; i<adlCategories.length; i++) {
+    fimString += `${adlCategories[i]} = ${Object.values(req.body)[i]}; `;
+  }
+  fimString += `total score: ${totalFimScore}/56.`;
+
+  //return final string
+  res.json(fimString);
 });
 //serve static assets if in production
-if(process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === "production") {
   //set static folder
-  app.use(express.static('client/build'));
+  app.use(express.static("client/build"));
 
-  app.get('*', (req,res)=>{
-    res.sendFile(path.resolve(__dirname, 'client','build','index.html'))
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
-
 
 const port = process.env.PORT || 5000;
 

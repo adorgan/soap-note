@@ -19,10 +19,11 @@ async function postData(url = "", data = {}) {
 }
 
 const defaultState = {
-  dressing: "",
+  feeding: "",
   grooming: "",
   bathing: "",
-  feeding: "",
+  dressing_upper: "",
+  dressing_lower: "",
   toileting: "",
   toilet_transfer: "",
   tub_transfer: "",
@@ -81,12 +82,12 @@ function FIM() {
       {submitting && <div>Submtting Form...</div>}
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <label htmlFor="dressing">Dressing</label>
+          <label htmlFor="feeding">Feeding</label>
           <FimScore
-            name="dressing"
-            id="dressing"
+            name="feeding"
+            id="feeding"
             handleChange={handleChange}
-            value={formData.dressing}
+            value={formData.feeding}
           />
           <label htmlFor="grooming">Grooming</label>
           <FimScore
@@ -95,19 +96,26 @@ function FIM() {
             handleChange={handleChange}
             value={formData.grooming}
           />
-          <label htmlFor="bathin">Bathing</label>
+          <label htmlFor="bathing">Bathing</label>
           <FimScore
             name="bathing"
             id="bathing"
             handleChange={handleChange}
             value={formData.bathing}
           />
-          <label htmlFor="feeding">Feeding</label>
+          <label htmlFor="dressing_upper">Upper Body Dressing</label>
           <FimScore
-            name="feeding"
-            id="feeding"
+            name="dressing_upper"
+            id="dressing_upper"
             handleChange={handleChange}
-            value={formData.feeding}
+            value={formData.dressing_upper}
+          />
+          <label htmlFor="dressing_lower">Lower Body Dressing</label>
+          <FimScore
+            name="dressing_lower"
+            id="dressing_lower"
+            handleChange={handleChange}
+            value={formData.dressing_lower}
           />
           <label htmlFor="toileting">Toileting</label>
           <FimScore

@@ -39,10 +39,11 @@ app.post("/fim", (req, res) => {
   };
 
   adlCategories = [
-    "dressing",
+    "feeding",
     "grooming",
     "bathing",
-    "feeding",
+    "upper body dressing",
+    "lower body dressing",
     "toileting",
     "toilet transfer",
     "tub transfer",

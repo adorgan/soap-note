@@ -78,7 +78,7 @@ function FIM() {
 
   return (
     <div className="wrapper">
-      <h1>How About Them Apples</h1>
+      <h1>FIM</h1>
       {submitting && <div>Submtting Form...</div>}
       <form onSubmit={handleSubmit}>
         <fieldset>

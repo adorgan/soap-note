@@ -13,67 +13,93 @@ const db = require("./config/keys").mongoURI;
 // const db = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.oj90x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+    .connect(db, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log("MongoDB connected"))
+    .catch((err) => console.log(err));
 
 //helper function for adding fim score array
 const addFim = (total, num) => {
-  return total + num;
+    return total + num;
 };
 
 //calculates fim score and blurb
 app.post("/fim", (req, res) => {
-  
-  fimScoring = {
-    'independent': 7,
-    "modified independent": 6,
-    'supervision': 5,
-    "minimum assistance": 4,
-    "moderate assistance": 3,
-    "maximum assistance": 2,
-    'dependent': 1,
-  };
+    fimScoring = {
+        independent: 7,
+        "modified independent": 6,
+        supervision: 5,
+        "minimum assistance": 4,
+        "moderate assistance": 3,
+        "maximum assistance": 2,
+        dependent: 1,
+    };
 
-  adlCategories = [
-    "feeding",
-    "grooming",
-    "bathing",
-    "upper body dressing",
-    "lower body dressing",
-    "toileting",
-    "toilet transfer",
-    "tub transfer",
-  ];
+    adlCategories = [
+        "feeding",
+        "grooming",
+        "bathing",
+        "upper body dressing",
+        "lower body dressing",
+        "toileting",
+        "toilet transfer",
+        "tub transfer",
+    ];
 
-  //create array of all ADL FIM scores to calculate total and % impaired
-  fimScoreArr = [];
-  Object.values(req.body).forEach((val) => {
-    fimScoreArr.push(fimScoring[val]);
-  });
-  let totalFimScore = fimScoreArr.reduce(addFim);
+    //create array of all ADL FIM scores to calculate total and % impaired
+    fimScoreArr = [];
+    Object.values(req.body).forEach((val) => {
+        fimScoreArr.push(fimScoring[val]);
+    });
+    let totalFimScore = fimScoreArr.reduce(addFim);
 
-  //build string of ADL and fim scores with total score
-  let fimString = "Functional Independence Measure: ";
-  for (let i=0; i<adlCategories.length; i++) {
-    fimString += `${adlCategories[i]} = ${Object.values(req.body)[i]}; `;
-  }
-  fimString += `total score: ${totalFimScore}/56.`;
+    //build string of ADL and fim scores with total score
+    let fimString = "Functional Independence Measure: ";
+    for (let i = 0; i < adlCategories.length; i++) {
+        fimString += `${adlCategories[i]} = ${Object.values(req.body)[i]}; `;
+    }
+    fimString += `total score: ${totalFimScore}/56.`;
 
-  //return final string
-  res.json(fimString);
+    //return final string
+    res.json(fimString);
 });
+
+app.post("/arm-bike", (req, res) => {
+    var goalStr = "";
+    if (req.body.goals.length === 1) {
+        goalStr = req.body.goals[0];
+    } else if (req.body.goals.length === 2) {
+        goalStr = `${req.body.goals[0]} and ${req.body.goals[1]}`;
+    } else {
+        var len = req.body.goals.length;
+        for (let i = 0; i < len - 1; i++) {
+            goalStr += `${req.body.goals[i]}, `;
+        }
+        goalStr += `and ${req.body.goals[len - 1]}`;
+    }
+
+    var armBikeStr = `In order to improve the resident's BUE strength and coordination 
+    for greater safety and independence with ${goalStr}, the therapist instructed the 
+    res in safe completion of the arm bike. The therapist provided minimal verbal cues 
+    for the res to complete ${req.body.arm_bike_time} minutes on level 
+    ${req.body.arm_bike_level}. The resident tolerated the activity well with minimal 
+    rest breaks and denied pain with activity. The resident will continue to benefit 
+    from BUE strengthening and gross motor activities to maximize their independence 
+    with ADLs prior to discharge.`;
+
+    res.json(armBikeStr);
+});
+
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {
-  //set static folder
-  app.use(express.static("client/build"));
+    //set static folder
+    app.use(express.static("client/build"));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
 }
 
 const port = process.env.PORT || 5000;

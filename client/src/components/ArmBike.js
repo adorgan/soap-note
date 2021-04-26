@@ -71,35 +71,39 @@ function ArmBike() {
 
     return (
         <>
-            <h1>Arm Bike</h1>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <Goals
-                        name="goals"
-                        id="goals"
-                        handleChange={handleGoalChange}
-                        value={formData.goals}
-                    />
-                    <NumberInput
-                        name="arm_bike_time"
-                        id="arm_bike_time"
-                        label="Time"
-                        min="0"
-                        max="15"
-                        handleChange={handleChange}
-                    />
-                    <NumberInput
-                        name="arm_bike_level"
-                        id="arm_bike_level"
-                        label="Level"
-                        min="0"
-                        max="10"
-                        handleChange={handleChange}
-                    />
-                </fieldset>
-                <button type="submit">Submit</button>
-            </form>
-            {showGoalBlurb && <div contentEditable="true" id="goal_blurb"></div>}
+            <div className='wrapper'>
+                <h1>Arm Bike</h1>
+                <form onSubmit={handleSubmit}>
+                    <fieldset>
+                        <Goals
+                            name="goals"
+                            id="goals"
+                            handleChange={handleGoalChange}
+                            value={formData.goals}
+                        />
+                        <NumberInput
+                            name="arm_bike_time"
+                            id="arm_bike_time"
+                            label="Time"
+                            min="0"
+                            max="15"
+                            handleChange={handleChange}
+                        />
+                        <NumberInput
+                            name="arm_bike_level"
+                            id="arm_bike_level"
+                            label="Level"
+                            min="0"
+                            max="10"
+                            handleChange={handleChange}
+                        />
+                    </fieldset>
+                    <button type="submit">Submit</button>
+                </form>
+                {showGoalBlurb && (
+                    <div contentEditable="true" id="goal_blurb"></div>
+                )}
+            </div>
         </>
     );
 }

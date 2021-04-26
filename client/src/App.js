@@ -7,7 +7,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   return (
     <Router>
-      <div>
+      <div className='container'>
+        <Header />
         <nav>
           <ul>
             <li>
@@ -48,7 +49,7 @@ function App() {
 }
 
 function Home() {
-    return <h2>Home</h2>;
+    return <h2></h2>;
 }
 
 export default App;

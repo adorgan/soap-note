@@ -7,6 +7,7 @@ export default function Goals({ name, id, handleChange, value }) {
         onChange={handleChange}
         multiple
         value={value || ""}
+        required
       >
         <option value="feeding">Feeding</option>
         <option value="grooming">Grooming</option>

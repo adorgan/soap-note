@@ -66,25 +66,51 @@ app.post("/fim", (req, res) => {
     res.json(fimString);
 });
 
-app.post("/arm-bike", (req, res) => {
-    var goalStr = "";
-    if (req.body.goals.length === 1) {
-        goalStr = req.body.goals[0];
-    } else if (req.body.goals.length === 2) {
-        goalStr = `${req.body.goals[0]} and ${req.body.goals[1]}`;
+const makeList = (arr) => {
+    listStr = "";
+    if (arr.length === 1) {
+        listStr = arr[0];
+    } else if (arr.length === 2) {
+        listStr = `${arr[0]} and ${arr[1]}`;
     } else {
-        var len = req.body.goals.length;
+        var len = arr.length;
         for (let i = 0; i < len - 1; i++) {
-            goalStr += `${req.body.goals[i]}, `;
+            listStr += `${arr[i]}, `;
         }
-        goalStr += `and ${req.body.goals[len - 1]}`;
+        listStr += `and ${arr[len - 1]}`;
     }
+    return listStr;
+};
 
-    var armBikeStr = `In order to improve the resident's BUE strength and coordination 
+const assistBlurb = (client, assistLevel) => {
+    assistDict = {
+        "independent": "The " + client + " completed the activity independently.",
+        "modified independent":
+            "The " + client + " completed the activity with modified independence.",
+        "supervision":
+            "The therapist provided supervision to the resident to safely complete the activity.",
+        "minimum assistance":
+            "The therapist provided minimal assistance to the resident to safely complete the activity.",
+        "moderate assistance":
+            "The therapist provided moderate assistance to the resident to safely complete the activity.",
+        "maximum assistance":
+            "The therapist provided maximum assistance to the resident to safely complete the activity.",
+        "dependent":
+            "The therapist provided total assistance to the resident to safely complete the activity.",
+    };
+
+    return assistDict[assistLevel];
+};
+
+app.post("/arm-bike", (req, res) => {
+    var goalStr = makeList(req.body.goals);
+    var impairmentStr = makeList(req.body.impairments);
+    var assistStr = assistBlurb('resident', req.body.fim_arm_bike);
+
+    var armBikeStr = `In order to improve the resident's ${impairmentStr} 
     for greater safety and independence with ${goalStr}, the therapist instructed the 
-    res in safe completion of the arm bike. The therapist provided minimal verbal cues 
-    for the res to complete ${req.body.arm_bike_time} minutes on level 
-    ${req.body.arm_bike_level}. The resident tolerated the activity well with minimal 
+    res in safe completion of the arm bike. The resident completed ${req.body.arm_bike_time} minutes on level 
+    ${req.body.arm_bike_level}. ${assistStr} The resident tolerated the activity well with minimal 
     rest breaks and denied pain with activity. The resident will continue to benefit 
     from BUE strengthening and gross motor activities to maximize their independence 
     with ADLs prior to discharge.`;

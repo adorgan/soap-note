@@ -80,57 +80,57 @@ function FIM() {
             {submitting && <div>Submtting Form...</div>}
             <form onSubmit={handleSubmit}>
                 <fieldset>
-                    <label htmlFor="feeding">Feeding</label>
                     <FimScore
+                        label="Feeding"
                         name="feeding"
                         id="feeding"
                         handleChange={handleChange}
                         value={formData.feeding}
                     />
-                    <label htmlFor="grooming">Grooming</label>
                     <FimScore
+                        label="Grooming"
                         name="grooming"
                         id="grooming"
                         handleChange={handleChange}
                         value={formData.grooming}
                     />
-                    <label htmlFor="bathing">Bathing</label>
                     <FimScore
+                        label="Bathing"
                         name="bathing"
                         id="bathing"
                         handleChange={handleChange}
                         value={formData.bathing}
                     />
-                    <label htmlFor="dressing_upper">Upper Body Dressing</label>
                     <FimScore
+                        label="Upper Body Dressing"
                         name="dressing_upper"
                         id="dressing_upper"
                         handleChange={handleChange}
                         value={formData.dressing_upper}
                     />
-                    <label htmlFor="dressing_lower">Lower Body Dressing</label>
                     <FimScore
+                        label="Lower Body Dressing"
                         name="dressing_lower"
                         id="dressing_lower"
                         handleChange={handleChange}
                         value={formData.dressing_lower}
                     />
-                    <label htmlFor="toileting">Toileting</label>
                     <FimScore
+                        label="Toileting"
                         name="toileting"
                         id="toileting"
                         handleChange={handleChange}
                         value={formData.toileting}
                     />
-                    <label htmlFor="toilet_transfer">Toilet Transfer</label>
                     <FimScore
+                        label="Toilet Transfers"
                         name="toilet_transfer"
                         id="toilet_transfer"
                         handleChange={handleChange}
                         value={formData.toilet_transfer}
                     />
-                    <label htmlFor="tub_transfer">Tub Transfer</label>
                     <FimScore
+                        label="Tub Transfers"
                         name="tub_transfer"
                         id="tub_transfer"
                         handleChange={handleChange}

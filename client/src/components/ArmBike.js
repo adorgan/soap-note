@@ -1,6 +1,8 @@
 import React, { useState, useReducer, useEffect } from "react";
 import Goals from "./Goals";
 import NumberInput from "./NumberInput";
+import FimScore from "./FimScore";
+import Impairments from "./Impairments"
 
 async function postData(url = "", data = {}) {
     // Default options are marked with *
@@ -22,8 +24,10 @@ async function postData(url = "", data = {}) {
 
 const defaultState = {
     goals: [],
+    impairments: [],
     arm_bike_level: "",
     arm_bike_time: "",
+    fim_arm_bike: "",
 };
 const formReducer = (state, event) => {
     if (event.reset) {
@@ -62,6 +66,21 @@ function ArmBike() {
         });
     };
 
+    const handleImpairmentsChange = (event) => {
+        // parse selected impairments in dropdown and add to array
+        var selectedImpairments = document.getElementById("impairments").selectedOptions;
+        var impairmentsArray = [];
+        for (let impairment of selectedImpairments) {
+            impairmentsArray.push(impairment.value);
+        }
+
+        //update form state with new array
+        setFormData({
+            name: event.target.name,
+            value: impairmentsArray,
+        });
+    };
+
     const handleChange = (event) => {
         setFormData({
             name: event.target.name,
@@ -71,15 +90,23 @@ function ArmBike() {
 
     return (
         <>
-            <div className='wrapper'>
+            <div className="wrapper">
                 <h1>Arm Bike</h1>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
+                        <label htmlFor="goals">Goals Targeted</label>
                         <Goals
                             name="goals"
                             id="goals"
                             handleChange={handleGoalChange}
                             value={formData.goals}
+                        />
+                        <Impairments 
+                            label="Impairments Addressed"
+                            name="impairments"
+                            id="impairments"
+                            handleChange={handleImpairmentsChange}
+                            value={formData.impairments}
                         />
                         <NumberInput
                             name="arm_bike_time"
@@ -96,6 +123,13 @@ function ArmBike() {
                             min="0"
                             max="10"
                             handleChange={handleChange}
+                        />
+                        <FimScore
+                            label="Assistance Required"
+                            name="fim_arm_bike"
+                            id="fim_arm_bike"
+                            handleChange={handleChange}
+                            value={formData.fim_arm_bike}
                         />
                     </fieldset>
                     <button type="submit">Submit</button>

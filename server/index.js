@@ -118,6 +118,10 @@ app.post("/arm-bike", (req, res) => {
     res.json(armBikeStr);
 });
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/client/public/index.html"));
+});
+
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {
     //set static folder

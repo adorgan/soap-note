@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Soap Note generator",
   "main": "index.js",
-  "homepage": "https://soap-note.herokuapp.com/",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "cd server && node index.js",

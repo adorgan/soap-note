@@ -122,8 +122,6 @@ app.post("/arm-bike", (req, res) => {
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {
     //set static folder
-    app.use('../', express.static("client/build"));
-
     const root = path.join(__dirname, "../client", "build");
     app.use(express.static(root));
     app.get("*", (req, res) => {

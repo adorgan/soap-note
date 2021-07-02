@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer } from "react";
 import FimScore from "./FimScore";
 async function postData(url = "", data = {}) {
     // Default options are marked with *
@@ -40,7 +40,6 @@ const formReducer = (state, event) => {
 
 function FIM() {
     const [showFimBlurb, setShowFimBlurb] = useState(false);
-    const [submitting, setSubmitting] = useState(false);
     const [formData, setFormData] = useReducer(formReducer, defaultState);
 
     const handleSubmit = (event) => {
@@ -50,19 +49,9 @@ function FIM() {
         if (Object.values(formData).includes("")) {
             alert("Complete form entirely!");
         } else {
-            // setSubmitting(true);
-
-            // setTimeout(() => {
-            // setSubmitting(false);
-            // console.log(formData);
-            // setFormData({
-            //     reset: false,
-            // });
-            // }, 3000);
             postData("/fim", formData).then((data) => {
                 setShowFimBlurb(true);
                 document.getElementById("fim_blurb").innerHTML = data;
-                console.log(data); // JSON data parsed by `data.json()` call
             });
         }
     };
@@ -77,7 +66,6 @@ function FIM() {
     return (
         <div className="wrapper">
             <h1>FIM</h1>
-            {submitting && <div>Submtting Form...</div>}
             <form onSubmit={handleSubmit}>
                 <fieldset>
                     <FimScore

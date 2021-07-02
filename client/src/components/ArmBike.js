@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer } from "react";
 import Goals from "./Goals";
 import NumberInput from "./NumberInput";
 import FimScore from "./FimScore";

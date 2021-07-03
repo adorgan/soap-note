@@ -1,5 +1,5 @@
-const createArmBike = require("./therEx/armbike");
-
+const fimScoring = require("../utils/fimScoring");
+const adlCategories = require("../utils/adlCategories");
 //helper function for adding fim score array
 const addFim = (total, num) => {
     return total + num;
@@ -7,26 +7,6 @@ const addFim = (total, num) => {
 
 //calculates fim score and blurb
 const createFim = (req, res) => {
-    fimScoring = {
-        independent: 7,
-        "modified independent": 6,
-        supervision: 5,
-        "minimum assistance": 4,
-        "moderate assistance": 3,
-        "maximum assistance": 2,
-        dependent: 1,
-    };
-
-    adlCategories = [
-        "feeding",
-        "grooming",
-        "bathing",
-        "upper body dressing",
-        "lower body dressing",
-        "toileting",
-        "toilet transfer",
-        "tub transfer",
-    ];
 
     //create array of all ADL FIM scores to calculate total and % impaired
     const fimScoreArr = [];

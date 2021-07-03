@@ -1,11 +1,19 @@
 const fimScoring = require("../utils/fimScoring");
 const adlCategories = require("../utils/adlCategories");
+
+
 //helper function for adding fim score array
 const addFim = (total, num) => {
     return total + num;
 };
 
-//calculates fim score and blurb
+
+/**
+ * Creates a FIM score summary
+ * @param {Object} req 
+ * @param {Object} res 
+ * @returns {JSON} FIM score summary response
+ */
 const createFim = (req, res) => {
 
     //create array of all ADL FIM scores to calculate total and % impaired
@@ -23,7 +31,7 @@ const createFim = (req, res) => {
     fimString += `total score: ${totalFimScore}/56.`;
 
     //return final string
-    res.json(fimString);
+    return res.json(fimString);
 };
 
 module.exports = createFim;

@@ -1,8 +1,8 @@
 export default function FimScore({ name, id, handleChange, value, label }) {
     return (
         <>
-            <label htmlFor={id}>{label}</label>
-            <div>
+            <label className="form-label" htmlFor={id}>{label}</label>
+            <div className="div-select">
                 <select
                     name={name}
                     id={id}

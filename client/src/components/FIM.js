@@ -65,7 +65,6 @@ function FIM() {
 
     return (
         <div className="wrapper">
-            <h1>FIM</h1>
             <form onSubmit={handleSubmit}>
                 <fieldset>
                     <FimScore
@@ -125,7 +124,11 @@ function FIM() {
                         value={formData.tub_transfer}
                     />
                 </fieldset>
-                <button type="submit">Submit</button>
+                <div className='div-submit-btn'>
+                    <button className="btn-form" type="submit">
+                        Submit
+                    </button>
+                </div>
             </form>
             {showFimBlurb && <div contentEditable="true" id="fim_blurb"></div>}
         </div>

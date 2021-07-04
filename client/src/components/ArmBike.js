@@ -101,7 +101,7 @@ function ArmBike() {
                             handleChange={handleGoalChange}
                             value={formData.goals}
                         />
-                        <Impairments 
+                        <Impairments
                             label="Impairments Addressed"
                             name="impairments"
                             id="impairments"
@@ -132,7 +132,9 @@ function ArmBike() {
                             value={formData.fim_arm_bike}
                         />
                     </fieldset>
-                    <button type="submit">Submit</button>
+                    <div className="div-submit-btn">
+                        <button className="btn-form" type="submit">Submit</button>
+                    </div>
                 </form>
                 {showGoalBlurb && (
                     <div contentEditable="true" id="goal_blurb"></div>

@@ -13,6 +13,8 @@ fieldset {
     grid-template-rows: 1fr 1fr;
     border: 0;
     padding: 0;
+    margin-bottom: 2rem;
+    align-items: center;
 }
 
 form {
@@ -47,9 +49,7 @@ nav {
 
 select {
     width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
-    margin-top: 1px;
+    padding: .5rem;
 }
 
 select:hover{
@@ -64,7 +64,14 @@ ul {
 }
 
 /* Classes */
-
+.btn-copy{
+    border-radius: .7rem;
+    padding: 1rem;
+    width: 6rem;
+    border: 0px;
+    background: #0088ff;
+    color: white;
+}
 .btn-form {
     border-radius: 7px;
     padding: 10px;
@@ -74,13 +81,9 @@ ul {
     color: white;
 }
 
-.btn-form:hover{
+.btn-form:hover, .btn-copy:hover{
     cursor: pointer;
     background: rgb(0, 104, 240);
-}
-
-.blurb-copy{
-    width: 5rem;
 }
 
 .container {
@@ -97,6 +100,8 @@ ul {
 
 .div-select {
     grid-column: 3;
+    align-items: center;
+    padding: .5rem;
 }
 
 

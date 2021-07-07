@@ -152,7 +152,7 @@ function FIM() {
                         <div className="div-copy-btn">
                             <button
                                 id="btn_copy"
-                                className="blurb-copy"
+                                className="btn-copy"
                                 onClick={setCopyBtn}
                             >
                                 Copy

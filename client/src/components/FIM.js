@@ -1,5 +1,15 @@
 import React, { useState, useReducer } from "react";
 import FimScore from "./FimScore";
+
+const setCopyBtn = () => {
+    var range = document.createRange();
+    range.selectNode(document.getElementById("blurb"));
+    window.getSelection().removeAllRanges(); // clear current selection
+    window.getSelection().addRange(range); // to select text
+    document.execCommand("copy");
+    // window.getSelection().removeAllRanges(); // to deselect
+};
+
 async function postData(url = "", data = {}) {
     // Default options are marked with *
     const response = await fetch(url, {
@@ -51,7 +61,7 @@ function FIM() {
         } else {
             postData("/fim", formData).then((data) => {
                 setShowFimBlurb(true);
-                document.getElementById("fim_blurb").innerHTML = data;
+                document.querySelector(".narrative_blurb").innerHTML = data;
             });
         }
     };
@@ -64,74 +74,94 @@ function FIM() {
     };
 
     return (
-        <div className="wrapper">
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <FimScore
-                        label="Feeding"
-                        name="feeding"
-                        id="feeding"
-                        handleChange={handleChange}
-                        value={formData.feeding}
-                    />
-                    <FimScore
-                        label="Grooming"
-                        name="grooming"
-                        id="grooming"
-                        handleChange={handleChange}
-                        value={formData.grooming}
-                    />
-                    <FimScore
-                        label="Bathing"
-                        name="bathing"
-                        id="bathing"
-                        handleChange={handleChange}
-                        value={formData.bathing}
-                    />
-                    <FimScore
-                        label="Upper Body Dressing"
-                        name="dressing_upper"
-                        id="dressing_upper"
-                        handleChange={handleChange}
-                        value={formData.dressing_upper}
-                    />
-                    <FimScore
-                        label="Lower Body Dressing"
-                        name="dressing_lower"
-                        id="dressing_lower"
-                        handleChange={handleChange}
-                        value={formData.dressing_lower}
-                    />
-                    <FimScore
-                        label="Toileting"
-                        name="toileting"
-                        id="toileting"
-                        handleChange={handleChange}
-                        value={formData.toileting}
-                    />
-                    <FimScore
-                        label="Toilet Transfers"
-                        name="toilet_transfer"
-                        id="toilet_transfer"
-                        handleChange={handleChange}
-                        value={formData.toilet_transfer}
-                    />
-                    <FimScore
-                        label="Tub Transfers"
-                        name="tub_transfer"
-                        id="tub_transfer"
-                        handleChange={handleChange}
-                        value={formData.tub_transfer}
-                    />
-                </fieldset>
-                <div className='div-submit-btn'>
-                    <button className="btn-form" type="submit">
-                        Submit
-                    </button>
-                </div>
-            </form>
-            {showFimBlurb && <div contentEditable="true" id="fim_blurb"></div>}
-        </div>
+        <>
+            <div className="wrapper">
+                <form onSubmit={handleSubmit}>
+                    <fieldset>
+                        <FimScore
+                            label="Feeding"
+                            name="feeding"
+                            id="feeding"
+                            handleChange={handleChange}
+                            value={formData.feeding}
+                        />
+                        <FimScore
+                            label="Grooming"
+                            name="grooming"
+                            id="grooming"
+                            handleChange={handleChange}
+                            value={formData.grooming}
+                        />
+                        <FimScore
+                            label="Bathing"
+                            name="bathing"
+                            id="bathing"
+                            handleChange={handleChange}
+                            value={formData.bathing}
+                        />
+                        <FimScore
+                            label="Upper Body Dressing"
+                            name="dressing_upper"
+                            id="dressing_upper"
+                            handleChange={handleChange}
+                            value={formData.dressing_upper}
+                        />
+                        <FimScore
+                            label="Lower Body Dressing"
+                            name="dressing_lower"
+                            id="dressing_lower"
+                            handleChange={handleChange}
+                            value={formData.dressing_lower}
+                        />
+                        <FimScore
+                            label="Toileting"
+                            name="toileting"
+                            id="toileting"
+                            handleChange={handleChange}
+                            value={formData.toileting}
+                        />
+                        <FimScore
+                            label="Toilet Transfers"
+                            name="toilet_transfer"
+                            id="toilet_transfer"
+                            handleChange={handleChange}
+                            value={formData.toilet_transfer}
+                        />
+                        <FimScore
+                            label="Tub Transfers"
+                            name="tub_transfer"
+                            id="tub_transfer"
+                            handleChange={handleChange}
+                            value={formData.tub_transfer}
+                        />
+                    </fieldset>
+                    <div className="div-submit-btn">
+                        <button className="btn-form" type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+
+                {showFimBlurb && (
+                    <>
+                        <div
+                            id="blurb"
+                            contentEditable="true"
+                            className="narrative_blurb"
+                        ></div>
+                        <div className="div-copy-btn">
+                            <button
+                                id="btn_copy"
+                                className="blurb-copy"
+                                onClick={setCopyBtn}
+                            >
+                                Copy
+                            </button>
+                        </div>
+                    </>
+                )}
+            </div>
+        </>
     );
 }
 

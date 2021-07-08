@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import Goals from "./Goals";
 import NumberInput from "./NumberInput";
 import FimScore from "./FimScore";
-import Impairments from "./Impairments"
+import Impairments from "./Impairments";
 
 async function postData(url = "", data = {}) {
     // Default options are marked with *
@@ -21,6 +21,26 @@ async function postData(url = "", data = {}) {
     });
     return response.json(); // parses JSON response into native JavaScript objects
 }
+
+const goals = [
+    "feeding",
+    "grooming",
+    "upper body dressing",
+    "lower body dressing",
+    "toileting",
+    "toilet transfers",
+    "tub transfers",
+];
+
+const impairments = [
+    "fine motor coordination",
+    "gross motor coordination",
+    "BUE strength",
+    "dynamic sitting balance",
+    "static standing balance",
+    "proprioception",
+    "safety awareness",
+];
 
 const defaultState = {
     goals: [],
@@ -68,7 +88,8 @@ function ArmBike() {
 
     const handleImpairmentsChange = (event) => {
         // parse selected impairments in dropdown and add to array
-        var selectedImpairments = document.getElementById("impairments").selectedOptions;
+        var selectedImpairments = document.getElementById("impairments")
+            .selectedOptions;
         var impairmentsArray = [];
         for (let impairment of selectedImpairments) {
             impairmentsArray.push(impairment.value);
@@ -94,12 +115,14 @@ function ArmBike() {
                 <h1>Arm Bike</h1>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
-                        <label htmlFor="goals">Goals Targeted</label>
                         <Goals
+                            label="Goals Targeted"
                             name="goals"
                             id="goals"
                             handleChange={handleGoalChange}
                             value={formData.goals}
+                            goals={goals}
+                            size={goals.length}
                         />
                         <Impairments
                             label="Impairments Addressed"
@@ -107,6 +130,8 @@ function ArmBike() {
                             id="impairments"
                             handleChange={handleImpairmentsChange}
                             value={formData.impairments}
+                            impairments={impairments}
+                            size={impairments.length}
                         />
                         <NumberInput
                             name="arm_bike_time"
@@ -133,7 +158,9 @@ function ArmBike() {
                         />
                     </fieldset>
                     <div className="div-submit-btn">
-                        <button className="btn-form" type="submit">Submit</button>
+                        <button className="btn-form" type="submit">
+                            Submit
+                        </button>
                     </div>
                 </form>
                 {showGoalBlurb && (

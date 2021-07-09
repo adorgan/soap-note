@@ -133,6 +133,17 @@ ul {
     margin-right: 1rem;
     padding: 1rem;
 }
+.note-container{
+    grid-column: 3 / 6;
+}
+.note-div{
+    border: .1rem solid grey;
+    padding: .5rem
+}
+
+.note-title{
+    margin-bottom: .25rem;
+}
 
 .wrapper{
     display: grid;

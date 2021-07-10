@@ -8,6 +8,7 @@ const app = express();
 
 const therExRoutes = require("./routes/therExRoutes");
 const fimRoutes = require("./routes/fimRoutes");
+const noteRoutes = require("./routes/noteRoutes");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,6 +25,7 @@ mongoose
 
 app.use("/", therExRoutes);
 app.use("/", fimRoutes);
+app.use("/", noteRoutes);
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {

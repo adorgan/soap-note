@@ -4,19 +4,6 @@ import Note from "./Note";
 import Delete from "./Delete";
 import postData from "../utils/postRequest"
 
-// async function postData(url = "", data = {}) {
-//     const response = await fetch(url, {
-//         method: "POST",
-//         mode: "cors",
-//         credentials: "same-origin",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data),
-//     });
-//     return response.json();
-// }
-
 async function getData(url = "") {
     const response = await fetch(url);
     return response.json();
@@ -57,7 +44,6 @@ const MyNotes = () => {
         postData("/delete-note", deleteData).then((data) => {
             setSubmitted(!submitted);
         });
-        console.log("post deleted");
     };
 
     const handleChange = (event) => {
@@ -69,7 +55,6 @@ const MyNotes = () => {
 
     useEffect(() => {
         getData("/get-notes").then((data) => {
-            console.log("notes gathered");
             setNotes(data);
         });
     }, [submitted]);

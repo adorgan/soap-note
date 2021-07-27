@@ -1,23 +1,31 @@
-import { useEffect, useReducer } from "react";
-import React from 'react'
+import { useEffect, useReducer, useState, Fragment } from "react";
+import React from "react";
+import Note from "./Note";
+import Delete from "./Delete";
+import postData from "../utils/postRequest"
 
-async function postData(url = "", data = {}) {
-    const response = await fetch(url, {
-        method: "POST", 
-        mode: "cors", 
-        credentials: "same-origin", 
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
+// async function postData(url = "", data = {}) {
+//     const response = await fetch(url, {
+//         method: "POST",
+//         mode: "cors",
+//         credentials: "same-origin",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(data),
+//     });
+//     return response.json();
+// }
+
+async function getData(url = "") {
+    const response = await fetch(url);
     return response.json();
 }
 
 const defaultState = {
     title: "",
     body: "",
-}
+};
 
 const formReducer = (state, event) => {
     if (event.reset) {
@@ -29,17 +37,27 @@ const formReducer = (state, event) => {
     };
 };
 
-
-
-
 const MyNotes = () => {
     const [formData, setFormData] = useReducer(formReducer, defaultState);
+    const [notes, setNotes] = useState([]);
+    const [submitted, setSubmitted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         postData("/add-note", formData).then((data) => {
-            console.log(data.body);
+            setSubmitted(!submitted);
         });
+    };
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        const deleteData = {
+            id: e.target.id.value,
+        };
+        postData("/delete-note", deleteData).then((data) => {
+            setSubmitted(!submitted);
+        });
+        console.log("post deleted");
     };
 
     const handleChange = (event) => {
@@ -50,29 +68,32 @@ const MyNotes = () => {
     };
 
     useEffect(() => {
-        const btn_edit = document.getElementById("btn-edit");
-        const btn_save = document.getElementById("btn-save")
-        const mynote = document.getElementById("mynote");
-        btn_edit.addEventListener("click", () => {
-            mynote.contentEditable = "true"
-            mynote.focus();
+        getData("/get-notes").then((data) => {
+            console.log("notes gathered");
+            setNotes(data);
         });
-        btn_save.addEventListener("click", () => {
-            mynote.contentEditable = "false";
-        });
-
-    }, []);
+    }, [submitted]);
 
     return (
         <>
             <div className="note-container">
-                <h3 className="note-title">Title</h3>
-                <div id="mynote" className="note-div">
-                    This is an example of some notes I would save for future
-                    use.
-                </div>
-                <button id="btn-edit">Edit</button>
-                <button id="btn-save">Save</button>
+                <>
+                    {notes.map((note) => {
+                        return (
+                            <Fragment key={note._id}>
+                                <Note
+                                    id={note._id}
+                                    title={note.title}
+                                    body={note.body}
+                                />
+                                <Delete
+                                    id={note._id}
+                                    handleSubmit={handleDelete}
+                                />
+                            </Fragment>
+                        );
+                    })}
+                </>
 
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="text">Title</label>
@@ -95,6 +116,6 @@ const MyNotes = () => {
             </div>
         </>
     );
-}
+};
 
-export default MyNotes
+export default MyNotes;

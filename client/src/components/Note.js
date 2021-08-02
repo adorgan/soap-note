@@ -1,33 +1,47 @@
-import {useEffect} from 'react';
+import { useEffect, useState } from "react";
+import postData from "../utils/postRequest";
 
 export default function Note({ title, body, id }) {
+    const [ note, setNote ] = useState(body);
+
     const editId = `btn-edit-${id}`;
     const saveId = `btn-save-${id}`;
-    const noteId = `note-${id}`
+    const noteId = `note-${id}`;
+
+    async function saveChanges() {
+        document.getElementById(noteId).readOnly = true;
+        const data = {
+            id: id,
+            body: note,
+        };
+        await postData("/save-note", data);
+    }
+
+    const handleChange = (e) => {
+        setNote(e.target.value);
+    };
 
     useEffect(() => {
-        
         const btn_edit = document.getElementById(editId);
-        const btn_save = document.getElementById(saveId);
         const mynote = document.getElementById(noteId);
+        mynote.readOnly = true;
         btn_edit.addEventListener("click", () => {
-            mynote.contentEditable = "true"
+            mynote.readOnly = false;
             mynote.focus();
         });
-        btn_save.addEventListener("click", () => {
-            mynote.contentEditable = "false";
-        });
     }, [editId, saveId, noteId]);
+
     return (
         <>
             <h3 className="note-title">{title}</h3>
-            <div id={noteId} className="note-div">
-                {body}
-            </div>
+            <textarea
+                id={noteId}
+                className="note-div"
+                onChange={handleChange}
+                value={ note }
+            ></textarea>
             <button id={editId}>Edit</button>
-            <button id={saveId}>Save</button>
-
-
+            <button id={saveId} onClick={saveChanges}>Save</button>
         </>
     );
 }

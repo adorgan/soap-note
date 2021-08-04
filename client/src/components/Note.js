@@ -37,7 +37,7 @@ export default function Note({ title, body, id }) {
             <h3 className="note-title">{title}</h3>
             <textarea
                 id={noteId}
-                className="note-div"
+                className="note-textarea"
                 onChange={handleChange}
                 value={note}
             ></textarea>

@@ -179,10 +179,11 @@ ul {
     grid-column: 2 / 5;
     padding: 2rem;
 }
-.note-div{
+.note-textarea{
     border: .1rem solid grey;
     padding: .5rem;
     width: 100%;
+    resize: none;
 }
 
 .note-title{

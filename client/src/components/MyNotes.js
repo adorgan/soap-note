@@ -90,24 +90,36 @@ const MyNotes = () => {
                     })}
                 </>
 
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="text">Title</label>
-                    <input
-                        id="text"
-                        name="title"
-                        type="text"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="body">Body</label>
-                    <textarea
-                        name="body"
-                        id="body"
-                        cols="30"
-                        rows="10"
-                        onChange={handleChange}
-                    ></textarea>
-                    <button type="submit">Submit</button>
-                </form>
+                <div className="new-note-form">
+                    <form onSubmit={handleSubmit}>
+                        <div >
+                            <div className="new-note-title">
+                                <label htmlFor="text">Title</label>
+                                <input
+                                    id="text"
+                                    name="title"
+                                    type="text"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="new-note-body">
+                                <label htmlFor="body">Body</label>
+                                <textarea
+                                    name="body"
+                                    id="body"
+                                    rows="5"
+                                    onChange={handleChange}
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div className="div-submit-btn">
+                            <button className="btn-form" type="submit">
+                                Add Note
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </>
     );

@@ -18,7 +18,6 @@ fieldset {
 }
 
 form {
-    padding: 20px;
     grid-column: 1/3;
 }
 
@@ -92,6 +91,10 @@ ul {
     grid-template-rows: 50px 1fr 1fr 1fr 1fr 1fr;
 }
 
+.delete-btn{
+    display: inline-block;
+}
+
 .div-copy-btn {
     grid-column-start: 2;
     display: flex;
@@ -133,16 +136,58 @@ ul {
     margin-right: 1rem;
     padding: 1rem;
 }
+
+.new-note-form{
+    display: block;
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.new-note-form form{
+    padding: 1rem;
+}
+
+.new-note-title label, .new-note-body label{
+    display: block;
+    padding: 1rem 0 .5rem 0;
+    font-weight: bold;
+}
+
+.new-note-title input{
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: .25rem;
+}
+
+.new-note-body {
+    width: 100%;
+}
+
+.new-note-form{
+    border: 1px solid black;
+}
+
+.new-note-body textarea {
+    display: block;
+    width: inherit;
+    margin-bottom: 2rem;
+}
+
 .note-container{
-    grid-column: 3 / 6;
+    grid-column: 2 / 5;
+    padding: 2rem;
 }
 .note-div{
     border: .1rem solid grey;
-    padding: .5rem
+    padding: .5rem;
+    width: 100%;
 }
 
 .note-title{
     margin-bottom: .25rem;
+    font-size: 1.5rem;
 }
 
 .wrapper{

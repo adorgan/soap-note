@@ -4,12 +4,13 @@ export default function Delete({
 }) {
     return (
         <>
-            <form id={id} onSubmit={handleSubmit}>
+            <form className="delete-btn" id={id} onSubmit={handleSubmit}>
                 <input
                     name="id"
                     value={id}
                     type="text"
                     readOnly
+                    hidden
                 />
                 <button type="submit">Delete</button>
             </form>

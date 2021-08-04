@@ -24,12 +24,16 @@ export default function Note({ title, body, id }) {
     useEffect(() => {
         const btn_edit = document.getElementById(editId);
         const mynote = document.getElementById(noteId);
-        mynote.readOnly = true;
         btn_edit.addEventListener("click", () => {
             mynote.readOnly = false;
             mynote.focus();
         });
     }, [editId, saveId, noteId]);
+
+    useEffect(() => {
+        const mynote = document.getElementById(noteId);
+        mynote.style.height = mynote.scrollHeight + "px";
+    });
 
     return (
         <>
@@ -38,10 +42,12 @@ export default function Note({ title, body, id }) {
                 id={noteId}
                 className="note-div"
                 onChange={handleChange}
-                value={ note }
+                value={note}
             ></textarea>
             <button id={editId}>Edit</button>
-            <button id={saveId} onClick={saveChanges}>Save</button>
+            <button id={saveId} onClick={saveChanges}>
+                Save
+            </button>
         </>
     );
 }

@@ -24,16 +24,13 @@ export default function Note({ title, body, id }) {
     useEffect(() => {
         const btn_edit = document.getElementById(editId);
         const mynote = document.getElementById(noteId);
+        mynote.readOnly = true;
+        mynote.style.height = mynote.scrollHeight + "px";
         btn_edit.addEventListener("click", () => {
             mynote.readOnly = false;
             mynote.focus();
         });
     }, [editId, saveId, noteId]);
-
-    useEffect(() => {
-        const mynote = document.getElementById(noteId);
-        mynote.style.height = mynote.scrollHeight + "px";
-    });
 
     return (
         <>

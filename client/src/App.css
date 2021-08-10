@@ -119,7 +119,7 @@ ul {
 }
 
 .header{
-    grid-column: 1 / 7;
+    grid-column: 1 / 8;
     grid-row: 1 / 1;
     background-color: #3498f0;
 }
@@ -191,13 +191,36 @@ ul {
     font-size: 1.5rem;
 }
 
+.right-sidebar{
+    grid-column-start: 6;
+    grid-row: 2 / 7;
+    border-left: 1px solid grey;
+}
+
+
+.vitals-label{
+    display: block;
+    padding: 1rem 0 .5rem 0;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.vitals-input{
+    display: block;
+    width: 7rem;
+    padding: .5rem;
+        margin-left: auto;
+    margin-right: auto;
+}
+
 .wrapper{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     grid-column-start: 2;
     grid-column-end: 6;
     grid-row: 2 / 6;
+
 }
 
 /* IDs */

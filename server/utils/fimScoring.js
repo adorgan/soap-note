@@ -5,7 +5,7 @@ const fimScoring = {
     "minimum assistance": 4,
     "moderate assistance": 3,
     "maximum assistance": 2,
-    dependent: 1,
+    "total assistance": 1,
 };
 
 module.exports = fimScoring;

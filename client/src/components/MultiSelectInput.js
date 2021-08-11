@@ -1,12 +1,14 @@
-export default function Goals({
+import React from 'react';
+
+export default function MultiSelectInput(
+    {id,
     name,
-    id,
-    handleChange,
-    value,
     label,
-    goals,
-    size,
-}) {
+    options,
+    handleChange}
+) {
+
+    
     return (
         <>
             <label className="form-label" htmlFor={id}>
@@ -14,21 +16,20 @@ export default function Goals({
             </label>
             <div className="div-select">
                 <select
-                    className="input"
                     name={name}
                     id={id}
                     onChange={handleChange}
+                    size={options.length + 1}
                     multiple
-                    value={value || ""}
-                    size={size}
                     required
-                    style={{ width: "auto" }}
                 >
-                    {goals.map((goal, index) => {
+                    <option value="default">Select One</option>
+                    {options.map((option, index) => {
                         return (
-                            <option key={index} value={goal}>
+                            <option key={index} value={option}>
                                 {/* capitalize first letter */}
-                                {goal.charAt(0).toUpperCase() + goal.slice(1)}
+                                {option.charAt(0).toUpperCase() +
+                                    option.slice(1)}
                             </option>
                         );
                     })}

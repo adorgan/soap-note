@@ -2,6 +2,7 @@ import Header from './components/Header'
 import FIM from './components/FIM'
 import ArmBike from './components//TherEx/ArmBike'
 import MyNotes from './components/MyNotes'
+import ArmExercise from './components/TherEx/ArmExercise'
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -17,6 +18,9 @@ function App() {
                       </li>
                       <li>
                           <Link to="/arm-bike">Arm Bike</Link>
+                      </li>
+                      <li>
+                          <Link to="/arm-exercises">Arm Exercises</Link>
                       </li>
                       <li>
                           <Link to="/fim">FIM</Link>
@@ -38,6 +42,9 @@ function App() {
                   </Route>
                   <Route path="/arm-bike">
                       <ArmBike />
+                  </Route>
+                  <Route path="/arm-exercises">
+                      <ArmExercise />
                   </Route>
                   <Route path="/">
                       <Home />

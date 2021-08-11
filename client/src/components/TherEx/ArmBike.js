@@ -1,11 +1,8 @@
 import React, { useState, useReducer } from "react";
-import Goals from "../Goals";
 import NumberInput from "../NumberInput";
-import FimScore from "../FimScore";
-import Impairments from "../Impairments";
 import Vitals from "../Vitals";
-import VerbalCues from "../VerbalCues";
-import Patient from "../Patient";
+import SelectInput from "../SelectInput";
+import MultiSelectInput from "../MultiSelectInput";
 
 async function postData(url = "", data = {}) {
     // Default options are marked with *
@@ -43,6 +40,24 @@ const impairments = [
     "static standing balance",
     "proprioception",
     "safety awareness",
+];
+
+const fim = [
+    'independent',
+    'modified independent',
+    'supervision',
+    'minimal assistance',
+    'moderate assistance',
+    'maximum assistance',
+    'total assistance',
+];
+
+const verbalcues = [
+    'no verbal cueing',
+    'minimal verbal cueing',
+    'moderate verbal cueing',
+    'maximum verbal cueing',
+    'total verbal cueing',
 ];
 
 const defaultState = {
@@ -120,29 +135,31 @@ function ArmBike() {
                 <h1>Arm Bike</h1>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
-                        <Patient
+                        {/* Patient terminology */}
+                        <SelectInput
+                            label="Healthcare Receiver Terminology"
                             id="patient"
                             name="patient"
                             handleChange={handleChange}
+                            options={["resident", "client", "patient"]}
                         />
-                        <Goals
+                        {/* Goals */}
+                        <MultiSelectInput
                             label="Goals Targeted"
                             name="goals"
                             id="goals"
                             handleChange={handleGoalChange}
-                            value={formData.goals}
-                            goals={goals}
-                            size={goals.length}
+                            options={goals}
                         />
-                        <Impairments
+                        {/* Physical Impairments */}
+                        <MultiSelectInput
                             label="Impairments Addressed"
                             name="impairments"
                             id="impairments"
                             handleChange={handleImpairmentsChange}
-                            value={formData.impairments}
-                            impairments={impairments}
-                            size={impairments.length}
+                            options={impairments}
                         />
+                        {/* Time on activity */}
                         <NumberInput
                             name="arm_bike_time"
                             id="arm_bike_time"
@@ -151,6 +168,7 @@ function ArmBike() {
                             max="15"
                             handleChange={handleChange}
                         />
+                        {/* Activity resistance level */}
                         <NumberInput
                             name="arm_bike_level"
                             id="arm_bike_level"
@@ -159,19 +177,27 @@ function ArmBike() {
                             max="10"
                             handleChange={handleChange}
                         />
-                        <FimScore
-                            label="Physical Assistance Required"
+                        {/* FIM scores */}
+                        <SelectInput
+                            label="FIM Score"
                             name="fim_arm_bike"
                             id="fim_arm_bike"
                             handleChange={handleChange}
-                            value={formData.fim_arm_bike}
+                            options={fim}
                         />
-                        <VerbalCues
+                        <SelectInput
                             label="Verbal Cueing Required"
                             name="verbal_cueing"
                             id="verbal_cueing"
                             handleChange={handleChange}
+                            options={verbalcues}
                         />
+                        {/* <VerbalCues
+                            label="Verbal Cueing Required"
+                            name="verbal_cueing"
+                            id="verbal_cueing"
+                            handleChange={handleChange}
+                        /> */}
                     </fieldset>
                     <div className="div-submit-btn">
                         <button className="btn-form" type="submit">
@@ -181,7 +207,11 @@ function ArmBike() {
                 </form>
 
                 {showGoalBlurb && (
-                    <div className="narrative_blurb"contentEditable="true" id="goal_blurb"></div>
+                    <div
+                        className="narrative_blurb"
+                        contentEditable="true"
+                        id="goal_blurb"
+                    ></div>
                 )}
             </div>
             <div className="right-sidebar">

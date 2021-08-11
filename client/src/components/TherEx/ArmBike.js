@@ -1,11 +1,11 @@
 import React, { useState, useReducer } from "react";
-import Goals from "./Goals";
-import NumberInput from "./NumberInput";
-import FimScore from "./FimScore";
-import Impairments from "./Impairments";
-import Vitals from "./Vitals";
-import VerbalCues from "./VerbalCues";
-import Patient from "./Patient";
+import Goals from "../Goals";
+import NumberInput from "../NumberInput";
+import FimScore from "../FimScore";
+import Impairments from "../Impairments";
+import Vitals from "../Vitals";
+import VerbalCues from "../VerbalCues";
+import Patient from "../Patient";
 
 async function postData(url = "", data = {}) {
     // Default options are marked with *

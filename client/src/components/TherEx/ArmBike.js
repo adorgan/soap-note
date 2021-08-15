@@ -1,64 +1,11 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import NumberInput from "../NumberInput";
 import Vitals from "../Vitals";
 import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
-
-async function postData(url = "", data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-}
-
-const goals = [
-    "feeding",
-    "grooming",
-    "upper body dressing",
-    "lower body dressing",
-    "toileting",
-    "toilet transfers",
-    "tub transfers",
-];
-
-const impairments = [
-    "fine motor coordination",
-    "gross motor coordination",
-    "BUE strength",
-    "dynamic sitting balance",
-    "static standing balance",
-    "proprioception",
-    "safety awareness",
-];
-
-const fim = [
-    'independent',
-    'modified independent',
-    'supervision',
-    'minimal assistance',
-    'moderate assistance',
-    'maximum assistance',
-    'total assistance',
-];
-
-const verbalcues = [
-    'no verbal cueing',
-    'minimal verbal cueing',
-    'moderate verbal cueing',
-    'maximum verbal cueing',
-    'total verbal cueing',
-];
+import postData from "../../utils/postRequest";
+import getData from "../../utils/getRequest";
+import constants from "../../utils/constants";
 
 const defaultState = {
     patient: "resident",
@@ -81,6 +28,8 @@ const formReducer = (state, event) => {
 
 // Component
 function ArmBike() {
+
+    const [impairments, setImpairments] = useState([]);
     const [formData, setFormData] = useReducer(formReducer, defaultState);
     const [showGoalBlurb, setShowGoalBlurb] = useState(false);
     const handleSubmit = (event) => {
@@ -129,6 +78,11 @@ function ArmBike() {
         });
     };
 
+
+    useEffect(() => {
+        getData("/get-impairments").then((data) => setImpairments(data));
+    }, []);
+
     return (
         <>
             <div className="wrapper">
@@ -143,13 +97,21 @@ function ArmBike() {
                             handleChange={handleChange}
                             options={["resident", "client", "patient"]}
                         />
+                        {/* Arm bike name */}
+                        <SelectInput
+                            label="Arm Bike Name"
+                            id="arm_bike_name"
+                            name="arm_bike_name"
+                            handleChange={handleChange}
+                            options={constants.armBikeNames}
+                        />
                         {/* Goals */}
                         <MultiSelectInput
                             label="Goals Targeted"
                             name="goals"
                             id="goals"
                             handleChange={handleGoalChange}
-                            options={goals}
+                            options={constants.goals}
                         />
                         {/* Physical Impairments */}
                         <MultiSelectInput
@@ -183,21 +145,22 @@ function ArmBike() {
                             name="fim_arm_bike"
                             id="fim_arm_bike"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Verbal Cueing Required"
                             name="verbal_cueing"
                             id="verbal_cueing"
                             handleChange={handleChange}
-                            options={verbalcues}
+                            options={constants.verbalCues}
                         />
-                        {/* <VerbalCues
-                            label="Verbal Cueing Required"
-                            name="verbal_cueing"
-                            id="verbal_cueing"
+                        <SelectInput
+                            label="Plan"
+                            name="plan"
+                            id="plan"
                             handleChange={handleChange}
-                        /> */}
+                            options={constants.plan}
+                        />
                     </fieldset>
                     <div className="div-submit-btn">
                         <button className="btn-form" type="submit">

@@ -19,11 +19,10 @@ export default function MultiSelectInput(
                     name={name}
                     id={id}
                     onChange={handleChange}
-                    size={options.length + 1}
+                    size={options.length}
                     multiple
                     required
                 >
-                    <option value="default">Select One</option>
                     {options.map((option, index) => {
                         return (
                             <option key={index} value={option}>

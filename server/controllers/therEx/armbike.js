@@ -1,3 +1,33 @@
+const makePlan = (plan, client, goals) => {
+    console.log(plan);
+    let planStatement = "";
+    switch (plan) {
+        case "upgrade":
+            planStatement = `Based on the ${client}'s positive response to this treatment 
+            intervention, future sessions will upgrade the challenge to better meet their 
+            need and maximize their potential to achieve ${goals} goals.`;
+            break;
+
+        case "downgrade":
+            planStatement = `Based on the ${client}'s difficult response to this treatment 
+            intervention, future sessions will downgrade the challenge to better meet their 
+            need and maximize their potential to achieve ${goals} goals.`;
+            break;
+
+        case "downgrade":
+            planStatement = `Based on the ${client}'s adequate response to this treatment 
+            intervention, future sessions will downgrade the challenge to better meet their 
+            need and maximize their potential to achieve ${goals} goals.`;
+            break;
+
+        default:
+            planStatement = "error";
+            break;
+    }
+
+    return planStatement;
+};
+
 /**
  * This makes a comma separated list of strings.
  * Ex. ["one", "two", "three"] -> "one, two, and three"
@@ -50,18 +80,18 @@ const assistBlurb = (client, assistLevel, verbalCues) => {
  */
 const createArmBike = (req, res) => {
     const patient = req.body.patient; // patient terminology
+    const armBikeName = req.body.arm_bike_name;
     const verbalCues = req.body.verbal_cueing;
     const goalStr = makeList(req.body.goals);
     const impairmentStr = makeList(req.body.impairments);
     const assistStr = assistBlurb(patient, req.body.fim_arm_bike, verbalCues);
+    const planStr = makePlan(req.body.plan, req.body.patient, goalStr);
 
     const armBikeStr = `In order to improve the ${patient}'s ${impairmentStr} 
     for greater safety and independence with ${goalStr}, the therapist instructed the 
-    ${patient} in safe completion of the arm bike. The ${patient} completed ${req.body.arm_bike_time} minutes on level 
+    ${patient} in safe completion of the ${armBikeName}. The ${patient} completed ${req.body.arm_bike_time} minutes on level 
     ${req.body.arm_bike_level}. ${assistStr} The ${patient} tolerated the activity well with minimal 
-    rest breaks and denied pain with activity. The ${patient} will continue to benefit 
-    from BUE strengthening and gross motor activities to maximize their independence 
-    with ADLs prior to discharge.`;
+    rest breaks and denied pain with activity. ${planStr}`;
 
     return res.json(armBikeStr);
 };

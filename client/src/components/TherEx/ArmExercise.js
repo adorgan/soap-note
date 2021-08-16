@@ -3,8 +3,10 @@ import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
 import NumberInput from "../NumberInput";
 import SubmitButton from '../SubmitButton';
+import NarrativeBlurb from '../NarrativeBlurb';
 import constants from "../../utils/constants";
 import getData from "../../utils/getRequest";
+import postData from '../../utils/postRequest';
 
 const defaultFormState = {
     patient: "",
@@ -28,6 +30,7 @@ const formReducer = (state, event) => {
 };
 
 export default function ArmExercise() {
+    const [blurb, setBlurb] = useState("");
     const [impairments, setImpairments] = useState([]);
     const [formData, setFormData] = useReducer(formReducer, defaultFormState);
 
@@ -54,7 +57,11 @@ export default function ArmExercise() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        postData("/arm-exercises", formData).then((data) => {
+            // setShowGoalBlurb(true);
+            // document.getElementById("goal_blurb").innerHTML = data;
+            setBlurb(data);
+        });
     };
 
     useEffect(() => {
@@ -141,6 +148,7 @@ export default function ArmExercise() {
                 </div>
                 <SubmitButton />
             </form>
+            <NarrativeBlurb text={blurb} id="blurb" />
         </>
     );
 }

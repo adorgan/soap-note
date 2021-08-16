@@ -1,3 +1,5 @@
+const makeCommaList = require("../../utils/makeCommaList");
+
 const makePlan = (plan, client, goals) => {
     console.log(plan);
     let planStatement = "";
@@ -26,29 +28,6 @@ const makePlan = (plan, client, goals) => {
     }
 
     return planStatement;
-};
-
-/**
- * This makes a comma separated list of strings.
- * Ex. ["one", "two", "three"] -> "one, two, and three"
- *
- * @param {string[]} stringArray array of strings to be formatted as list
- * @returns {string} comma separated list of strings
- */
-const makeList = (stringArray) => {
-    let stringList = "";
-    if (stringArray.length === 1) {
-        stringList = stringArray[0];
-    } else if (stringArray.length === 2) {
-        stringList = `${stringArray[0]} and ${stringArray[1]}`;
-    } else {
-        const len = stringArray.length;
-        for (let i = 0; i < len - 1; i++) {
-            stringList += `${stringArray[i]}, `;
-        }
-        stringList += `and ${stringArray[len - 1]}`;
-    }
-    return stringList;
 };
 
 /**
@@ -82,8 +61,8 @@ const createArmBike = (req, res) => {
     const patient = req.body.patient; // patient terminology
     const armBikeName = req.body.arm_bike_name;
     const verbalCues = req.body.verbal_cueing;
-    const goalStr = makeList(req.body.goals);
-    const impairmentStr = makeList(req.body.impairments);
+    const goalStr = makeCommaList(req.body.goals);
+    const impairmentStr = makeCommaList(req.body.impairments);
     const assistStr = assistBlurb(patient, req.body.fim_arm_bike, verbalCues);
     const planStr = makePlan(req.body.plan, req.body.patient, goalStr);
 

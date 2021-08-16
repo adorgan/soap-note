@@ -3,6 +3,8 @@ import NumberInput from "../NumberInput";
 import Vitals from "../Vitals";
 import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
+import NarrativeBlurb from "../NarrativeBlurb";
+import SubmitButton from "../SubmitButton";
 import postData from "../../utils/postRequest";
 import getData from "../../utils/getRequest";
 import constants from "../../utils/constants";
@@ -31,12 +33,14 @@ function ArmBike() {
 
     const [impairments, setImpairments] = useState([]);
     const [formData, setFormData] = useReducer(formReducer, defaultState);
-    const [showGoalBlurb, setShowGoalBlurb] = useState(false);
+    // const [showGoalBlurb, setShowGoalBlurb] = useState(false);
+    const [blurb, setBlurb] = useState("");
     const handleSubmit = (event) => {
         event.preventDefault();
         postData("/arm-bike", formData).then((data) => {
-            setShowGoalBlurb(true);
-            document.getElementById("goal_blurb").innerHTML = data;
+            // setShowGoalBlurb(true);
+            // document.getElementById("goal_blurb").innerHTML = data;
+            setBlurb(data);
         });
     };
 
@@ -162,20 +166,10 @@ function ArmBike() {
                             options={constants.plan}
                         />
                     </fieldset>
-                    <div className="div-submit-btn">
-                        <button className="btn-form" type="submit">
-                            Submit
-                        </button>
-                    </div>
+                    <SubmitButton />
                 </form>
 
-                {showGoalBlurb && (
-                    <div
-                        className="narrative_blurb"
-                        contentEditable="true"
-                        id="goal_blurb"
-                    ></div>
-                )}
+                <NarrativeBlurb text={blurb} id="goal_blurb" />
             </div>
             <div className="right-sidebar">
                 <Vitals />

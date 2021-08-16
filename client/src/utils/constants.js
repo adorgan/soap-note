@@ -36,5 +36,27 @@ module.exports = {
         "Colorado Cycle",
         "restorator",
     ],
+    patientTerm: [
+        "patient",
+        "client",
+        "resident",
+    ],
+    extremities: [
+        "BUE",
+        "LUE",
+        "RUE"
+    ],
+    muscleGroups: [
+        "bicep",
+        "tricep",
+        "deltoid",
+        "trapezius",
+        "pectoralis major",
+        "wrist flexor",
+        "wrist extensor",
+        "grip",
+        "forearm supinator",
+        "forearm prontator"
+    ]
 };
 

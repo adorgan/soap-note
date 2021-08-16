@@ -129,12 +129,14 @@ ul {
 }
 
 .narrative_blurb {
-    grid-column: 3/6;
+    grid-column: 1/6;
     width: 100%;
     font-size: 1.5rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    margin-bottom: 3rem;
     padding: 1rem;
+    
 }
 
 .new-note-form{

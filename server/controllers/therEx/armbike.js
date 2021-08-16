@@ -5,19 +5,19 @@ const makePlan = (plan, client, goals) => {
         case "upgrade":
             planStatement = `Based on the ${client}'s positive response to this treatment 
             intervention, future sessions will upgrade the challenge to better meet their 
-            need and maximize their potential to achieve ${goals} goals.`;
+            needs and maximize their potential to achieve ${goals} goals.`;
             break;
 
         case "downgrade":
             planStatement = `Based on the ${client}'s difficult response to this treatment 
             intervention, future sessions will downgrade the challenge to better meet their 
-            need and maximize their potential to achieve ${goals} goals.`;
+            needs and maximize their potential to achieve ${goals} goals.`;
             break;
 
-        case "downgrade":
-            planStatement = `Based on the ${client}'s adequate response to this treatment 
-            intervention, future sessions will downgrade the challenge to better meet their 
-            need and maximize their potential to achieve ${goals} goals.`;
+        case "maintain":
+            planStatement = `Based on the ${client}'s satisfactory response to this treatment 
+            intervention, future sessions will maintain the challenge to best meet their 
+            needs and maximize their potential to achieve ${goals} goals.`;
             break;
 
         default:

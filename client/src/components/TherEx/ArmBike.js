@@ -158,6 +158,9 @@ function ArmBike() {
                             handleChange={handleChange}
                             options={constants.verbalCues}
                         />
+                        <div>
+                            
+                        </div>
                         <SelectInput
                             label="Plan"
                             name="plan"
@@ -165,6 +168,7 @@ function ArmBike() {
                             handleChange={handleChange}
                             options={constants.plan}
                         />
+                        <Vitals />
                     </fieldset>
                     <SubmitButton />
                 </form>

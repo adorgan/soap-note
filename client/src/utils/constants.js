@@ -24,11 +24,7 @@ module.exports = {
         "maximum verbal cueing",
         "total verbal cueing",
     ],
-    plan: [
-        "upgrade",
-        "downgrade",
-        "maintain",
-    ],
+    plan: ["upgrade", "downgrade", "maintain"],
     armBikeNames: [
         "arm bike",
         "Omnicycle",
@@ -36,16 +32,8 @@ module.exports = {
         "Colorado Cycle",
         "restorator",
     ],
-    patientTerm: [
-        "patient",
-        "client",
-        "resident",
-    ],
-    extremities: [
-        "BUE",
-        "LUE",
-        "RUE"
-    ],
+    patientTerm: ["patient", "client", "resident"],
+    extremities: ["BUE", "LUE", "RUE"],
     muscleGroups: [
         "bicep",
         "tricep",
@@ -56,7 +44,53 @@ module.exports = {
         "wrist extensor",
         "grip",
         "forearm supinator",
-        "forearm prontator"
+        "forearm prontator",
+    ],
+    functionalActivityEducationTopics: [
+        "purpose",
+        "frequency",
+        "duration",
+        "proper technique",
+        "sequencing",
+        "rules and procedures",
+        "initiation",
+        "termination",
+    ],
+    upperBodyDressingVerbalCues: [
+        "clothing placement prior to donning",
+        "dressing affected extremity first",
+        "undressing the affected side last",
+        "pulling sleeves up to shoulders before donning",
+        "pulling shirt down in back all the way",
+        "use dressing stick for limited reach",
+        "shift weight appropriately"
+    ],
+    interventionsUBDressing: [
+        "adaptive equipment: reacher",
+        "adaptive equipment: dressing stick",
+        "repetition",
+        "task simplification",
+        "weight shifting practice",
+        "challenge dynamic sitting balance",
+    ],
+    sittingBalance: [
+        "normal",
+        "good",
+        "good-",
+        "fair+",
+        "fair",
+        "fair-",
+        "poor+",
+        "poor",
+        "poor-"
+    ],
+    care: [
+        "Independent",
+        "Setup or Clean Assistance",
+        "Supervision",
+        "Partial/Moderate Assistance",
+        "Substantial/Maximal Assistance",
+        "Dependent",
     ]
 };
 

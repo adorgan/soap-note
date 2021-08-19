@@ -4,6 +4,7 @@ import MultiSelectInput from "../MultiSelectInput";
 import NumberInput from "../NumberInput";
 import SubmitButton from '../SubmitButton';
 import NarrativeBlurb from '../NarrativeBlurb';
+import Vitals from '../Vitals';
 import constants from "../../utils/constants";
 import getData from "../../utils/getRequest";
 import postData from '../../utils/postRequest';
@@ -17,6 +18,8 @@ const defaultFormState = {
     sets: "",
     reps: "",
     weight: "",
+    verbal_cueing: "",
+    plan: "",
 };
 
 const formReducer = (state, event) => {
@@ -146,6 +149,22 @@ export default function ArmExercise() {
                         handleChange={handleSingleSelectChange}
                     />
                 </div>
+                <SelectInput
+                    label="Verbal Cueing Required"
+                    name="verbal_cueing"
+                    id="verbal_cueing"
+                    handleChange={handleSingleSelectChange}
+                    options={constants.verbalCues}
+                />
+                <SelectInput
+                    label="Plan"
+                    name="plan"
+                    id="plan"
+                    handleChange={handleSingleSelectChange}
+                    options={constants.plan}
+                />
+                <Vitals />
+                
                 <SubmitButton />
             </form>
             <NarrativeBlurb text={blurb} id="blurb" />

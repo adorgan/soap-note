@@ -1,17 +1,22 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useReducer } from "react";
 import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
-import NumberInput from "../NumberInput";
 import SubmitButton from "../SubmitButton";
 import NarrativeBlurb from "../NarrativeBlurb";
-import Vitals from "../Vitals";
+// import Vitals from "../Vitals";
 import constants from "../../utils/constants";
+import postData from "../../utils/postRequest";
 
 const defaultFormState = {
     patient: "",
-    goals: [],
-    impairments: [],
-    extremities: "",
+    extremity: "",
+    education: [],
+    instruction: [],
+    interventions: [],
+    fim: "",
+    care: "",
+    dynamic_sitting_balance: "",
+    static_sitting_balance: "",
 };
 
 const formReducer = (state, event) => {
@@ -26,7 +31,15 @@ const formReducer = (state, event) => {
 
 export default function HemiDressing() {
     const [formData, setFormData] = useReducer(formReducer, defaultFormState);
-
+    const [blurb, setBlurb] = useState("");
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        postData("/hemi-dressing", formData).then((data) => {
+            setBlurb(data);
+        });
+    };
+    
     const handleSingleSelectChange = (event) => {
         setFormData({
             name: event.target.name,
@@ -49,7 +62,7 @@ export default function HemiDressing() {
     };
     return (
         <>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 {/* Patient terminology */}
                 <SelectInput
                     label="Healthcare Receiver Terminology"
@@ -118,7 +131,7 @@ export default function HemiDressing() {
                 <SubmitButton />
             </form>
 
-            <NarrativeBlurb />
+            <NarrativeBlurb text={blurb} id="blurb"/>
         </>
     );
 }

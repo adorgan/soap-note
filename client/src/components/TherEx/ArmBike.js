@@ -35,6 +35,7 @@ function ArmBike() {
     const [formData, setFormData] = useReducer(formReducer, defaultState);
     // const [showGoalBlurb, setShowGoalBlurb] = useState(false);
     const [blurb, setBlurb] = useState("");
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         postData("/arm-bike", formData).then((data) => {

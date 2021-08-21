@@ -10,6 +10,7 @@ const therExRoutes = require("./routes/therExRoutes");
 const fimRoutes = require("./routes/fimRoutes");
 const noteRoutes = require("./routes/noteRoutes");
 const dataRoutes = require("./routes/dataRoutes");
+const adlRoutes = require("./routes/adlRoutes");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use("/", therExRoutes);
 app.use("/", fimRoutes);
 app.use("/", noteRoutes);
 app.use("/", dataRoutes);
+app.use("/", adlRoutes);
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {

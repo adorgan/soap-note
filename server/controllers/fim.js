@@ -16,8 +16,6 @@ const addFim = (total, num) => {
  */
 const createFim = (req, res) => {
 
-    console.log(req.body); 
-
     //create array of all ADL FIM scores to calculate total and % impaired
     const fimScoreArr = [];
     Object.values(req.body).forEach((val) => {

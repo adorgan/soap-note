@@ -63,7 +63,7 @@ module.exports = {
         "pulling sleeves up to shoulders before donning",
         "pulling shirt down in back all the way",
         "use dressing stick for limited reach",
-        "shift weight appropriately"
+        "shift weight appropriately",
     ],
     interventionsUBDressing: [
         "adaptive equipment: reacher",
@@ -82,7 +82,7 @@ module.exports = {
         "fair-",
         "poor+",
         "poor",
-        "poor-"
+        "poor-",
     ],
     care: [
         "Independent",
@@ -91,6 +91,47 @@ module.exports = {
         "Partial/Moderate Assistance",
         "Substantial/Maximal Assistance",
         "Dependent",
-    ]
+    ],
+    groomingTasks: [
+        "brushing teeth",
+        "brushing dentures",
+        "rinsing mouth",
+        "washing/drying face",
+        "washing/drying hands",
+        "combing/brushing hair",
+    ],
+    groomingVerbalCues: [
+        "applying toothpaste to the toothbrush",
+        "screwing/unscrewing the toothpaste cap",
+        "thoroughly brushing teeth",
+        "thoroughly brushing dentures",
+        "applying soap to washcloth",
+        "drying face with dry towel",
+        "thoroughly scrubbing hands with soap",
+        "drying hands with dry towel",
+        "brushing/combing hair entirely",
+    ],
+    interventionsGrooming: [
+        "weighted or builtup handle",
+        "adapted toothpaste opener",
+        "task repetition",
+        "task simplification",
+        "item placement",
+        "gross motor coordination for reaching",
+        "fine motor coordination",
+    ],
+    position: ["seated", "standing", "supine with head of bed elevated"],
+    location: ["bedroom", "bathroom"],
+    coordination: [
+        "normal",
+        "good",
+        "good-",
+        "fair+",
+        "fair",
+        "fair-",
+        "poor+",
+        "poor",
+        "poor-",
+    ],
 };
 

@@ -3,7 +3,7 @@ module.exports = {
         "independent",
         "modified independent",
         "supervision",
-        "minimal assistance",
+        "minimum assistance",
         "moderate assistance",
         "maximum assistance",
         "total assistance",

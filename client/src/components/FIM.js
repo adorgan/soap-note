@@ -1,15 +1,16 @@
 import React, { useState, useReducer } from "react";
 import SelectInput from "./SelectInput";
+import constants from "../utils/constants";
 
-const fim = [
-    "independent",
-    "modified independent",
-    "supervision",
-    "minimal assistance",
-    "moderate assistance",
-    "maximum assistance",
-    "total assistance",
-];
+// const fim = [
+//     "independent",
+//     "modified independent",
+//     "supervision",
+//     "minimal assistance",
+//     "moderate assistance",
+//     "maximum assistance",
+//     "total assistance",
+// ];
 const setCopyBtn = () => {
     var range = document.createRange();
     range.selectNode(document.getElementById("blurb"));
@@ -92,56 +93,56 @@ function FIM() {
                             name="feeding"
                             id="feeding"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Grooming"
                             name="grooming"
                             id="grooming"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Bathing"
                             name="bathing"
                             id="bathing"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Upper Body Dressing"
                             name="dressing_upper"
                             id="dressing_upper"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Lower Body Dressing"
                             name="dressing_lower"
                             id="dressing_lower"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Toileting"
                             name="toileting"
                             id="toileting"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Toilet Transfers"
                             name="toilet_transfer"
                             id="toilet_transfer"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                         <SelectInput
                             label="Tub Transfers"
                             name="tub_transfer"
                             id="tub_transfer"
                             handleChange={handleChange}
-                            options={fim}
+                            options={constants.fim}
                         />
                     </fieldset>
                     <div className="div-submit-btn">

@@ -1,7 +1,12 @@
-/* Tags */
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Tags
 html, body, #root, .App, .container {
   height: 100%;
 }
+
 
 body{
     margin: 0;
@@ -63,7 +68,7 @@ ul {
 }
 
 /* Classes */
-.btn-copy{
+/* .btn-copy{
     border-radius: .7rem;
     padding: 1rem;
     width: 6rem;
@@ -223,7 +228,7 @@ ul {
     grid-column-end: 6;
     grid-row: 2 / 6;
 
-}
+} */
 
 /* IDs */
-
+ /* */ 

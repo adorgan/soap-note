@@ -8,7 +8,7 @@ export default function NumberInput({
 }) {
     return (
         <>
-            <div className="row">
+            <div className="row m-2">
                 <label className="form-label col-4" htmlFor={id}>
                     {label}
                 </label>

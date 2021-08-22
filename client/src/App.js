@@ -5,14 +5,14 @@ import MyNotes from "./components/MyNotes";
 import ArmExercise from "./components/TherEx/ArmExercise";
 import HemiDressing from "./components/SelfCare/HemiDressing";
 import Grooming from "./components/SelfCare/Grooming";
-// import "./App.css";
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
     return (
         <Router>
-            <div className="container-fluid">
+            <div className="container-fluid p-0">
                 <nav className="navbar navbar-dark bg-primary">
                     <div className="container-fluid">
                         <Link className="navbar-brand" to="/">Home</Link>
@@ -20,7 +20,7 @@ function App() {
                 </nav>
                 <Header />
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-2 border-end">
                         <nav className="navbar">
                             <ul>
                                 <li>

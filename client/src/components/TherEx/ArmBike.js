@@ -176,9 +176,7 @@ function ArmBike() {
 
                 <NarrativeBlurb text={blurb} id="goal_blurb" />
             </div>
-            <div className="right-sidebar">
-                <Vitals />
-            </div>
+            
         </>
     );
 }

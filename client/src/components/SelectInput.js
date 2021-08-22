@@ -7,8 +7,8 @@ export default function SelectInput({
 }) {
     return (
         <>
-            <div className="row m-2">
-                <label className="form-label col-4" htmlFor={id}>
+            <div className="row my-2">
+                <label className="form-label col-4 pt-1 ps-4" htmlFor={id}>
                     {label}
                 </label>
                 <div className="col-8">

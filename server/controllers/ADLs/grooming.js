@@ -14,6 +14,7 @@ const createGrooming = (req, res) => {
     // fine_motor_coordination: "",
     // dynamic_sitting_balance: "",
     // static_sitting_balance: "",
+    console.log(req.body);
 
     const patient = req.body.patient;
     const position = req.body.position;

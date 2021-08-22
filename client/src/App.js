@@ -15,35 +15,97 @@ function App() {
             <div className="container-fluid p-0">
                 <nav className="navbar navbar-dark bg-primary">
                     <div className="container-fluid">
-                        <Link className="navbar-brand" to="/">Home</Link>
+                        <Link className="navbar-brand" to="/">
+                            Home
+                        </Link>
                     </div>
                 </nav>
                 <Header />
                 <div className="row">
-                    <div className="col-2 border-end">
+                    <div className="col-2 border-end p-0">
                         <nav className="navbar">
-                            <ul>
+                            <ul className="list-unstyled ps-3 pt-3">
+                                <li className="">
+                                    <button
+                                        type="button"
+                                        className="btn shadow-none p-0 fw-bolder"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#component-collapse-adl"
+                                    >
+                                        ADLs/Self-Care
+                                    </button>
+                                    <div
+                                        className="collapse"
+                                        id="component-collapse-adl"
+                                    >
+                                        <ul className="list-unstyled ps-2">
+                                            <li>
+                                                <Link
+                                                    className="text-decoration-none text-reset"
+                                                    to="/hemi-dressing"
+                                                >
+                                                    Hemi-Dressing
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    className="text-decoration-none text-reset"
+                                                    to="/grooming"
+                                                >
+                                                    Grooming
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li className="">
+                                    <button
+                                        type="button"
+                                        className="btn shadow-none p-0 fw-bolder"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#component-collapse-ther-ex"
+                                    >
+                                        Therapuetic Exercise
+                                    </button>
+                                    <div
+                                        className="collapse"
+                                        id="component-collapse-ther-ex"
+                                    >
+                                        <ul className="list-unstyled ps-2">
+                                            <li>
+                                                <Link
+                                                    className="text-decoration-none text-reset"
+                                                    to="/arm-bike"
+                                                >
+                                                    Arm Bike
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    className="text-decoration-none text-reset"
+                                                    to="/arm-exercises"
+                                                >
+                                                    Arm Exercises
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li>
-                                    <Link to="/hemi-dressing">
-                                        Hemi-Dressing
+                                    <Link
+                                        className="text-decoration-none text-reset"
+                                        to="/fim"
+                                    >
+                                        FIM
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/grooming">Grooming</Link>
-                                </li>
-                                <li>
-                                    <Link to="/arm-bike">Arm Bike</Link>
-                                </li>
-                                <li>
-                                    <Link to="/arm-exercises">
-                                        Arm Exercises
+                                    <Link
+                                        className="text-decoration-none text-reset"
+                                        to="/notes"
+                                    >
+                                        My Notes
                                     </Link>
-                                </li>
-                                <li>
-                                    <Link to="/fim">FIM</Link>
-                                </li>
-                                <li>
-                                    <Link to="/notes">My Notes</Link>
                                 </li>
                             </ul>
                         </nav>

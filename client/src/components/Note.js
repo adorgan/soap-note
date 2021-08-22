@@ -25,6 +25,7 @@ export default function Note({ title, body, id }) {
         const btn_edit = document.getElementById(editId);
         const mynote = document.getElementById(noteId);
         mynote.readOnly = true;
+        mynote.style.width = "100%";
         mynote.style.height = mynote.scrollHeight + "px";
         btn_edit.addEventListener("click", () => {
             mynote.readOnly = false;
@@ -37,7 +38,7 @@ export default function Note({ title, body, id }) {
             <h3 className="note-title">{title}</h3>
             <textarea
                 id={noteId}
-                className="note-textarea"
+                
                 onChange={handleChange}
                 value={note}
             ></textarea>

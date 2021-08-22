@@ -71,7 +71,7 @@ const MyNotes = () => {
 
     return (
         <>
-            <div className="note-container">
+            <div className="">
                 <>
                     {notes.map((note) => {
                         return (

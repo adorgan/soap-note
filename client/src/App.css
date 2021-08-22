@@ -129,7 +129,7 @@ ul {
 }
 
 .narrative_blurb {
-    grid-column: 1/6;
+    grid-column: 2/6;
     width: 100%;
     font-size: 1.5rem;
     margin-left: 1rem;

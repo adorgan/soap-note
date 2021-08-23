@@ -4,6 +4,8 @@ import MultiSelectInput from "../MultiSelectInput";
 import SubmitButton from "../SubmitButton";
 import NarrativeBlurb from "../NarrativeBlurb";
 import Vitals from "../Vitals";
+import Accordian from "../Accordian";
+import Assessments from "../Assessments";
 import constants from "../../utils/constants";
 import postData from "../../utils/postRequest";
 
@@ -125,98 +127,26 @@ export default function Grooming() {
                     handleChange={handleMultiSelectChange}
                     options={constants.interventionsGrooming}
                 />
-
-                <div className="accordion " id="accordionExample">
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingOne">
-                            <button
-                                className="accordion-button collapsed shadow-none"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne"
-                                aria-expanded="false"
-                                aria-controls="collapseOne"
-                            >
-                                Assessments
-                            </button>
-                        </h2>
-                        <div
-                            id="collapseOne"
-                            className="accordion-collapse collapse"
-                            aria-labelledby="headingOne"
-                        >
-                            <div className="accordion-body">
-                                <SelectInput
-                                    label="FIM Score"
-                                    id="fim"
-                                    name="fim"
+                <Accordian
+                    categories={[
+                        {
+                            component: (
+                                <Assessments
                                     handleChange={handleSingleSelectChange}
-                                    options={constants.fim}
                                 />
-                                <SelectInput
-                                    label="CARE tool"
-                                    id="care"
-                                    name="care"
-                                    handleChange={handleSingleSelectChange}
-                                    options={constants.care}
-                                />
-                                <SelectInput
-                                    label="Gross Motor Coordination"
-                                    id="gross_motor_coordination"
-                                    name="gross_motor_coordination"
-                                    handleChange={handleSingleSelectChange}
-                                    options={constants.coordination}
-                                />
-                                <SelectInput
-                                    label="Fine Motor Coordination"
-                                    id="fine_motor_coordination"
-                                    name="fine_motor_coordination"
-                                    handleChange={handleSingleSelectChange}
-                                    options={constants.coordination}
-                                />
-                                <SelectInput
-                                    label="Dynamic Sitting Balance"
-                                    id="dynamic_sitting_balance"
-                                    name="dynamic_sitting_balance"
-                                    handleChange={handleSingleSelectChange}
-                                    options={constants.sittingBalance}
-                                />
-                                <SelectInput
-                                    label="Static Sitting Balance"
-                                    id="static_sitting_balance"
-                                    name="static_sitting_balance"
-                                    handleChange={handleSingleSelectChange}
-                                    options={constants.sittingBalance}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingTwo">
-                            <button
-                                className="accordion-button collapsed"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo"
-                                aria-expanded="false"
-                                aria-controls="collapseTwo"
-                            >
-                                Vitals
-                            </button>
-                        </h2>
-                        <div
-                            id="collapseTwo"
-                            className="accordion-collapse collapse"
-                            aria-labelledby="headingTwo"
-                        >
-                            <div className="accordion-body">
+                            ),
+                            label: "Assessments",
+                        },
+                        {
+                            component: (
                                 <Vitals
                                     handleChange={handleSingleSelectChange}
                                 />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            ),
+                            label: "Vitals",
+                        },
+                    ]}
+                />
                 <SubmitButton />
             </form>
 

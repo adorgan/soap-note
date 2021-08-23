@@ -20,6 +20,10 @@ const createHemiDressing = (req, res) => {
     const care = req.body.care;
     const dynamicSittingBalance = req.body.dynamic_sitting_balance;
     const staticSittingBalance = req.body.static_sitting_balance;
+    const grossMotorCoordination = req.body.gross_motor_coordination;
+    const fineMotorCoordination = req.body.fine_motor_coordination;
+
+    
     let assessments = "";
 
     if (fim !== "") {
@@ -29,10 +33,20 @@ const createHemiDressing = (req, res) => {
         assessments += `CARE: ${care}; `;
     }
     if (dynamicSittingBalance !== "") {
-        assessments += `Dynamic sitting balance grade: ${dynamicSittingBalance}; `;
+        assessments += `dynamic sitting balance grade: ${dynamicSittingBalance}; `;
     }
     if (staticSittingBalance !== "") {
-        assessments += `Static sitting balance grade: ${staticSittingBalance}; `;
+        assessments += `static sitting balance grade: ${staticSittingBalance}; `;
+    }
+    if (grossMotorCoordination !== "") {
+        assessments += `gross motor coordination grade: ${grossMotorCoordination}; `;
+    }
+    if (fineMotorCoordination !== "") {
+        assessments += `fine motor coordination grade: ${fineMotorCoordination}; `;
+    }
+
+    if (assessments !== "") {
+        assessments = `Assessments: ${assessments}`; 
     }
 
     const blurb = `In order to improve the ${patient}'s safety and independence

@@ -30,6 +30,8 @@ const createGrooming = (req, res) => {
     const grossMotorCoordination = req.body.gross_motor_coordination;
     const fineMotorCoordination = req.body.fine_motor_coordination;
 
+    let assessments = "";
+
     if (fim !== "") {
         assessments = `Functional Independence Measure: ${fim}; `;
     }
@@ -47,6 +49,9 @@ const createGrooming = (req, res) => {
     }
     if (fineMotorCoordination !== "") {
         assessments += `Fine motor coordination grade: ${fineMotorCoordination}; `;
+    }
+    if (assessments !== "") {
+        assessments = `Assessments: ${assessments}`;
     }
 
     const blurb = `In order to improve the ${patient}'s safety and independence

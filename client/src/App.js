@@ -21,7 +21,7 @@ function App() {
                     </div>
                 </nav>
                 <Header />
-                <div className="row">
+                <div className="row me-0">
                     <div className="col-2 border-end p-0">
                         <nav className="navbar">
                             <ul className="list-unstyled ps-3 pt-3">

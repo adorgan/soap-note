@@ -3,7 +3,9 @@ import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
 import SubmitButton from "../SubmitButton";
 import NarrativeBlurb from "../NarrativeBlurb";
-// import Vitals from "../Vitals";
+import Accordian from "../Accordian";
+import Assessments from "../Assessments";
+import Vitals from "../Vitals";
 import constants from "../../utils/constants";
 import postData from "../../utils/postRequest";
 
@@ -17,6 +19,8 @@ const defaultFormState = {
     care: "",
     dynamic_sitting_balance: "",
     static_sitting_balance: "",
+    gross_motor_coordination:"",
+    fine_motor_coordination:"",
 };
 
 const formReducer = (state, event) => {
@@ -32,14 +36,14 @@ const formReducer = (state, event) => {
 export default function HemiDressing() {
     const [formData, setFormData] = useReducer(formReducer, defaultFormState);
     const [blurb, setBlurb] = useState("");
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         postData("/hemi-dressing", formData).then((data) => {
             setBlurb(data);
         });
     };
-    
+
     const handleSingleSelectChange = (event) => {
         setFormData({
             name: event.target.name,
@@ -100,38 +104,30 @@ export default function HemiDressing() {
                     handleChange={handleMultiSelectChange}
                     options={constants.interventionsUBDressing}
                 />
-                <SelectInput
-                    label="FIM Score"
-                    id="fim"
-                    name="fim"
-                    handleChange={handleSingleSelectChange}
-                    options={constants.fim}
-                />
-                <SelectInput
-                    label="CARE tool"
-                    id="care"
-                    name="care"
-                    handleChange={handleSingleSelectChange}
-                    options={constants.care}
-                />
-                <SelectInput
-                    label="Dynamic Sitting Balance"
-                    id="dynamic_sitting_balance"
-                    name="dynamic_sitting_balance"
-                    handleChange={handleSingleSelectChange}
-                    options={constants.sittingBalance}
-                />
-                <SelectInput
-                    label="Static Sitting Balance"
-                    id="static_sitting_balance"
-                    name="static_sitting_balance"
-                    handleChange={handleSingleSelectChange}
-                    options={constants.sittingBalance}
+                <Accordian
+                    categories={[
+                        {
+                            component: (
+                                <Assessments
+                                    handleChange={handleSingleSelectChange}
+                                />
+                            ),
+                            label: "Assessments",
+                        },
+                        {
+                            component: (
+                                <Vitals
+                                    handleChange={handleSingleSelectChange}
+                                />
+                            ),
+                            label: "Vitals",
+                        },
+                    ]}
                 />
                 <SubmitButton />
             </form>
 
-            <NarrativeBlurb text={blurb} id="blurb"/>
+            <NarrativeBlurb text={blurb} id="blurb" />
         </>
     );
 }

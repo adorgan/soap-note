@@ -2,6 +2,10 @@ body{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+.bold-nav {
+    font-weight: bold;
+}
+
 /* Tags
 html, body, #root, .App, .container {
   height: 100%;

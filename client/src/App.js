@@ -24,11 +24,11 @@ function App() {
                 <div className="row me-0">
                     <div className="col-2 border-end p-0">
                         <nav className="navbar">
-                            <ul className="list-unstyled ps-3 pt-3">
+                            <ul className="list-unstyled ps-4 pt-3">
                                 <li className="">
                                     <button
                                         type="button"
-                                        className="btn shadow-none p-0 fw-bolder"
+                                        className="btn shadow-none p-0"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#component-collapse-adl"
                                     >
@@ -38,9 +38,10 @@ function App() {
                                         className="collapse"
                                         id="component-collapse-adl"
                                     >
-                                        <ul className="list-unstyled ps-2">
+                                        <ul className="list-unstyled ps-3">
                                             <li>
                                                 <Link
+                                                    id="nav-hemi-dressing"
                                                     className="text-decoration-none text-reset"
                                                     to="/hemi-dressing"
                                                 >
@@ -49,6 +50,7 @@ function App() {
                                             </li>
                                             <li>
                                                 <Link
+                                                    id="nav-grooming"
                                                     className="text-decoration-none text-reset"
                                                     to="/grooming"
                                                 >
@@ -61,7 +63,7 @@ function App() {
                                 <li className="">
                                     <button
                                         type="button"
-                                        className="btn shadow-none p-0 fw-bolder"
+                                        className="btn shadow-none p-0"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#component-collapse-ther-ex"
                                     >
@@ -71,9 +73,10 @@ function App() {
                                         className="collapse"
                                         id="component-collapse-ther-ex"
                                     >
-                                        <ul className="list-unstyled ps-2">
+                                        <ul className="list-unstyled ps-3">
                                             <li>
                                                 <Link
+                                                    id="nav-arm-bike"
                                                     className="text-decoration-none text-reset"
                                                     to="/arm-bike"
                                                 >
@@ -82,6 +85,7 @@ function App() {
                                             </li>
                                             <li>
                                                 <Link
+                                                    id="nav-arm-exercises"
                                                     className="text-decoration-none text-reset"
                                                     to="/arm-exercises"
                                                 >
@@ -93,6 +97,7 @@ function App() {
                                 </li>
                                 <li>
                                     <Link
+                                        id="nav-fim"
                                         className="text-decoration-none text-reset"
                                         to="/fim"
                                     >
@@ -101,6 +106,7 @@ function App() {
                                 </li>
                                 <li>
                                     <Link
+                                        id="nav-my-notes"
                                         className="text-decoration-none text-reset"
                                         to="/notes"
                                     >

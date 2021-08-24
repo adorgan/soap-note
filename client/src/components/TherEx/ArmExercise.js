@@ -1,13 +1,14 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer } from "react";
 import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
 import NumberInput from "../NumberInput";
-import SubmitButton from '../SubmitButton';
-import NarrativeBlurb from '../NarrativeBlurb';
-import Vitals from '../Vitals';
+import SubmitButton from "../SubmitButton";
+import NarrativeBlurb from "../NarrativeBlurb";
+import Vitals from "../Vitals";
 import constants from "../../utils/constants";
 import getData from "../../utils/getRequest";
-import postData from '../../utils/postRequest';
+import postData from "../../utils/postRequest";
+import changeNavBold from "../../utils/changeNavBold";
 
 const defaultFormState = {
     patient: "",
@@ -44,7 +45,7 @@ export default function ArmExercise() {
         });
     };
 
-    const handleMultiSelectChange = (e) =>{
+    const handleMultiSelectChange = (e) => {
         // make array of multi selected options
         const selected = document.getElementById(e.target.id).selectedOptions;
         let selectedArray = [];
@@ -56,7 +57,7 @@ export default function ArmExercise() {
             name: e.target.name,
             value: selectedArray,
         });
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -69,6 +70,14 @@ export default function ArmExercise() {
 
     useEffect(() => {
         getData("/get-impairments").then((data) => setImpairments(data));
+    }, []);
+
+    useEffect(() => {
+        changeNavBold("nav-arm-exercises");
+
+        // make sure collapsed content is shown if browser refreshed
+        const collapsed = document.getElementById("component-collapse-adl");
+        collapsed.classList.add("show");
     }, []);
 
     return (
@@ -164,7 +173,7 @@ export default function ArmExercise() {
                     options={constants.plan}
                 />
                 <Vitals />
-                
+
                 <SubmitButton />
             </form>
             <NarrativeBlurb text={blurb} id="blurb" />

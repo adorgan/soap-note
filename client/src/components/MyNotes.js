@@ -2,8 +2,9 @@ import { useEffect, useReducer, useState, Fragment } from "react";
 import React from "react";
 import Note from "./Note";
 import Delete from "./Delete";
-import postData from "../utils/postRequest"
-import getData from "../utils/getRequest"
+import postData from "../utils/postRequest";
+import getData from "../utils/getRequest";
+import changeNavBold from "../utils/changeNavBold";
 
 const defaultState = {
     title: "",
@@ -35,7 +36,6 @@ const MyNotes = () => {
         const allNotes = await getData("/get-notes");
         setNotes(allNotes);
     }
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -69,6 +69,14 @@ const MyNotes = () => {
         });
     }, []);
 
+    useEffect(() => {
+        changeNavBold("nav-my-notes");
+
+        // make sure collapsed content is shown if browser refreshed
+        const collapsed = document.getElementById("component-collapse-adl");
+        collapsed.classList.add("show");
+    }, []);
+
     return (
         <>
             <div className="">
@@ -92,7 +100,7 @@ const MyNotes = () => {
 
                 <div className="new-note-form">
                     <form onSubmit={handleSubmit}>
-                        <div >
+                        <div>
                             <div className="new-note-title">
                                 <label htmlFor="text">Title</label>
                                 <input

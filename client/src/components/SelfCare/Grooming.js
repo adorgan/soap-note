@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
 import SubmitButton from "../SubmitButton";
@@ -8,6 +8,7 @@ import Accordian from "../Accordian";
 import Assessments from "../Assessments";
 import constants from "../../utils/constants";
 import postData from "../../utils/postRequest";
+import changeNavBold from "../../utils/changeNavBold";
 
 const defaultFormState = {
     patient: "",
@@ -71,6 +72,15 @@ export default function Grooming() {
             value: selectedArray,
         });
     };
+
+    useEffect(() => {
+        changeNavBold("nav-grooming");
+
+        // make sure collapsed content is shown if browser refreshed
+        const collapsed = document.getElementById("component-collapse-adl");
+        collapsed.classList.add("show");
+        
+    }, []);
 
 
     return (

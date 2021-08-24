@@ -1,6 +1,7 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import SelectInput from "./SelectInput";
 import constants from "../utils/constants";
+import changeNavBold from "../utils/changeNavBold";
 
 // const fim = [
 //     "independent",
@@ -82,6 +83,14 @@ function FIM() {
             value: event.target.value,
         });
     };
+
+    useEffect(() => {
+        changeNavBold("nav-fim");
+
+        // make sure collapsed content is shown if browser refreshed
+        const collapsed = document.getElementById("component-collapse-adl");
+        collapsed.classList.add("show");
+    }, []);
 
     return (
         <>

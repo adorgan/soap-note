@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
 import SubmitButton from "../SubmitButton";
@@ -8,6 +8,7 @@ import Assessments from "../Assessments";
 import Vitals from "../Vitals";
 import constants from "../../utils/constants";
 import postData from "../../utils/postRequest";
+import changeNavBold from "../../utils/changeNavBold";
 
 const defaultFormState = {
     patient: "",
@@ -19,8 +20,8 @@ const defaultFormState = {
     care: "",
     dynamic_sitting_balance: "",
     static_sitting_balance: "",
-    gross_motor_coordination:"",
-    fine_motor_coordination:"",
+    gross_motor_coordination: "",
+    fine_motor_coordination: "",
 };
 
 const formReducer = (state, event) => {
@@ -64,6 +65,15 @@ export default function HemiDressing() {
             value: selectedArray,
         });
     };
+
+    useEffect(() => {
+        changeNavBold("nav-hemi-dressing");
+
+        // make sure collapsed content is shown if browser refreshed
+        const collapsed = document.getElementById("component-collapse-adl");
+        collapsed.classList.add("show");
+    }, []);
+
     return (
         <>
             <form onSubmit={handleSubmit}>

@@ -11,7 +11,7 @@ export default function Accordian(categories){
                             <div className="accordion-item">
                                 <h2
                                     className="accordion-header"
-                                    id={`collapse${index}`}
+                                    id={`heading${index}`}
                                 >
                                     <button
                                         className="accordion-button collapsed shadow-none"

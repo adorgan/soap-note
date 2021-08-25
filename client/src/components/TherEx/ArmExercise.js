@@ -76,7 +76,7 @@ export default function ArmExercise() {
         changeNavBold("nav-arm-exercises");
 
         // make sure collapsed content is shown if browser refreshed
-        const collapsed = document.getElementById("component-collapse-adl");
+        const collapsed = document.getElementById("component-collapse-ther-ex");
         collapsed.classList.add("show");
     }, []);
 

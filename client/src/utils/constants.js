@@ -5,11 +5,11 @@ module.exports = {
         "supervision",
         "minimum assistance",
         "moderate assistance",
-        "maximum assistance",
+        "maximal assistance",
         "total assistance",
     ],
     goals: [
-        "feeding",
+        "eating",
         "grooming",
         "upper body dressing",
         "lower body dressing",

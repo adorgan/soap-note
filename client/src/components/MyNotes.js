@@ -72,9 +72,6 @@ const MyNotes = () => {
     useEffect(() => {
         changeNavBold("nav-my-notes");
 
-        // make sure collapsed content is shown if browser refreshed
-        const collapsed = document.getElementById("component-collapse-adl");
-        collapsed.classList.add("show");
     }, []);
 
     return (

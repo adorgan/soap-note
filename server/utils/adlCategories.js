@@ -1,5 +1,5 @@
 const adlCategories = [
-    "feeding",
+    "eating",
     "grooming",
     "bathing",
     "upper body dressing",

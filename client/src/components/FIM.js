@@ -87,9 +87,6 @@ function FIM() {
     useEffect(() => {
         changeNavBold("nav-fim");
 
-        // make sure collapsed content is shown if browser refreshed
-        const collapsed = document.getElementById("component-collapse-adl");
-        collapsed.classList.add("show");
     }, []);
 
     return (
@@ -98,9 +95,9 @@ function FIM() {
                 <form onSubmit={handleSubmit}>
                     <fieldset>
                         <SelectInput
-                            label="Feeding"
-                            name="feeding"
-                            id="feeding"
+                            label="Eating"
+                            name="eating"
+                            id="eating"
                             handleChange={handleChange}
                             options={constants.fim}
                         />

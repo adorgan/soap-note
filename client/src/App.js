@@ -5,6 +5,7 @@ import MyNotes from "./components/MyNotes";
 import ArmExercise from "./components/TherEx/ArmExercise";
 import HemiDressing from "./components/SelfCare/HemiDressing";
 import Grooming from "./components/SelfCare/Grooming";
+import ToiletTransfer from "./components/Mobility/ToiletTransfer";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -95,6 +96,41 @@ function App() {
                                         </ul>
                                     </div>
                                 </li>
+                                <li className="">
+                                    <button
+                                        type="button"
+                                        className="btn shadow-none p-0"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#component-collapse-mobility"
+                                    >
+                                        Functional Mobility
+                                    </button>
+                                    <div
+                                        className="collapse"
+                                        id="component-collapse-mobility"
+                                    >
+                                        <ul className="list-unstyled ps-3">
+                                            <li>
+                                                <Link
+                                                    id="nav-toilet-transfer"
+                                                    className="text-decoration-none text-reset"
+                                                    to="/toilet-transfer"
+                                                >
+                                                    Toilet Transfer
+                                                </Link>
+                                            </li>
+                                            {/* <li>
+                                                <Link
+                                                    id="nav-arm-exercises"
+                                                    className="text-decoration-none text-reset"
+                                                    to="/arm-exercises"
+                                                >
+                                                    Arm Exercises
+                                                </Link>
+                                            </li> */}
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li>
                                     <Link
                                         id="nav-fim"
@@ -138,6 +174,9 @@ function App() {
                             </Route>
                             <Route path="/grooming">
                                 <Grooming />
+                            </Route>
+                            <Route path="/toilet-transfer">
+                                <ToiletTransfer />
                             </Route>
                             <Route path="/">
                                 <Home />

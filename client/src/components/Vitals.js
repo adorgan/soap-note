@@ -26,7 +26,21 @@ export default function Vitals({ handleChange }) {
                     <input
                         id="heart"
                         type="number"
-                        name="heart-rate"
+                        name="heart_rate"
+                        className="form-control"
+                        onChange={handleChange}
+                    />
+                </div>
+            </div>
+            <div className="row m-2">
+                <label className="form-label col-4" htmlFor="saturation">
+                    O2 Saturation
+                </label>
+                <div className="col-8">
+                    <input
+                        id="saturation"
+                        type="number"
+                        name="saturation"
                         className="form-control"
                         onChange={handleChange}
                     />
@@ -56,21 +70,6 @@ export default function Vitals({ handleChange }) {
                         id="temperature"
                         type="number"
                         name="temperature"
-                        className="form-control"
-                        onChange={handleChange}
-                    />
-                </div>
-            </div>
-
-            <div className="row m-2">
-                <label className="form-label col-4" htmlFor="saturation">
-                    O2 Saturation
-                </label>
-                <div className="col-8">
-                    <input
-                        id="saturation"
-                        type="number"
-                        name="saturation"
                         className="form-control"
                         onChange={handleChange}
                     />

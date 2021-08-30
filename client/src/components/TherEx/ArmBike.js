@@ -157,14 +157,14 @@ function ArmBike() {
                             name="fim_arm_bike"
                             id="fim_arm_bike"
                             handleChange={handleChange}
-                            options={constants.fim}
+                            options={constants.assessments.fim}
                         />
                         <SelectInput
                             label="Verbal Cueing Required"
                             name="verbal_cueing"
                             id="verbal_cueing"
                             handleChange={handleChange}
-                            options={constants.verbalCues}
+                            options={constants.assessments.verbalCues}
                         />
                         <div></div>
                         <SelectInput

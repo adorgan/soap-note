@@ -7,7 +7,9 @@
  */
 const makeList = (stringArray) => {
     let stringList = "";
-    if (stringArray.length === 1) {
+    if (stringArray.length === 0) {
+        return stringList;
+    } else if (stringArray.length === 1) {
         stringList = stringArray[0];
     } else if (stringArray.length === 2) {
         stringList = `${stringArray[0]} and ${stringArray[1]}`;

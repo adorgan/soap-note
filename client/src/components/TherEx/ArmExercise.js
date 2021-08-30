@@ -163,7 +163,7 @@ export default function ArmExercise() {
                     name="verbal_cueing"
                     id="verbal_cueing"
                     handleChange={handleSingleSelectChange}
-                    options={constants.verbalCues}
+                    options={constants.assessments.verbalCues}
                 />
                 <SelectInput
                     label="Plan"

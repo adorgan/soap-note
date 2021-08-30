@@ -11,6 +11,7 @@ const fimRoutes = require("./routes/fimRoutes");
 const noteRoutes = require("./routes/noteRoutes");
 const dataRoutes = require("./routes/dataRoutes");
 const adlRoutes = require("./routes/adlRoutes");
+const mobilityRoutes = require("./routes/mobilityRoutes");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use("/", fimRoutes);
 app.use("/", noteRoutes);
 app.use("/", dataRoutes);
 app.use("/", adlRoutes);
+app.use("/", mobilityRoutes);
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {

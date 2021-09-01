@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
+const session = require("express-session");
+const MongoDbSession = require("connect-mongodb-session")(session);
 const app = express();
 
 const therExRoutes = require("./routes/therExRoutes");
@@ -12,11 +14,25 @@ const noteRoutes = require("./routes/noteRoutes");
 const dataRoutes = require("./routes/dataRoutes");
 const adlRoutes = require("./routes/adlRoutes");
 const mobilityRoutes = require("./routes/mobilityRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 app.use(cors());
 app.use(bodyParser.json());
 
 const db = require("./config/keys").mongoURI;
+
+const store = new MongoDbSession({
+    uri: db,
+    collection: "userSessions",
+});
+app.use(
+    session({
+        secret: "secret key",
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+    })
+);
 
 mongoose
     .connect(db, {
@@ -32,6 +48,7 @@ app.use("/", noteRoutes);
 app.use("/", dataRoutes);
 app.use("/", adlRoutes);
 app.use("/", mobilityRoutes);
+app.use("/", authRoutes);
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {

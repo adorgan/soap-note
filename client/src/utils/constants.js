@@ -36,7 +36,7 @@ module.exports = {
             "supervision",
             "minimum assistance",
             "moderate assistance",
-            "maximal assistance",
+            "maximum assistance",
             "total assistance",
         ],
         verbalCues: [

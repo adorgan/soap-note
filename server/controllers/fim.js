@@ -21,6 +21,7 @@ const createFim = (req, res) => {
     Object.values(req.body).forEach((val) => {
         fimScoreArr.push(fimScoring[val]);
     });
+    console.log(fimScoreArr);
     const totalFimScore = fimScoreArr.reduce(addFim);
 
     //build string of ADL and fim scores with total score

@@ -71,61 +71,63 @@ const MyNotes = () => {
 
     useEffect(() => {
         changeNavBold("nav-my-notes");
-
     }, []);
+
 
     return (
         <>
-            <div className="">
-                <>
-                    {notes.map((note) => {
-                        return (
-                            <Fragment key={note._id}>
-                                <Note
-                                    id={note._id}
-                                    title={note.title}
-                                    body={note.body}
-                                />
-                                <Delete
-                                    id={note._id}
-                                    handleSubmit={handleDelete}
-                                />
-                            </Fragment>
-                        );
-                    })}
-                </>
+            
+                <div className="">
+                    <>
+                        {notes.map((note) => {
+                            return (
+                                <Fragment key={note._id}>
+                                    <Note
+                                        id={note._id}
+                                        title={note.title}
+                                        body={note.body}
+                                    />
+                                    <Delete
+                                        id={note._id}
+                                        handleSubmit={handleDelete}
+                                    />
+                                </Fragment>
+                            );
+                        })}
+                    </>
 
-                <div className="new-note-form">
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <div className="new-note-title">
-                                <label htmlFor="text">Title</label>
-                                <input
-                                    id="text"
-                                    name="title"
-                                    type="text"
-                                    onChange={handleChange}
-                                />
+                    <div className="new-note-form">
+                        <form onSubmit={handleSubmit}>
+                            <div>
+                                <div className="new-note-title">
+                                    <label htmlFor="text">Title</label>
+                                    <input
+                                        id="text"
+                                        name="title"
+                                        type="text"
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="new-note-body">
+                                    <label htmlFor="body">Body</label>
+                                    <textarea
+                                        name="body"
+                                        id="body"
+                                        rows="5"
+                                        onChange={handleChange}
+                                    ></textarea>
+                                </div>
                             </div>
-                            <div className="new-note-body">
-                                <label htmlFor="body">Body</label>
-                                <textarea
-                                    name="body"
-                                    id="body"
-                                    rows="5"
-                                    onChange={handleChange}
-                                ></textarea>
-                            </div>
-                        </div>
 
-                        <div className="div-submit-btn">
-                            <button className="btn-form" type="submit">
-                                Add Note
-                            </button>
-                        </div>
-                    </form>
+                            <div className="div-submit-btn">
+                                <button className="btn-form" type="submit">
+                                    Add Note
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            
         </>
     );
 };

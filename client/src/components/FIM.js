@@ -40,7 +40,7 @@ async function postData(url = "", data = {}) {
 }
 
 const defaultState = {
-    feeding: "",
+    eating: "",
     grooming: "",
     bathing: "",
     dressing_upper: "",
@@ -65,6 +65,7 @@ function FIM() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(formData);
 
         //check to make sure no field has default option selected
         if (Object.values(formData).includes("")) {

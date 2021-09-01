@@ -6,6 +6,9 @@ import ArmExercise from "./components/TherEx/ArmExercise";
 import HemiDressing from "./components/SelfCare/HemiDressing";
 import Grooming from "./components/SelfCare/Grooming";
 import ToiletTransfer from "./components/Mobility/ToiletTransfer";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Dashboard from "./components/Dashboard";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -18,6 +21,12 @@ function App() {
                     <div className="container-fluid">
                         <Link className="navbar-brand" to="/">
                             Home
+                        </Link>
+                        <Link className="navbar-brand" to="/login">
+                            Login
+                        </Link>
+                        <Link className="navbar-brand" to="/register">
+                            Register
                         </Link>
                     </div>
                 </nav>
@@ -158,7 +167,7 @@ function App() {
                     <div className="col-8">
                         <Switch>
                             <Route path="/notes">
-                                <MyNotes />
+                                <Dashboard />
                             </Route>
                             <Route path="/fim">
                                 <FIM />
@@ -177,6 +186,12 @@ function App() {
                             </Route>
                             <Route path="/toilet-transfer">
                                 <ToiletTransfer />
+                            </Route>
+                            <Route path="/login">
+                                <Login />
+                            </Route>
+                            <Route path="/register">
+                                <Register />
                             </Route>
                             <Route path="/">
                                 <Home />

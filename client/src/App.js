@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import FIM from "./components/FIM";
 import ArmBike from "./components//TherEx/ArmBike";
-import MyNotes from "./components/MyNotes";
 import ArmExercise from "./components/TherEx/ArmExercise";
 import HemiDressing from "./components/SelfCare/HemiDressing";
 import Grooming from "./components/SelfCare/Grooming";

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
-const MongoDbSession = require("connect-mongodb-session")(session);
+// const MongoDbSession = require("connect-mongodb-session")(session);
 const app = express();
 
 const therExRoutes = require("./routes/therExRoutes");
@@ -15,11 +15,21 @@ const dataRoutes = require("./routes/dataRoutes");
 const adlRoutes = require("./routes/adlRoutes");
 const mobilityRoutes = require("./routes/mobilityRoutes");
 // const authRoutes = require("./routes/authRoutes");
+const db = require("./config/keys").mongoURI;
+
+mongoose
+    .connect(db, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log("MongoDB connected"))
+    .catch((err) => console.log(err));
+
 
 app.use(cors());
 app.use(bodyParser.json());
 
-const db = require("./config/keys").mongoURI;
+
 
 // const store = new MongoDbSession({
 //     uri: db,
@@ -34,13 +44,7 @@ const db = require("./config/keys").mongoURI;
 //     })
 // );
 
-mongoose
-    .connect(db, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log("MongoDB connected"))
-    .catch((err) => console.log(err));
+
 
 app.use("/", therExRoutes);
 app.use("/", fimRoutes);

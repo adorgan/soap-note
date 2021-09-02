@@ -21,18 +21,18 @@ app.use(bodyParser.json());
 
 const db = require("./config/keys").mongoURI;
 
-const store = new MongoDbSession({
-    uri: db,
-    collection: "userSessions",
-});
-app.use(
-    session({
-        secret: "secret key",
-        resave: false,
-        saveUninitialized: false,
-        store: store,
-    })
-);
+// const store = new MongoDbSession({
+//     uri: db,
+//     collection: "userSessions",
+// });
+// app.use(
+//     session({
+//         secret: "secret key",
+//         resave: false,
+//         saveUninitialized: false,
+//         store: store,
+//     })
+// );
 
 mongoose
     .connect(db, {

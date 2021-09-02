@@ -1,23 +1,23 @@
-const User = require("../../models/User");
-const bcrypt = require("bcryptjs");
+// const User = require("../../models/User");
+// const bcrypt = require("bcryptjs");
 
-const loginUser = async (req, res) => {
-    const {email, password} = req.body;
+// const loginUser = async (req, res) => {
+//     const {email, password} = req.body;
 
-    const user = await User.findOne({email});
-    if(!user){
-        return res.json("failure");
-    }
+//     const user = await User.findOne({email});
+//     if(!user){
+//         return res.json("failure");
+//     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+//     const isMatch = await bcrypt.compare(password, user.password);
 
-    if(!isMatch){
-        return res.json("failure");
-    }
+//     if(!isMatch){
+//         return res.json("failure");
+//     }
 
-    req.session.isAuth = true;
+//     req.session.isAuth = true;
 
-    return res.json('success');
-};
+//     return res.json('success');
+// };
 
-module.exports = loginUser;
+// module.exports = loginUser;

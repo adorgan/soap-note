@@ -21,12 +21,12 @@ function App() {
                         <Link className="navbar-brand" to="/">
                             Home
                         </Link>
-                        <Link className="navbar-brand" to="/login">
+                        {/* <Link className="navbar-brand" to="/login">
                             Login
                         </Link>
                         <Link className="navbar-brand" to="/register">
                             Register
-                        </Link>
+                        </Link> */}
                     </div>
                 </nav>
                 <Header />
@@ -186,12 +186,12 @@ function App() {
                             <Route path="/toilet-transfer">
                                 <ToiletTransfer />
                             </Route>
-                            <Route path="/login">
+                            {/* <Route path="/login">
                                 <Login />
                             </Route>
                             <Route path="/register">
                                 <Register />
-                            </Route>
+                            </Route> */}
                             <Route path="/">
                                 <Home />
                             </Route>

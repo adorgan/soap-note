@@ -16,9 +16,6 @@ const adlRoutes = require("./routes/adlRoutes");
 const mobilityRoutes = require("./routes/mobilityRoutes");
 // const authRoutes = require("./routes/authRoutes");
 const db = require("./config/keys").mongoURI;
-
-
-
 mongoose
     .connect(db, {
         useNewUrlParser: true,

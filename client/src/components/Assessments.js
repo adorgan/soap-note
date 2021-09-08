@@ -4,13 +4,14 @@ import constants from "../utils/constants";
 export default function Assessments(handleChange) {
     return (
         <>
-            <SelectInput
+            
+            {/* <SelectInput
                 label="FIM Score"
                 id="fim"
                 name="fim"
                 handleChange={handleChange.handleChange}
                 options={constants.assessments.fim}
-            />
+            /> */}
             <SelectInput
                 label="CARE tool"
                 id="care"

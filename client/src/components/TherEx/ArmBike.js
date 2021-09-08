@@ -4,20 +4,36 @@ import Vitals from "../Vitals";
 import SelectInput from "../SelectInput";
 import MultiSelectInput from "../MultiSelectInput";
 import NarrativeBlurb from "../NarrativeBlurb";
+import Accordian from "../Accordian";
+import Assessments from "../Assessments";
 import SubmitButton from "../SubmitButton";
+import FimBloc from "../FimBloc";
 import postData from "../../utils/postRequest";
 import getData from "../../utils/getRequest";
 import constants from "../../utils/constants";
 import changeNavBold from "../../utils/changeNavBold";
 
+
 const defaultState = {
     patient: "resident",
+    name: "",
     goals: [],
     impairments: [],
-    arm_bike_level: "",
-    arm_bike_time: "",
-    fim_arm_bike: "",
+    level: "",
+    time: "",
+    plan: "",
+    fim: "",
+    care: "",
     verbal_cueing: "",
+    gross_motor_coordination: "",
+    fine_motor_coordination: "",
+    dynamic_sitting_balance: "",
+    static_sitting_balance: "",
+    blood_pressure: "",
+    heart_rate: "",
+    respiration_rate: "",
+    temperature: "",
+    saturation: "",
 };
 const formReducer = (state, event) => {
     if (event.reset) {
@@ -45,41 +61,24 @@ function ArmBike() {
         });
     };
 
-    const handleGoalChange = (event) => {
-        // parse selected goals in dropdown and add to array
-        var selectedGoals = document.getElementById("goals").selectedOptions;
-        var goalsArray = [];
-        for (let goal of selectedGoals) {
-            goalsArray.push(goal.value);
-        }
-
-        //update form state with new array
-        setFormData({
-            name: event.target.name,
-            value: goalsArray,
-        });
-    };
-
-    const handleImpairmentsChange = (event) => {
-        // parse selected impairments in dropdown and add to array
-        var selectedImpairments =
-            document.getElementById("impairments").selectedOptions;
-        var impairmentsArray = [];
-        for (let impairment of selectedImpairments) {
-            impairmentsArray.push(impairment.value);
-        }
-
-        //update form state with new array
-        setFormData({
-            name: event.target.name,
-            value: impairmentsArray,
-        });
-    };
-
-    const handleChange = (event) => {
+    const handleSingleSelectChange = (event) => {
         setFormData({
             name: event.target.name,
             value: event.target.value,
+        });
+    };
+
+    const handleMultiSelectChange = (e) => {
+        // make array of multi selected options
+        const selected = document.getElementById(e.target.id).selectedOptions;
+        let selectedArray = [];
+        for (let element of selected) {
+            selectedArray.push(element.value);
+        }
+        // update form element state with new array values
+        setFormData({
+            name: e.target.name,
+            value: selectedArray,
         });
     };
 
@@ -106,15 +105,15 @@ function ArmBike() {
                             label="Healthcare Receiver Terminology"
                             id="patient"
                             name="patient"
-                            handleChange={handleChange}
-                            options={["resident", "client", "patient"]}
+                            handleChange={handleSingleSelectChange}
+                            options={constants.patientTerm}
                         />
                         {/* Arm bike name */}
                         <SelectInput
                             label="Arm Bike Name"
-                            id="arm_bike_name"
-                            name="arm_bike_name"
-                            handleChange={handleChange}
+                            id="name"
+                            name="name"
+                            handleChange={handleSingleSelectChange}
                             options={constants.armBikeNames}
                         />
                         {/* Goals */}
@@ -122,7 +121,7 @@ function ArmBike() {
                             label="Goals Targeted"
                             name="goals"
                             id="goals"
-                            handleChange={handleGoalChange}
+                            handleChange={handleMultiSelectChange}
                             options={constants.goals}
                         />
                         {/* Physical Impairments */}
@@ -130,51 +129,68 @@ function ArmBike() {
                             label="Impairments Addressed"
                             name="impairments"
                             id="impairments"
-                            handleChange={handleImpairmentsChange}
+                            handleChange={handleMultiSelectChange}
                             options={impairments}
                         />
                         {/* Time on activity */}
                         <NumberInput
-                            name="arm_bike_time"
-                            id="arm_bike_time"
+                            name="time"
+                            id="time"
                             label="Time"
                             min="0"
                             max="15"
-                            handleChange={handleChange}
+                            handleChange={handleSingleSelectChange}
                         />
                         {/* Activity resistance level */}
                         <NumberInput
-                            name="arm_bike_level"
-                            id="arm_bike_level"
+                            name="level"
+                            id="level"
                             label="Level"
                             min="0"
                             max="10"
-                            handleChange={handleChange}
+                            handleChange={handleSingleSelectChange}
                         />
-                        {/* FIM scores */}
-                        <SelectInput
-                            label="FIM Score"
-                            name="fim_arm_bike"
-                            id="fim_arm_bike"
-                            handleChange={handleChange}
-                            options={constants.assessments.fim}
-                        />
-                        <SelectInput
-                            label="Verbal Cueing Required"
-                            name="verbal_cueing"
-                            id="verbal_cueing"
-                            handleChange={handleChange}
-                            options={constants.assessments.verbalCues}
-                        />
-                        <div></div>
                         <SelectInput
                             label="Plan"
                             name="plan"
                             id="plan"
-                            handleChange={handleChange}
+                            handleChange={handleSingleSelectChange}
                             options={constants.plan}
                         />
-                        <Vitals />
+                        <Accordian
+                            categories={[
+                                {
+                                    component: (
+                                        <FimBloc
+                                            handleChange={
+                                                handleSingleSelectChange
+                                            }
+                                        />
+                                    ),
+                                    label: "FIM",
+                                },
+                                {
+                                    component: (
+                                        <Assessments
+                                            handleChange={
+                                                handleSingleSelectChange
+                                            }
+                                        />
+                                    ),
+                                    label: "Assessments",
+                                },
+                                {
+                                    component: (
+                                        <Vitals
+                                            handleChange={
+                                                handleSingleSelectChange
+                                            }
+                                        />
+                                    ),
+                                    label: "Vitals",
+                                },
+                            ]}
+                        />
                     </fieldset>
                     <SubmitButton />
                 </form>

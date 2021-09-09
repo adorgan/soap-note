@@ -9,7 +9,7 @@ const makeAssessments = (
     let assessments = "";
 
     if (fim !== "") {
-        assessments = `FIM: ${fim}; `;
+        assessments = `${fim}; `;
     }
     if (care !== "") {
         assessments += `CARE: ${care}; `;
@@ -27,7 +27,7 @@ const makeAssessments = (
         assessments += `fine motor coordination grade: ${fineMotorCoordination}; `;
     }
     if (assessments !== "") {
-        assessments = `Standardized assessments: ${assessments}`;
+        assessments = `Standardized assessments: ${assessments.slice(0, -2)}.`;
     }
 
     return assessments;

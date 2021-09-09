@@ -135,6 +135,7 @@ module.exports = {
         "fine motor coordination",
     ],
     position: ["seated", "standing", "supine with head of bed elevated"],
+    position_exercise: ["seated", "standing"],
     location: ["bedroom", "bathroom"],
     toiletTransfer: {
         instruction: [

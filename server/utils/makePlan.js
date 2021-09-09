@@ -1,22 +1,22 @@
-const makePlan = (plan, client, goals) => {
+const makePlan = (plan, activity, client, goals) => {
     let planStatement = "";
     switch (plan) {
         case "upgrade":
-            planStatement = `Based on the ${client}'s positive response to this treatment 
-            intervention, future sessions will upgrade the challenge to better meet their 
-            needs and maximize their potential to achieve ${goals} goals.`;
+            planStatement = `The ${client} tolerated the ${activity} well and would benefit
+            from increasing the challenge, duration, or intensity in future treatments to
+            best maximize their potential for achieving their ${goals} goals.`;
             break;
 
         case "downgrade":
-            planStatement = `Based on the ${client}'s difficult response to this treatment 
-            intervention, future sessions will downgrade the challenge to better meet their 
-            needs and maximize their potential to achieve ${goals} goals.`;
+            planStatement = `The ${client} tolerated the ${activity} poorly and would benefit
+            from decreasing the challenge, duration, or intensity in future treatments to
+            best maximize their potential for achieving their ${goals} goals.`;
             break;
 
         case "maintain":
-            planStatement = `Based on the ${client}'s satisfactory response to this treatment 
-            intervention, future sessions will maintain the challenge to best meet their 
-            needs and maximize their potential to achieve ${goals} goals.`;
+            planStatement = `The ${client} tolerated the ${activity} adequately but would benefit
+            from modifying the challenge, duration, or intensity in future treatments to
+            best maximize their potential for achieving their ${goals} goals.`;
             break;
 
         default:

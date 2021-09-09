@@ -5,6 +5,7 @@ import ArmExercise from "./components/TherEx/ArmExercise";
 import HemiDressing from "./components/SelfCare/HemiDressing";
 import Grooming from "./components/SelfCare/Grooming";
 import ToiletTransfer from "./components/Mobility/ToiletTransfer";
+import MyNotes from "./components/MyNotes";
 // import Login from "./components/Auth/Login";
 // import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard";
@@ -166,7 +167,7 @@ function App() {
                     <div className="col-8">
                         <Switch>
                             <Route path="/notes">
-                                <Dashboard />
+                                <MyNotes />
                             </Route>
                             <Route path="/fim">
                                 <FIM />

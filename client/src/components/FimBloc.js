@@ -28,15 +28,15 @@ export default function fimBloc(handleChange) {
                     />
                     <SelectInput
                         label="Upper Body Dressing"
-                        name="dressing_upper"
-                        id="dressing_upper"
+                        name="upper_body_dressing"
+                        id="upper_body_dressing"
                         handleChange={handleChange.handleChange}
                         options={constants.assessments.fim}
                     />
                     <SelectInput
                         label="Lower Body Dressing"
-                        name="dressing_lower"
-                        id="dressing_lower"
+                        name="lower_body_dressing"
+                        id="lower_body_dressing"
                         handleChange={handleChange.handleChange}
                         options={constants.assessments.fim}
                     />
@@ -49,15 +49,15 @@ export default function fimBloc(handleChange) {
                     />
                     <SelectInput
                         label="Toilet Transfers"
-                        name="toilet_transfer"
-                        id="toilet_transfer"
+                        name="toilet_transfers"
+                        id="toilet_transfers"
                         handleChange={handleChange.handleChange}
                         options={constants.assessments.fim}
                     />
                     <SelectInput
                         label="Tub Transfers"
-                        name="tub_transfer"
-                        id="tub_transfer"
+                        name="tub_transfers"
+                        id="tub_transfers"
                         handleChange={handleChange.handleChange}
                         options={constants.assessments.fim}
                     />

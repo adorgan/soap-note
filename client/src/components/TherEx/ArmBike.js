@@ -17,14 +17,22 @@ import changeNavBold from "../../utils/changeNavBold";
 const defaultState = {
     patient: "resident",
     name: "",
+    position: "",
     goals: [],
     impairments: [],
     level: "",
     time: "",
-    plan: "",
-    fim: "",
-    care: "",
+    physical_assistance: "",
     verbal_cueing: "",
+    plan: "",
+    eating: "",
+    grooming: "",
+    upper_body_dressing: "",
+    lower_body_dressing: "",
+    toileting: "",
+    toilet_transfers: "",
+    tub_transfers: "",
+    care: "",
     gross_motor_coordination: "",
     fine_motor_coordination: "",
     dynamic_sitting_balance: "",
@@ -107,6 +115,7 @@ function ArmBike() {
                             name="patient"
                             handleChange={handleSingleSelectChange}
                             options={constants.patientTerm}
+                            isRequired={true}
                         />
                         {/* Arm bike name */}
                         <SelectInput
@@ -115,6 +124,15 @@ function ArmBike() {
                             name="name"
                             handleChange={handleSingleSelectChange}
                             options={constants.armBikeNames}
+                            isRequired={true}
+                        />
+                        <SelectInput
+                            label="Patient Position"
+                            id="position"
+                            name="position"
+                            handleChange={handleSingleSelectChange}
+                            options={constants.position_exercise}
+                            isRequired={true}
                         />
                         {/* Goals */}
                         <MultiSelectInput
@@ -131,6 +149,13 @@ function ArmBike() {
                             id="impairments"
                             handleChange={handleMultiSelectChange}
                             options={impairments}
+                        />
+                        <MultiSelectInput
+                            label="Pre-Activity Education Topics"
+                            id="education"
+                            name="education"
+                            handleChange={handleMultiSelectChange}
+                            options={constants.functionalActivityEducationTopics}
                         />
                         {/* Time on activity */}
                         <NumberInput
@@ -151,11 +176,28 @@ function ArmBike() {
                             handleChange={handleSingleSelectChange}
                         />
                         <SelectInput
+                            label="Physical Assistance Provided"
+                            id="physical_assistance"
+                            name="physical_assistance"
+                            handleChange={handleSingleSelectChange}
+                            options={constants.assessments.fim}
+                            isRequired={true}
+                        />
+                        <SelectInput
+                            label="Verbal Cueing Required"
+                            name="verbal_cueing"
+                            id="verbal_cueing"
+                            handleChange={handleSingleSelectChange}
+                            options={constants.assessments.verbalCues}
+                            isRequired={true}
+                        />
+                        <SelectInput
                             label="Plan"
                             name="plan"
                             id="plan"
                             handleChange={handleSingleSelectChange}
                             options={constants.plan}
+                            isRequired={true}
                         />
                         <Accordian
                             categories={[
@@ -177,7 +219,7 @@ function ArmBike() {
                                             }
                                         />
                                     ),
-                                    label: "Assessments",
+                                    label: "Misc. Assessments",
                                 },
                                 {
                                     component: (

@@ -8,7 +8,7 @@ import ToiletTransfer from "./components/Mobility/ToiletTransfer";
 import MyNotes from "./components/MyNotes";
 // import Login from "./components/Auth/Login";
 // import Register from "./components/Auth/Register";
-import Dashboard from "./components/Dashboard";
+// import Dashboard from "./components/Dashboard";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";

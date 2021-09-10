@@ -161,5 +161,14 @@ module.exports = {
             "slide board",
         ],
     },
+    armBike: {
+        verbalCues: [
+            "hand placement",
+            "speed",
+            "posture",
+            "rest breaks",
+            "pursed lip breathing",
+        ]
+    }
 };
 

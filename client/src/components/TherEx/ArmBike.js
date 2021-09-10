@@ -12,24 +12,7 @@ import postData from "../../utils/postRequest";
 import getData from "../../utils/getRequest";
 import constants from "../../utils/constants";
 import changeNavBold from "../../utils/changeNavBold";
-
-const toggleVerbalCues = (setVerbalCues) => {
-  const verbalCueingRequired = document.getElementById("verbal_cueing");
-  const verbalCuesGiven = document.getElementById("verbal_cues_given");
-
-  if (verbalCueingRequired.value === "no verbal cueing") {
-    // disable verbal cues given multi select and reset form value
-    verbalCuesGiven.disabled = true;
-    verbalCuesGiven.value = "";
-    setVerbalCues({
-      name: "verbal_cues_given",
-      value: "",
-    });
-  } else {
-    // re-enable multi-select
-    verbalCuesGiven.disabled = false;
-  }
-};
+import toggleMultiSelect from "../../utils/toggleMultiSelect";
 
 const defaultState = {
   patient: "resident",
@@ -75,20 +58,22 @@ const formReducer = (state, event) => {
 function ArmBike() {
   const [impairments, setImpairments] = useState([]);
   const [formData, setFormData] = useReducer(formReducer, defaultState);
-  // const [showGoalBlurb, setShowGoalBlurb] = useState(false);
   const [blurb, setBlurb] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     postData("/arm-bike", formData).then((data) => {
-      // setShowGoalBlurb(true);
-      // document.getElementById("goal_blurb").innerHTML = data;
       setBlurb(data);
     });
   };
 
   const handleSingleSelectChange = (event) => {
-    toggleVerbalCues(setFormData);
+    toggleMultiSelect(
+      "verbal_cueing",
+      "verbal_cues_given",
+      "no verbal cueing",
+      setFormData
+    );
     setFormData({
       name: event.target.name,
       value: event.target.value,
@@ -116,7 +101,7 @@ function ArmBike() {
   useEffect(() => {
     changeNavBold("nav-arm-bike");
 
-    // make sure collapsed content is shown if browser refreshed
+    // make sure collapsed content in nav is shown if browser refreshed
     const collapsed = document.getElementById("component-collapse-ther-ex");
     collapsed.classList.add("show");
   }, []);
@@ -145,6 +130,7 @@ function ArmBike() {
               options={constants.armBikeNames}
               isRequired={true}
             />
+            {/* Position of patient */}
             <SelectInput
               label="Patient Position"
               id="position"
@@ -169,6 +155,7 @@ function ArmBike() {
               handleChange={handleMultiSelectChange}
               options={impairments}
             />
+            {/* Education topics prior to activity */}
             <MultiSelectInput
               label="Pre-Activity Education Topics"
               id="education"
@@ -194,6 +181,7 @@ function ArmBike() {
               max="10"
               handleChange={handleSingleSelectChange}
             />
+            {/* Physical assistance needed for activity */}
             <SelectInput
               label="Physical Assistance Provided"
               id="physical_assistance"
@@ -202,6 +190,7 @@ function ArmBike() {
               options={constants.assessments.fim}
               isRequired={true}
             />
+            {/* Verbal cueing required */}
             <SelectInput
               label="Verbal Cueing Required"
               name="verbal_cueing"
@@ -210,6 +199,7 @@ function ArmBike() {
               options={constants.assessments.verbalCues}
               isRequired={true}
             />
+            {/* Specific verbal cues */}
             <MultiSelectInput
               label="Verbal Cues Given"
               name="verbal_cues_given"
@@ -217,6 +207,7 @@ function ArmBike() {
               handleChange={handleMultiSelectChange}
               options={constants.armBike.verbalCues}
             />
+            {/* Plan for future sessions */}
             <SelectInput
               label="Plan"
               name="plan"
@@ -228,18 +219,21 @@ function ArmBike() {
             <Accordian
               categories={[
                 {
+                  // FIM scoring for all ADLs
                   component: (
                     <FimBloc handleChange={handleSingleSelectChange} />
                   ),
                   label: "FIM",
                 },
                 {
+                  // Other assessments to add
                   component: (
                     <Assessments handleChange={handleSingleSelectChange} />
                   ),
                   label: "Misc. Assessments",
                 },
                 {
+                  // patient vital signs
                   component: <Vitals handleChange={handleSingleSelectChange} />,
                   label: "Vitals",
                 },

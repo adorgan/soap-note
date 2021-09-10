@@ -5,13 +5,13 @@
  * @param {string} assistLevel FIM level string
  * @returns {string} string describing assistance provided
  */
- const makeAssist = (client, assistLevel, verbalCues) => {
+ const makeAssist = (client, assistLevel, verbalCues, verbalCuesGiven) => {
     let verbalCuePhrase = "";
     if(verbalCues === "no verbal cueing"){
-      verbalCuePhrase = `${verbalCues} throughout`;
+      verbalCuePhrase = `${verbalCues} throughout.`;
     }
     else{
-      verbalCuePhrase = `${verbalCues} for `;
+      verbalCuePhrase = `${verbalCues} for ${verbalCuesGiven}.`;
     }
     const assistDict = {
       independent: `The ${client} completed the activity independently with ${verbalCuePhrase}`,

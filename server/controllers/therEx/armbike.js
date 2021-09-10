@@ -14,10 +14,10 @@ const makeFim = require("../../utils/makeFim");
 const assistBlurb = (client, assistLevel, verbalCues) => {
   let verbalCuePhrase = "";
   if(verbalCues === "no verbal cueing"){
-    verbalCuePhrase = `${verbalCues} throughout.`;
+    verbalCuePhrase = `${verbalCues} throughout`;
   }
   else{
-    verbalCuePhrase = `${verbalCues} for`
+    verbalCuePhrase = `${verbalCues} for `;
   }
   const assistDict = {
     independent: `The ${client} completed the activity independently with ${verbalCuePhrase}`,
@@ -104,7 +104,7 @@ const createArmBike = (req, res) => {
     the therapist instructed the ${patient} to complete the ${name} while ${position} for ${time} 
     minutes on level ${level}. Prior the start of the activity, the therapist instructed the 
     ${patient} in the activity's ${education}.
-    ${assistStr} ${verbal_cues_given}. ${planStr} ${assessmentsStr} ${vitalsStr}`;
+    ${assistStr}${verbal_cues_given}. ${planStr} ${assessmentsStr} ${vitalsStr}`;
 
   return res.json(armBikeStr);
 };

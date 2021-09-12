@@ -169,6 +169,21 @@ module.exports = {
             "rest breaks",
             "pursed lip breathing",
         ]
+    },
+    exercise: {
+        bandColors: [
+            "yellow",
+            "red",
+            "green",
+            "blue",
+            "black",
+        ],
+        verbalCues: [
+            "counting repetitions",
+            "pacing",
+            "correct form",
+            "breathing strategies",
+        ]
     }
 };
 

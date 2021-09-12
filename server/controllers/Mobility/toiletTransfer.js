@@ -1,62 +1,92 @@
 const makeCommaList = require("../../utils/makeCommaList");
-
-const makeVitals = (bp, hr, o2, rr, temp)=>{
-    let vitalsArr = [];
-    if (bp !== ""){
-        vitalsArr.push(`blood pressure: ${bp}`);
-    }
-    if (hr !== "") {
-        vitalsArr.push(`heart rate: ${hr} beats/min`);
-    }
-    if (o2 !== "") {
-        vitalsArr.push(`oxygen saturation: ${o2}%`);
-    }
-    if (rr !== "") {
-        vitalsArr.push(`respiration rate: ${rr} respirations/min`);
-    }
-    if (temp !== "") {
-        vitalsArr.push(`temperature: ${temp}° F`);
-    }
-
-    if (vitalsArr.length === 0){
-        return ""
-    }
-
-    return `Vitals: ${makeCommaList(vitalsArr)}.`;
-
-}
+const makePlan = require("../../utils/makePlan");
+const makeAssessments = require("../../utils/makeAssessments");
+const makeVitals = require("../../utils/makeVitals");
+const makeFim = require("../../utils/makeFim");
+const makeAssist = require("../../utils/makeAssist");
 
 const createToiletTransfer = (req, res) => {
-    const patient = req.body.patient;
-    const education = makeCommaList(req.body.education);
-    const instruction = makeCommaList(req.body.instruction);
-    const interventions = makeCommaList(req.body.intervention);
-    const {
-        fim,
-        care,
-        verbal_cueing,
-        dynamicSittingBalance,
-        staticSittingBalance,
-        grossMotorCoordination,
-        fineMotorCoordination,
-    } = req.body;
+  const {
+    // patient data
+    patient,
+    physical_assistance,
+    plan,
+    // assessment data
+    care,
+    verbal_cueing,
+    eating,
+    grooming,
+    upper_body_dressing,
+    lower_body_dressing,
+    toileting,
+    toilet_transfers,
+    tub_transfers,
+    dynamic_sitting_balance,
+    static_sitting_balance,
+    gross_motor_coordination,
+    fine_motor_coordination,
+    // vitals data
+    blood_pressure,
+    heart_rate,
+    respiration_rate,
+    saturation,
+    temperature,
+  } = req.body;
 
-    const vitals = makeVitals(req.body.blood_pressure, req.body.heart_rate, req.body.saturation, req.body.respiration_rate, req.body.temperature);
 
-    let verbalCueingBlurb = "";
-    if(verbal_cueing !== ""){
-        verbalCueingBlurb = `and ${verbal_cueing}`;
-    }
-   
-    const blurb = `In order to improve safety and independence with toilet transfers, 
-                the therapist first educated the ${patient} regarding the ${education} 
-                of toilet transfers. Next, the therapist instructed the ${patient} to 
-                ${instruction} to maximize safety. The therapist utilized ${interventions}
-                to help the ${patient} better complete the task. The therapist provided
-                ${fim} ${verbalCueingBlurb} for the ${patient} to transfer on/off the toilet.
-                ${vitals}`
-    
-    return res.json(blurb);
+  const education = makeCommaList(req.body.education);
+  const verbal_cues_given = makeCommaList(req.body.verbal_cues_given);
+  const instruction = makeCommaList(req.body.instruction);
+  const intervention = makeCommaList(req.body.intervention);
+
+  // plan blurb
+  const planBlurb = makePlan(plan, "toilet transfer training", patient, "toilet transfers");
+
+  // physical and verbal assistance blurb
+  const assistBlurb = makeAssist(
+    patient,
+    physical_assistance,
+    verbal_cueing,
+    verbal_cues_given
+  );
+
+  // FIM blurb
+  const fimBlurb = makeFim(
+    eating,
+    grooming,
+    upper_body_dressing,
+    lower_body_dressing,
+    toileting,
+    toilet_transfers,
+    tub_transfers
+  );
+
+  // other assessments blurb
+  const assessmentsBlurb = makeAssessments(
+    fimBlurb,
+    care,
+    dynamic_sitting_balance,
+    static_sitting_balance,
+    gross_motor_coordination,
+    fine_motor_coordination
+  );
+
+  // vitals blurb
+  const vitalsBlurb = makeVitals(
+    blood_pressure,
+    heart_rate,
+    respiration_rate,
+    saturation,
+    temperature
+  );
+
+  const blurb = `In order to improve safety and independence with toilet transfers,
+              the therapist educated the ${patient} regarding the ${education}
+              of toilet transfers. Next, the therapist utilized ${intervention} while
+              providing instructions to ${instruction}. 
+              ${assistBlurb} ${planBlurb} ${assessmentsBlurb} ${vitalsBlurb}`;
+
+  return res.json(blurb);
 };
 
 module.exports = createToiletTransfer;

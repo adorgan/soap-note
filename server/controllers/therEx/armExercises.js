@@ -96,7 +96,7 @@ const createArmExercises = (req, res) => {
     exercises focusing on the ${muscle_groups} muscle groups to improve ${impairments}.
     Prior the start of the activity, the therapist instructed the 
     ${patient} in the activity's ${education}. The ${patient} completed ${sets} sets of
-    ${reps} repetitions using ${weight} lb weights while in a ${position} position..
+    ${reps} repetitions using ${weight} lb weights while in a ${position} position.
     ${assistBlurb} ${planBlurb} ${assessmentsBlurb} ${vitalsBlurb}`;
 
   return res.json(blurb);

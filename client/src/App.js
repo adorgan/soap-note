@@ -12,6 +12,7 @@ import MyNotes from "./components/MyNotes";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ADL from "./components/ADL";
 
 function App() {
     return (
@@ -49,6 +50,15 @@ function App() {
                                         id="component-collapse-adl"
                                     >
                                         <ul className="list-unstyled ps-3">
+                                            <li>
+                                                <Link
+                                                    id="nav-ADL"
+                                                    className="text-decoration-none text-reset"
+                                                    to="/ADL"
+                                                >
+                                                    ADL re-training
+                                                </Link>
+                                            </li>
                                             <li>
                                                 <Link
                                                     id="nav-hemi-dressing"
@@ -186,6 +196,9 @@ function App() {
                             </Route>
                             <Route path="/toilet-transfer">
                                 <ToiletTransfer />
+                            </Route>
+                            <Route path="/ADL">
+                                <ADL />
                             </Route>
                             {/* <Route path="/login">
                                 <Login />

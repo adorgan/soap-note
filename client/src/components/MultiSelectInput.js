@@ -1,13 +1,20 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 export default function MultiSelectInput(
     {id,
     name,
     label,
     options,
-    handleChange}
+    handleChange,
+    isRequired=false}
 ) {
 
+    useEffect(() => {
+        const input = document.getElementById(id);
+        if (isRequired) {
+          input.required = true;
+        }
+      }, [id, isRequired]);
     
     return (
         <>
@@ -22,7 +29,6 @@ export default function MultiSelectInput(
                         onChange={handleChange}
                         size={options.length}
                         multiple
-                        required
                         className="form-select"
                     >
                         {options.map((option, index) => {

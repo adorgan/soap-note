@@ -1,9 +1,12 @@
+const makeBathingBlurb = require("../../utils/ADL/makeBathingBlurb");
 const makeEatingBlurb = require("../../utils/ADL/makeEatingBlurb");
 const makeGroomingBlurb = require("../../utils/ADL/makeGroomingBlurb");
+const makeLowerDressingBlurb = require("../../utils/ADL/makeLowerDressing");
+const makeToiletingBlurb = require("../../utils/ADL/makeToiletingBlurb");
+const makeUpperDressingBlurb = require("../../utils/ADL/makeUpperDressingBlurb");
 const makeList = require("../../utils/makeCommaList");
 
 const makeADL = (req, res) => {
-
   //   eating
   const { eating_position, eating_location, eating_fim, eating_verbal_cueing } =
     req.body;
@@ -50,7 +53,7 @@ const makeADL = (req, res) => {
     grooming_tasks,
     grooming_education,
     grooming_instruction,
-    grooming_interventions,
+    grooming_interventions
     // grooming_adaptive_equipment
   );
 
@@ -68,6 +71,18 @@ const makeADL = (req, res) => {
   const bathing_interventions = makeList(req.body.bathing_interventions);
   const bathing_adaptive_equipment = makeList(
     req.body.bathing_adaptive_equipment
+  );
+
+  const bathingBlurb = makeBathingBlurb(
+    bathing_position,
+    bathing_location,
+    bathing_fim,
+    bathing_verbal_cueing,
+    bathing_tasks,
+    bathing_education,
+    bathing_instruction,
+    bathing_interventions,
+    bathing_adaptive_equipment
   );
 
   // Upper body dressing
@@ -90,6 +105,18 @@ const makeADL = (req, res) => {
     req.body.upper_dressing_adaptive_equipment
   );
 
+  const upperDressingBlurb = makeUpperDressingBlurb(
+    upper_dressing_position,
+    upper_dressing_location,
+    upper_dressing_fim,
+    upper_dressing_verbal_cueing,
+    upper_dressing_tasks,
+    upper_dressing_education,
+    upper_dressing_instruction,
+    upper_dressing_interventions,
+    upper_dressing_adaptive_equipment
+  );
+
   // Lower body dressing
   const {
     lower_dressing_position,
@@ -110,6 +137,18 @@ const makeADL = (req, res) => {
     req.body.lower_dressing_adaptive_equipment
   );
 
+  const lowerDressingBlurb = makeLowerDressingBlurb(
+    lower_dressing_position,
+    lower_dressing_location,
+    lower_dressing_fim,
+    lower_dressing_verbal_cueing,
+    lower_dressing_tasks,
+    lower_dressing_education,
+    lower_dressing_instruction,
+    lower_dressing_interventions,
+    lower_dressing_adaptive_equipment
+  );
+
   // Toileting
   const {
     toileting_position,
@@ -120,16 +159,32 @@ const makeADL = (req, res) => {
 
   const toileting_tasks = makeList(req.body.toileting_tasks);
   const toileting_education = makeList(req.body.toileting_education);
-  const toileting_instruction = makeList(
-    req.body.toileting_instruction
-  );
-  const toileting_interventions = makeList(
-    req.body.toileting_interventions
-  );
+  const toileting_instruction = makeList(req.body.toileting_instruction);
+  const toileting_interventions = makeList(req.body.toileting_interventions);
   const toileting_adaptive_equipment = makeList(
     req.body.toileting_adaptive_equipment
   );
-  return res.json(`${eatingBlurb} ${groomingBlurb}`);
+
+  const toiletingBlurb = makeToiletingBlurb(
+    toileting_position,
+    toileting_location,
+    toileting_fim,
+    toileting_verbal_cueing,
+    toileting_tasks,
+    toileting_education,
+    toileting_instruction,
+    toileting_interventions,
+    toileting_adaptive_equipment
+  );
+
+  return res.json(
+    `${eatingBlurb} 
+     ${groomingBlurb} 
+     ${bathingBlurb} 
+     ${upperDressingBlurb} 
+     ${lowerDressingBlurb} 
+     ${toiletingBlurb}`
+  );
 };
 
 module.exports = makeADL;

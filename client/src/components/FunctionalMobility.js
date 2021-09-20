@@ -1,10 +1,11 @@
-import {useState, useReducer} from 'react'
+import { useState, useReducer } from "react";
 import ToiletTransfer from "./FunctionalMobility/ToiletTransfer";
 import Accordian from "./Accordian";
 import SubmitButton from "./SubmitButton";
 import NarrativeBlurb from "./NarrativeBlurb";
 import postData from "../utils/postRequest";
-import TubTransfer from './FunctionalMobility/TubTransfer';
+import TubTransfer from "./FunctionalMobility/TubTransfer";
+import BedMobility from "./FunctionalMobility/BedMobility";
 
 const defaultFormState = {
     // Toilet transfers
@@ -27,6 +28,16 @@ const defaultFormState = {
     tub_transfer_adaptive_equipment: [],
     tub_transfer_fim: "",
     tub_transfer_verbal_cueing: "",
+    // Bed mobility
+    bed_mobility_location: "",
+    bed_mobility_tasks: [],
+    bed_mobility_aids: [],
+    bed_mobility_education: [],
+    bed_mobility_instruction: [],
+    bed_mobility_interventions: [],
+    // bed_mobility_adaptive_equipment: [],
+    bed_mobility_fim: "",
+    bed_mobility_verbal_cueing: "",
 };
 const formReducer = (state, event) => {
     if (event.reset) {
@@ -73,6 +84,19 @@ export default function FunctionalMobility() {
             <form onSubmit={handleSubmit}>
                 <Accordian
                     categories={[
+                        {
+                            component: (
+                                <BedMobility
+                                    handleMultiSelectChange={
+                                        handleMultiSelectChange
+                                    }
+                                    handleSingleSelectChange={
+                                        handleSingleSelectChange
+                                    }
+                                />
+                            ),
+                            label: "Bed Mobility",
+                        },
                         {
                             component: (
                                 <ToiletTransfer

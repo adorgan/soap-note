@@ -494,4 +494,42 @@ module.exports = {
         ],
         adaptive_equipment: ["grab bars", "shower chair", "tub bench"],
     },
+    bed_mobility: {
+        location: ["patient room", "therapy room"],
+        tasks: [
+            "rolling side to side",
+            "supine -> edge of bed",
+            "edge of bed -> supine",
+        ],
+        aids: ["bed rail", "headboard"],
+        education: [
+            "purpose",
+            "frequency",
+            "duration",
+            "proper technique for completion",
+            "task sequencing",
+            "rules and procedures",
+            "initiation",
+            "termination",
+        ],
+        instruction: [
+            "use bed rails for leverage",
+            "slide feet off edge of bed prior to sitting up",
+            "push off of bed surface when transferring upright",
+            "use log rolling technique"
+        ],
+        intervention: [
+            "task repetition",
+            "task simplification",
+            "forward chaining",
+            "backward chaining",
+            "adaptive equipment",
+            "tactile cueing",
+            "visual cueing",
+            "modeling",
+            "task modification",
+            "adapting the environment",
+        ],
+        
+    },
 };

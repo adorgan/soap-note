@@ -413,9 +413,8 @@ module.exports = {
         ],
         adaptive_equipment: ["grab bars", "bottom buddy"],
     },
-    
+
     toilet_transfer: {
-        
         location: ["bathroom", "patient room", "therapy room"],
         tasks: [
             "sit -> stand",
@@ -423,14 +422,8 @@ module.exports = {
             "wheelchair -> bedside commode",
             "toilet -> wheelchair",
             "bedside commode -> wheelchair",
-    
         ],
-        aids: [
-          "2 wheel walker",
-          "Rollator",
-          "grab bars",
-          "wheelchair",
-        ],
+        aids: ["2 wheel walker", "Rollator", "grab bars", "wheelchair"],
         education: [
             "purpose",
             "frequency",
@@ -460,5 +453,45 @@ module.exports = {
             "adapting the environment",
         ],
         adaptive_equipment: ["grab bars", "RW"],
+    },
+    tub_transfer: {
+        location: ["bathroom", "shower room", "therapy room"],
+        tasks: [
+            "sit -> stand",
+            "wheelchair -> tub bench",
+            "wheelchair -> shower chair",
+            "tub bench -> wheelchair",
+            "shower chair -> wheelchair",
+        ],
+        aids: ["2 wheel walker", "Rollator", "grab bars", "wheelchair"],
+        education: [
+            "purpose",
+            "frequency",
+            "duration",
+            "proper technique for completion",
+            "task sequencing",
+            "rules and procedures",
+            "initiation",
+            "termination",
+        ],
+        instruction: [
+            "lock wheelchair breaks prior to standing",
+            "position the wheelchair near shower stall",
+            "pull up on grab bars for support",
+            "reach back for commode arms when sitting",
+        ],
+        intervention: [
+            "task repetition",
+            "task simplification",
+            "forward chaining",
+            "backward chaining",
+            "adaptive equipment",
+            "tactile cueing",
+            "visual cueing",
+            "modeling",
+            "task modification",
+            "adapting the environment",
+        ],
+        adaptive_equipment: ["grab bars", "shower chair", "tub bench"],
     },
 };

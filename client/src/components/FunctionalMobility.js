@@ -4,8 +4,10 @@ import Accordian from "./Accordian";
 import SubmitButton from "./SubmitButton";
 import NarrativeBlurb from "./NarrativeBlurb";
 import postData from "../utils/postRequest";
+import TubTransfer from './FunctionalMobility/TubTransfer';
 
 const defaultFormState = {
+    // Toilet transfers
     toilet_transfer_location: "",
     toilet_transfer_tasks: [],
     toilet_transfer_aids: [],
@@ -15,8 +17,17 @@ const defaultFormState = {
     toilet_transfer_adaptive_equipment: [],
     toilet_transfer_fim: "",
     toilet_transfer_verbal_cueing: "",
-
-}
+    // Tub transfers
+    tub_transfer_location: "",
+    tub_transfer_tasks: [],
+    tub_transfer_aids: [],
+    tub_transfer_education: [],
+    tub_transfer_instruction: [],
+    tub_transfer_interventions: [],
+    tub_transfer_adaptive_equipment: [],
+    tub_transfer_fim: "",
+    tub_transfer_verbal_cueing: "",
+};
 const formReducer = (state, event) => {
     if (event.reset) {
         return defaultFormState;
@@ -75,11 +86,24 @@ export default function FunctionalMobility() {
                             ),
                             label: "Toilet Transfer",
                         },
+                        {
+                            component: (
+                                <TubTransfer
+                                    handleMultiSelectChange={
+                                        handleMultiSelectChange
+                                    }
+                                    handleSingleSelectChange={
+                                        handleSingleSelectChange
+                                    }
+                                />
+                            ),
+                            label: "Tub Transfer",
+                        },
                     ]}
                 />
                 <SubmitButton />
             </form>
-            <NarrativeBlurb text={blurb} id="blurb"/>
+            <NarrativeBlurb text={blurb} id="blurb" />
         </>
     );
 }

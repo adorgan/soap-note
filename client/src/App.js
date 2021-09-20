@@ -13,6 +13,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ADL from "./components/ADL";
+import FunctionalMobility from "./components/FunctionalMobility";
 
 function App() {
     return (
@@ -138,6 +139,15 @@ function App() {
                                                     Toilet Transfer
                                                 </Link>
                                             </li>
+                                            <li>
+                                                <Link
+                                                    id="nav-transfers"
+                                                    className="text-decoration-none text-reset"
+                                                    to="/functional-mobility"
+                                                >
+                                                    Functional Mobility
+                                                </Link>
+                                            </li>
                                             {/* <li>
                                                 <Link
                                                     id="nav-arm-exercises"
@@ -199,6 +209,9 @@ function App() {
                             </Route>
                             <Route path="/ADL">
                                 <ADL />
+                            </Route>
+                            <Route pathe="/transfers">
+                                <FunctionalMobility />
                             </Route>
                             {/* <Route path="/login">
                                 <Login />

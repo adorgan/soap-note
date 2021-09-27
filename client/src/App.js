@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ADL from "./components/ADL";
 import FunctionalMobility from "./components/FunctionalMobility";
+import Balance from "./components/Balance";
 
 function App() {
     return (
@@ -160,6 +161,32 @@ function App() {
                                         </ul>
                                     </div>
                                 </li>
+                                <li className="">
+                                    <button
+                                        type="button"
+                                        className="btn shadow-none p-0"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#component-collapse-balance"
+                                    >
+                                        Balance
+                                    </button>
+                                    <div
+                                        className="collapse"
+                                        id="component-collapse-balance"
+                                    >
+                                        <ul className="list-unstyled ps-3">
+                                            <li>
+                                                <Link
+                                                    id="nav-dynamic-balance"
+                                                    className="text-decoration-none text-reset"
+                                                    to="/dynamic-balance"
+                                                >
+                                                    Dynamic Balance
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li>
                                     <Link
                                         id="nav-fim"
@@ -210,8 +237,11 @@ function App() {
                             <Route path="/ADL">
                                 <ADL />
                             </Route>
-                            <Route pathe="/transfers">
+                            <Route path="/functional-mobility">
                                 <FunctionalMobility />
+                            </Route>
+                            <Route path="/dynamic-balance">
+                                <Balance />
                             </Route>
                             {/* <Route path="/login">
                                 <Login />

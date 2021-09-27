@@ -516,7 +516,7 @@ module.exports = {
             "use bed rails for leverage",
             "slide feet off edge of bed prior to sitting up",
             "push off of bed surface when transferring upright",
-            "use log rolling technique"
+            "use log rolling technique",
         ],
         intervention: [
             "task repetition",
@@ -530,6 +530,46 @@ module.exports = {
             "task modification",
             "adapting the environment",
         ],
-        
+    },
+    dynamic_balance: {
+        position: ["seated", "standing"],
+        support: ["parallel bars", "RW", "cane"],
+        tasks: [
+            "reach for cones in various positions",
+            "play balloon toss",
+            "insert pegs into peg board",
+            "toss a ball back and forth",
+            "complete BUE strengthening exercises",
+            "fold laundry",
+        ],
+        education: [
+            "purpose",
+            "frequency",
+            "duration",
+            "proper technique for completion",
+            "task sequencing",
+            "rules and procedures",
+            "initiation",
+            "termination",
+        ],
+        instruction: [
+            "safely weight shift when reaching",
+            "maintain one UE on support device",
+            "establish a wide base of support",
+            "maintain an upright posture",
+            "avoid looking down",
+        ],
+        intervention: [
+            "task repetition",
+            "task simplification",
+            "forward chaining",
+            "backward chaining",
+            "adaptive equipment",
+            "tactile cueing",
+            "visual cueing",
+            "modeling",
+            "task modification",
+            "adapting the environment",
+        ],
     },
 };

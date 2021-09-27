@@ -14,6 +14,7 @@ const noteRoutes = require("./routes/noteRoutes");
 const dataRoutes = require("./routes/dataRoutes");
 const adlRoutes = require("./routes/adlRoutes");
 const mobilityRoutes = require("./routes/mobilityRoutes");
+const balanceRoutes = require("./routes/balanceRoutes");
 // const authRoutes = require("./routes/authRoutes");
 const db = require("./config/keys").mongoURI;
 mongoose
@@ -51,6 +52,7 @@ app.use("/", noteRoutes);
 app.use("/", dataRoutes);
 app.use("/", adlRoutes);
 app.use("/", mobilityRoutes);
+app.use("/", balanceRoutes);
 // app.use("/", authRoutes);
 
 //serve static assets if in production

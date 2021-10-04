@@ -161,7 +161,16 @@ function App() {
                                         </ul>
                                     </div>
                                 </li>
-                                <li className="">
+                                <li>
+                                    <Link
+                                        id="nav-balance"
+                                        className="text-decoration-none text-reset"
+                                        to="/balance"
+                                    >
+                                        Balance
+                                    </Link>
+                                </li>
+                                {/* <li className="">
                                     <button
                                         type="button"
                                         className="btn shadow-none p-0"
@@ -186,7 +195,7 @@ function App() {
                                             </li>
                                         </ul>
                                     </div>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link
                                         id="nav-fim"
@@ -240,7 +249,7 @@ function App() {
                             <Route path="/functional-mobility">
                                 <FunctionalMobility />
                             </Route>
-                            <Route path="/dynamic-balance">
+                            <Route path="/balance">
                                 <Balance />
                             </Route>
                             {/* <Route path="/login">

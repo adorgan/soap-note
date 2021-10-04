@@ -1,7 +1,9 @@
 const makeDynamicBalance = require("../../utils/Balance/makeDynamicBalance");
+const makeStaticBalance = require("../../utils/Balance/makeStaticBalance");
 const makeList = require("../../utils/makeCommaList");
 
 const makeBalance = (req, res) => {
+    console.log(req.body);
     // Dynamic Balance
     const {
         dynamic_balance_patient,
@@ -40,9 +42,45 @@ const makeBalance = (req, res) => {
         dynamic_balance_verbal_cueing
     );
 
-    return res.json(
-        `${dynamicBalanceBlurb}`
+    // Static Balance
+    const {
+        static_balance_patient,
+        static_balance_position,
+        static_balance_support,
+        static_balance_duration,
+        static_balance_LOB,
+        static_balance_fim,
+        static_balance_verbal_cueing,
+    } = req.body;
+
+    const static_balance_goals = makeList(req.body.static_balance_goals);
+    const static_balance_tasks = makeList(req.body.static_balance_tasks);
+    const static_balance_education = makeList(
+        req.body.static_balance_education
     );
+    const static_balance_instruction = makeList(
+        req.body.static_balance_instruction
+    );
+    const static_balance_interventions = makeList(
+        req.body.static_balance_interventions
+    );
+
+    const staticBalanceBlurb = makeStaticBalance(
+        static_balance_patient,
+        static_balance_goals,
+        static_balance_position,
+        static_balance_support,
+        static_balance_duration,
+        static_balance_LOB,
+        static_balance_tasks,
+        static_balance_education,
+        static_balance_instruction,
+        static_balance_interventions,
+        static_balance_fim,
+        static_balance_verbal_cueing
+    );
+
+    return res.json(`${dynamicBalanceBlurb} ${staticBalanceBlurb}`);
 };
 
 module.exports = makeBalance;

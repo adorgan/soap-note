@@ -21,7 +21,7 @@ export default function NumberInput({
                         min={min}
                         max={max}
                         onChange={handleChange}
-                        required
+                        // required
                     />
                 </div>
             </div>

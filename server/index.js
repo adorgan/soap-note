@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
-// const MongoDbSession = require("connect-mongodb-session")(session);
+const MongoDbSession = require("connect-mongodb-session")(session);
 const app = express();
 
 const therExRoutes = require("./routes/therExRoutes");
@@ -15,7 +15,7 @@ const dataRoutes = require("./routes/dataRoutes");
 const adlRoutes = require("./routes/adlRoutes");
 const mobilityRoutes = require("./routes/mobilityRoutes");
 const balanceRoutes = require("./routes/balanceRoutes");
-// const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/authRoutes");
 const db = require("./config/keys").mongoURI;
 mongoose
     .connect(db, {
@@ -53,7 +53,7 @@ app.use("/", dataRoutes);
 app.use("/", adlRoutes);
 app.use("/", mobilityRoutes);
 app.use("/", balanceRoutes);
-// app.use("/", authRoutes);
+app.use("/", authRoutes);
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {

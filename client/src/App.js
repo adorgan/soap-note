@@ -6,9 +6,9 @@ import HemiDressing from "./components/SelfCare/HemiDressing";
 import Grooming from "./components/SelfCare/Grooming";
 import ToiletTransfer from "./components/Mobility/ToiletTransfer";
 import MyNotes from "./components/MyNotes";
-// import Login from "./components/Auth/Login";
-// import Register from "./components/Auth/Register";
-// import Dashboard from "./components/Dashboard";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Dashboard from "./components/Dashboard";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -25,12 +25,14 @@ function App() {
                         <Link className="navbar-brand" to="/">
                             Home
                         </Link>
-                        {/* <Link className="navbar-brand" to="/login">
-                            Login
-                        </Link>
-                        <Link className="navbar-brand" to="/register">
-                            Register
-                        </Link> */}
+                        <div>
+                            <Link className="navbar-brand" to="/login">
+                                Login
+                            </Link>
+                            <Link className="navbar-brand" to="/register">
+                                Register
+                            </Link>
+                        </div>
                     </div>
                 </nav>
                 <Header />
@@ -170,7 +172,7 @@ function App() {
                                         Balance
                                     </Link>
                                 </li>
-                                {/* <li className="">
+                                <li className="">
                                     <button
                                         type="button"
                                         className="btn shadow-none p-0"
@@ -195,7 +197,7 @@ function App() {
                                             </li>
                                         </ul>
                                     </div>
-                                </li> */}
+                                </li>
                                 <li>
                                     <Link
                                         id="nav-fim"
@@ -252,12 +254,12 @@ function App() {
                             <Route path="/balance">
                                 <Balance />
                             </Route>
-                            {/* <Route path="/login">
+                            <Route path="/login">
                                 <Login />
                             </Route>
                             <Route path="/register">
                                 <Register />
-                            </Route> */}
+                            </Route>
                             <Route path="/">
                                 <Home />
                             </Route>

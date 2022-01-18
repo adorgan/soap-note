@@ -1,7 +1,6 @@
 import { useEffect, useReducer, useState, Fragment } from "react";
 import React from "react";
 import Note from "./Note";
-import Delete from "./Delete";
 import postData from "../utils/postRequest";
 import getData from "../utils/getRequest";
 import changeNavBold from "../utils/changeNavBold";
@@ -45,11 +44,10 @@ const MyNotes = () => {
     };
 
     const handleDelete = (e) => {
-        e.preventDefault();
 
-        // set _id for specific note to be deleted for post request
+        // set _id for specific note to be deleted
         const deleteData = {
-            id: e.target.id.value,
+            id: e.target.id,
         };
 
         //delete note from database
@@ -86,10 +84,7 @@ const MyNotes = () => {
                                         id={note._id}
                                         title={note.title}
                                         body={note.body}
-                                    />
-                                    <Delete
-                                        id={note._id}
-                                        handleSubmit={handleDelete}
+                                        onClickDelete={handleDelete}
                                     />
                                 </Fragment>
                             );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import postData from "../utils/postRequest";
 
-export default function Note({ title, body, id }) {
+export default function Note({ title, body, id, onClickDelete }) {
     const [ note, setNote ] = useState(body);
 
     const editId = `btn-edit-${id}`;
@@ -38,14 +38,28 @@ export default function Note({ title, body, id }) {
             <h3 className="note-title">{title}</h3>
             <textarea
                 id={noteId}
-                
                 onChange={handleChange}
                 value={note}
             ></textarea>
-            <button id={editId}>Edit</button>
-            <button id={saveId} onClick={saveChanges}>
-                Save
-            </button>
+            <div>
+                <button id={editId} className="btn btn-primary m-1">
+                    Edit
+                </button>
+                <button
+                    id={saveId}
+                    className="btn btn-primary m-1"
+                    onClick={saveChanges}
+                >
+                    Save
+                </button>
+                <button
+                    id={id}
+                    onClick={onClickDelete}
+                    className="btn btn-primary m-1"
+                >
+                    Delete
+                </button>
+            </div>
         </>
     );
 }

@@ -21,7 +21,7 @@ export default function SelectInput({
         <label className="form-label col-4 pt-1 ps-4" htmlFor={id}>
           {label}
         </label>
-        <div className="col-8">
+
           <select
             className="form-select"
             name={name}
@@ -38,7 +38,7 @@ export default function SelectInput({
               );
             })}
           </select>
-        </div>
+        
       </div>
 
       {/* <div className="div-select"></div> */}

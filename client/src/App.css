@@ -88,10 +88,12 @@ a {
 }
 
 .content {
-  margin-top: 60px;
+  margin-top: 70px;
+  margin-left: 20px;
   display: flex;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 

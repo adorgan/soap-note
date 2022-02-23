@@ -1,10 +1,8 @@
 import React, { useState, useReducer, useEffect } from "react";
-import SelectInput from "./SelectInput";
-import constants from "../utils/constants";
-// import changeNavBold from "../utils/changeNavBold";
 import FormSelect from "./FormSelect";
 import Modal from "./Modal";
 import FimModal from "./ModalContent/FimModal";
+import postData from "../utils/postRequest";
 
 const setCopyBtn = () => {
   var range = document.createRange();
@@ -14,24 +12,6 @@ const setCopyBtn = () => {
   document.execCommand("copy");
   // window.getSelection().removeAllRanges(); // to deselect
 };
-
-async function postData(url = "", data = {}) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
-    headers: {
-      "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
-}
 
 const defaultState = {
   eating: "",
@@ -56,12 +36,11 @@ const formReducer = (state, event) => {
 function FIM() {
   const [showFimBlurb, setShowFimBlurb] = useState(false);
   const [formData, setFormData] = useReducer(formReducer, defaultState);
-  const [modalTitle, setModalTitle] = useState("");
-  const [modalContent, setModalContent] = useState(<Test />);
+  const [modalContent, setModalContent] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
 
     //check to make sure no field has default option selected
     if (Object.values(formData).includes("")) {
@@ -74,22 +53,30 @@ function FIM() {
     }
   };
 
-  const handleChange = (event) => {
+  const onClickNext = (modal, name, value, subtitleID) => {
+    setModalContent(modal);
+    if (value !== "") {
+      document.getElementById(subtitleID).innerHTML = value;
+    }
+
     setFormData({
-      name: event.target.name,
-      value: event.target.value,
+      name: name,
+      value: value.toLowerCase(),
     });
   };
 
-  const handleOkModalClick = (selectedName, subtitleID, name) => {
+  const handleOkModalClick = (name, value, subtitleID) => {
     const modal = document.getElementById("myModal");
     modal.style.display = "none";
     setModalVisible(false);
-    document.getElementById(subtitleID).innerHTML = selectedName;
-    console.log(name);
+
+    if (value !== "") {
+      document.getElementById(subtitleID).innerHTML = value;
+    }
+
     setFormData({
       name: name,
-      value: selectedName.toLowerCase(),
+      value: value.toLowerCase(),
     });
   };
 
@@ -98,7 +85,7 @@ function FIM() {
     setModalVisible(true);
   };
 
-  const [modalVisible, setModalVisible] = useState(false);
+
 
   useEffect(() => {
     if (modalVisible) {
@@ -113,6 +100,110 @@ function FIM() {
     }
   }, [modalVisible]);
 
+  const tubTransferModal = (
+    <FimModal
+      key="tub transers"
+      title="Tub Transfers"
+      onOkayClick={handleOkModalClick}
+      subtitleID="tub-transfers-subtitle-id"
+      name="tub_transfer"
+      prevSelected={formData.tub_transfer}
+      nextModal={""}
+    />
+  );
+
+  const toiletTransferModal = (
+    <FimModal
+      key="toilet transers"
+      title="Toilet Transfers"
+      onOkayClick={handleOkModalClick}
+      subtitleID="toilet-transfers-subtitle-id"
+      name="toilet_transfer"
+      prevSelected={formData.toilet_transfer}
+      nextModal={
+        tubTransferModal
+      }
+      onClickNext={onClickNext}
+    />
+  );
+
+  const toiletingModal = (
+    <FimModal
+      key="toileting"
+      title="Toileting"
+      onOkayClick={handleOkModalClick}
+      subtitleID="toileting-subtitle-id"
+      name="toileting"
+      prevSelected={formData.toileting}
+      nextModal={toiletTransferModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const lowerDressModal = (
+    <FimModal
+      key="lower body dressing"
+      title="Lower Body Dressing"
+      onOkayClick={handleOkModalClick}
+      subtitleID="lb-dressing-subtitle-id"
+      name="dressing_lower"
+      prevSelected={formData.dressing_lower}
+      nextModal={toiletingModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const upperDressModal = (
+    <FimModal
+      key="upper body dressing"
+      title="Upper Body Dressing"
+      onOkayClick={handleOkModalClick}
+      subtitleID="ub-dressing-subtitle-id"
+      name="dressing_upper"
+      prevSelected={formData.dressing_upper}
+      nextModal={lowerDressModal}
+      onClickNext={onClickNext}
+    />
+  );
+  const bathingModal = (
+    <FimModal
+      key="bathin"
+      title="Bathing"
+      onOkayClick={handleOkModalClick}
+      subtitleID="bathin-subtitle-id"
+      name="bathing"
+      prevSelected={formData.bathing}
+      nextModal={upperDressModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const groomingModal = (
+    <FimModal
+      key="grooming"
+      title="Grooming"
+      onOkayClick={handleOkModalClick}
+      subtitleID="grooming-subtitle-id"
+      name="grooming"
+      prevSelected={formData.grooming}
+      nextModal={bathingModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const eatingModal = (
+    <FimModal
+      key="eating"
+      title="Eating"
+      onOkayClick={handleOkModalClick}
+      subtitleID="eating-subtitle-id"
+      name="eating"
+      prevSelected={formData.eating}
+      nextModal={groomingModal}
+      onClickNext={onClickNext}
+    />
+  );
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -121,119 +212,51 @@ function FIM() {
             title="Eating"
             subtitle="select FIM rating"
             subtitleID="eating-subtitle-id"
-            onClick={() =>
-              handleModalVisit(
-                <FimModal
-                  title="Eating"
-                  onOkayClick={handleOkModalClick}
-                  subtitleID="eating-subtitle-id"
-                  name="eating"
-                />
-              )
-            }
+            onClick={() => handleModalVisit(eatingModal)}
           />
           <FormSelect
             title="Grooming"
             subtitle="select FIM rating"
-            onClick={() =>
-                handleModalVisit(
-                  <FimModal
-                    title="Grooming"
-                    onOkayClick={handleOkModalClick}
-                    subtitleID="grooming-subtitle-id"
-                    name="grooming"
-                  />
-                )
-              }
+            subtitleID="grooming-subtitle-id"
+            onClick={() => handleModalVisit(groomingModal)}
           />
           <FormSelect
             title="Bathing"
             subtitle="select FIM rating"
-            onClick={() => handleModalVisit("Bathing")}
+            subtitleID="bathin-subtitle-id"
+            onClick={() => handleModalVisit(bathingModal)}
           />
           <FormSelect
             title="Upper Body Dressing"
             subtitle="select FIM rating"
-            onClick={() => handleModalVisit("Upper Body Dressing")}
+            subtitleID="ub-dressing-subtitle-id"
+            onClick={() => handleModalVisit(upperDressModal)}
           />
           <FormSelect
             title="Lower Body Dressing"
             subtitle="select FIM rating"
-            onClick={() => handleModalVisit("Lower Body Dressing")}
+            subtitleID="lb-dressing-subtitle-id"
+            onClick={() => handleModalVisit(lowerDressModal)}
           />
           <FormSelect
             title="Toileting"
             subtitle="select FIM rating"
-            onClick={() => handleModalVisit("Toileting")}
+            subtitleID="toileting-subtitle-id"
+            onClick={() => handleModalVisit(toiletingModal)}
           />
           <FormSelect
             title="Toilet Transfers"
             subtitle="select FIM rating"
-            onClick={() => handleModalVisit("Toilet Transfers")}
+            subtitleID="toilet-transfers-subtitle-id"
+            onClick={() => handleModalVisit(toiletTransferModal)}
           />
           <FormSelect
             title="Tub Transfers"
             subtitle="select FIM rating"
-            onClick={() => handleModalVisit("Tub Transfers")}
+            subtitleID="tub-transfers-subtitle-id"
+            onClick={() => handleModalVisit(tubTransferModal)}
           />
           <Modal modalContent={modalContent} />
-
-          {/* <SelectInput
-            label="Eating"
-            name="eating"
-            id="eating"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          /> */}
-          <SelectInput
-            label="Grooming"
-            name="grooming"
-            id="grooming"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          />
-          <SelectInput
-            label="Bathing"
-            name="bathing"
-            id="bathing"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          />
-          <SelectInput
-            label="Upper Body Dressing"
-            name="dressing_upper"
-            id="dressing_upper"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          />
-          <SelectInput
-            label="Lower Body Dressing"
-            name="dressing_lower"
-            id="dressing_lower"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          />
-          <SelectInput
-            label="Toileting"
-            name="toileting"
-            id="toileting"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          />
-          <SelectInput
-            label="Toilet Transfers"
-            name="toilet_transfer"
-            id="toilet_transfer"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          />
-          <SelectInput
-            label="Tub Transfers"
-            name="tub_transfer"
-            id="tub_transfer"
-            handleChange={handleChange}
-            options={constants.assessments.fim}
-          />
         </fieldset>
         <div className="div-submit-btn">
           <button className="btn-form" type="submit" style={{ width: "100%" }}>
@@ -259,13 +282,5 @@ function FIM() {
     </>
   );
 }
-
-const Test = () => {
-  return <div className="modal-content">Hellow</div>;
-};
-
-const Test1 = () => {
-  return <div className="modal-content">Hello One</div>;
-};
 
 export default FIM;

@@ -42,13 +42,13 @@ const FimModal = ({
 
   const handleOnClick = (id, option) => {
     const selectedDiv = document.getElementById(id);
-    if (selected === id) {
+    if (chosen === id) {
       selectedDiv.classList.remove("modal-option-selected");
       selectedDiv.classList.add("modal-option-hover");
-      chosen = option;
+      chosen = id;
     } else {
-      if (selected !== "") {
-        const prevDiv = document.getElementById(selected);
+      if (chosen !== "") {
+        const prevDiv = document.getElementById(chosen);
         prevDiv.classList.remove("modal-option-selected");
         prevDiv.classList.add("modal-option-hover");
       }

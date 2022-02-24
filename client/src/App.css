@@ -120,6 +120,7 @@ fieldset {
   border: none;
   background-color: #5158e2;
   color: white;
+  width: 100%;
 }
 
 .btn-form:hover {
@@ -172,7 +173,7 @@ fieldset {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto; /* 15% from the top and centered */
+  margin: 5% auto; /* 15% from the top and centered */
   width: fit-content;
 }
 

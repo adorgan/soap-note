@@ -259,7 +259,7 @@ function FIM() {
           <Modal modalContent={modalContent} />
         </fieldset>
         <div className="div-submit-btn">
-          <button className="btn-form" type="submit" style={{ width: "100%" }}>
+          <button className="btn-form" type="submit">
             Submit
           </button>
         </div>

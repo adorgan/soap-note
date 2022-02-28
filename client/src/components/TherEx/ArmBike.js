@@ -16,9 +16,10 @@ import toggleMultiSelect from "../../utils/toggleMultiSelect";
 import FormSelect from "../FormSelect";
 import Modal from "../Modal";
 import MultiSelectModal from "../ModalContent/MultiSelectModal";
+import SingleSelectModal from "../ModalContent/SingleSelectModal";
 
 const defaultState = {
-    patient: "resident",
+    patient: "",
     name: "",
     position: "",
     goals: [],
@@ -108,16 +109,23 @@ const ArmBike = () => {
         const modal = document.getElementById("myModal");
         modal.style.display = "none";
         setModalVisible(false);
-
-        console.log(value);
-        if (value.length > 0) {
-            document.getElementById(subtitleID).innerHTML = value.join(", ");
+        
+        if (value.constructor === Array) {
+            if (value.length > 0) {
+                document.getElementById(subtitleID).innerHTML =
+                    value.join(", ");
+            }
+        } else {
+            if (value.length != 0) {
+                document.getElementById(subtitleID).innerHTML = value;
+            }
         }
 
         setFormData({
             name: name,
             value: value,
         });
+        console.log(formData.patient);
     };
 
     const handleClick = () => {
@@ -150,9 +158,9 @@ const ArmBike = () => {
     }, []);
 
     const terminology = (
-        <MultiSelectModal
+        <SingleSelectModal
             key={"patient-terminology"}
-            name={"Patient Terminology"}
+            name={"patient"}
             subtitleID="pt-terminology-subtitle-id"
             options={[
                 { value: "Patient", id: "patient" },
@@ -163,6 +171,44 @@ const ArmBike = () => {
                 },
             ]}
             onOkayClick={handleOkModalClick}
+            prevSelected={formData.patient}
+        />
+    );
+
+    const armBikeName = (
+        <SingleSelectModal
+            key={"arm-bike-name"}
+            name={"name"}
+            subtitleID="arm-bike-name-subtitle-id"
+            options={[
+                { value: "Arm Bike", id: "arm_bike" },
+                { value: "Restorator", id: "restorator" },
+                {
+                    value: "Omnicycle",
+                    id: "omnicycle",
+                },
+            ]}
+            onOkayClick={handleOkModalClick}
+            prevSelected={formData.name}
+        />
+    );
+
+    const goals = (
+        <MultiSelectModal
+            key={"goals"}
+            name={"goals"}
+            subtitleID="goals-subtitle-id"
+            options={[
+                { value: "Eating", id: "eating" },
+                { value: "Grooming", id: "grooming" },
+                { value: "Upper Body Dressing", id: "upper_body_dressing" },
+                { value: "Lower Body Dressing", id: "lower_body_dressing" },
+                { value: "Toileting", id: "toileting" },
+                { value: "Toilet Transfers", id: "toilet_transfers" },
+                { value: "Tub Transfers", id: "tub_transfers" },
+            ]}
+            onOkayClick={handleOkModalClick}
+            prevSelected={formData.goals}
         />
     );
 
@@ -182,11 +228,13 @@ const ArmBike = () => {
                             title="Arm Bike Name"
                             subtitle="Select arm bike name"
                             subtitleID="arm-bike-name-subtitle-id"
+                            onClick={() => handleModalVisit(armBikeName)}
                         />
                         <FormSelect
                             title="Goals"
                             subtitle="Select one or more goal areas"
                             subtitleID="goals-subtitle-id"
+                            onClick={() => handleModalVisit(goals)}
                         />
                         <FormSelect
                             title="Impairments"
@@ -375,6 +423,6 @@ const ArmBike = () => {
             </div>
         </>
     );
-}
+};
 
 export default ArmBike;

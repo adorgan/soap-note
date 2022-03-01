@@ -1,279 +1,331 @@
 import React, { useState, useReducer, useEffect } from "react";
-import NumberInput from "../NumberInput";
-import Vitals from "../Vitals";
-import SelectInput from "../SelectInput";
-import MultiSelectInput from "../MultiSelectInput";
+// import NumberInput from "../NumberInput";
+// import Vitals from "../Vitals";
+// import SelectInput from "../SelectInput";
+// import MultiSelectInput from "../MultiSelectInput";
 import NarrativeBlurb from "../NarrativeBlurb";
-import Accordian from "../Accordian";
-import Assessments from "../Assessments";
+// import Accordian from "../Accordian";
+// import Assessments from "../Assessments";
 import SubmitButton from "../SubmitButton";
-import FimBloc from "../FimBloc";
+// import FimBloc from "../FimBloc";
 import postData from "../../utils/postRequest";
 import getData from "../../utils/getRequest";
-import constants from "../../utils/constants";
+// import constants from "../../utils/constants";
 import changeNavBold from "../../utils/changeNavBold";
-import toggleMultiSelect from "../../utils/toggleMultiSelect";
+// import toggleMultiSelect from "../../utils/toggleMultiSelect";
 import FormSelect from "../FormSelect";
 import Modal from "../Modal";
 import MultiSelectModal from "../ModalContent/MultiSelectModal";
 import SingleSelectModal from "../ModalContent/SingleSelectModal";
 
 const defaultState = {
-    patient: "",
-    name: "",
-    position: "",
-    goals: [],
-    impairments: [],
-    level: "",
-    time: "",
-    physical_assistance: "",
-    verbal_cueing: "",
-    verbal_cues_given: [],
-    plan: "",
-    eating: "",
-    grooming: "",
-    upper_body_dressing: "",
-    lower_body_dressing: "",
-    toileting: "",
-    toilet_transfers: "",
-    tub_transfers: "",
-    care: "",
-    gross_motor_coordination: "",
-    fine_motor_coordination: "",
-    dynamic_sitting_balance: "",
-    static_sitting_balance: "",
-    blood_pressure: "",
-    heart_rate: "",
-    respiration_rate: "",
-    temperature: "",
-    saturation: "",
+  patient: "",
+  name: "",
+  position: "",
+  goals: [],
+  impairments: [],
+  level: "",
+  time: "",
+  physical_assistance: "",
+  verbal_cueing: "",
+  verbal_cues_given: [],
+  plan: "",
+  eating: "",
+  grooming: "",
+  upper_body_dressing: "",
+  lower_body_dressing: "",
+  toileting: "",
+  toilet_transfers: "",
+  tub_transfers: "",
+  care: "",
+  gross_motor_coordination: "",
+  fine_motor_coordination: "",
+  dynamic_sitting_balance: "",
+  static_sitting_balance: "",
+  blood_pressure: "",
+  heart_rate: "",
+  respiration_rate: "",
+  temperature: "",
+  saturation: "",
 };
+
+const patient_name_options = {
+  patient: "Patient",
+  client: "Client",
+  resident: "Resident",
+};
+
+const arm_bike_name_options = {
+  arm_bike: "Arm Bike",
+  omnicycle: "Omnicycle",
+  restorator: "Restorator",
+};
+
+const goal_options = {
+  eating: "Eating",
+  grooming: "Grooming",
+  bathing: "Bathing",
+  upper_body_dressing: "Upper Body Dressing",
+  lower_body_dressing: "Lower Body Dressing",
+  toileting: "Toileting",
+  toilet_transfers: "Toilet Transfers",
+  tub_transfers: "Tub Transfers",
+};
+
+const impairment_options = {
+  strength: "Strength",
+  standing_balance: "Standing Balance",
+  sitting_balance: "Sitting Balance",
+  gross_motor_coordination: "Gross Motor Coordination",
+  fine_motor_coordination: "Fine Motor Coordination",
+  cognition: "Cognition",
+  endurance: "Endurance",
+  sensation: "Sensation",
+};
+
+const fim_options = {
+  independent: "Independent",
+  modified_independent: "Modified Independent",
+  supervision: "Supervision",
+  minimum_assistance: "Minimum Assistance",
+  moderate_assistance: "Moderate Assistance",
+  maximum_assistance: "Maximum Assistance",
+  total_assistance: "Total Assistance",
+};
+
 const formReducer = (state, event) => {
-    if (event.reset) {
-        return defaultState;
-    }
-    return {
-        ...state,
-        [event.name]: event.value,
-    };
+  if (event.reset) {
+    return defaultState;
+  }
+  return {
+    ...state,
+    [event.name]: event.value,
+  };
 };
 
 // Component
 const ArmBike = () => {
-    const [impairments, setImpairments] = useState([]);
-    const [formData, setFormData] = useReducer(formReducer, defaultState);
-    const [blurb, setBlurb] = useState("");
-    const [modalContent, setModalContent] = useState("");
-    const [modalVisible, setModalVisible] = useState(false);
+  //   const [impairments, setImpairments] = useState([]);
+  const [formData, setFormData] = useReducer(formReducer, defaultState);
+  const [blurb, setBlurb] = useState("");
+  const [modalContent, setModalContent] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        postData("/arm-bike", formData).then((data) => {
-            setBlurb(data);
-        });
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    postData("/arm-bike", formData).then((data) => {
+      setBlurb(data);
+    });
+  };
 
-    const handleSingleSelectChange = (event) => {
-        toggleMultiSelect(
-            "verbal_cueing",
-            "verbal_cues_given",
-            "no verbal cueing",
-            setFormData
-        );
-        setFormData({
-            name: event.target.name,
-            value: event.target.value,
-        });
-    };
+  //   console.log(formData);
 
-    const handleMultiSelectChange = (e) => {
-        // make array of multi selected options
-        const selected = document.getElementById(e.target.id).selectedOptions;
-        let selectedArray = [];
-        for (let element of selected) {
-            selectedArray.push(element.value);
+  // const handleSingleSelectChange = (event) => {
+  //     toggleMultiSelect(
+  //         "verbal_cueing",
+  //         "verbal_cues_given",
+  //         "no verbal cueing",
+  //         setFormData
+  //     );
+  //     setFormData({
+  //         name: event.target.name,
+  //         value: event.target.value,
+  //     });
+  // };
+
+  // const handleMultiSelectChange = (e) => {
+  //     // make array of multi selected options
+  //     const selected = document.getElementById(e.target.id).selectedOptions;
+  //     let selectedArray = [];
+  //     for (let element of selected) {
+  //         selectedArray.push(element.value);
+  //     }
+  //     // update form element state with new array values
+  //     setFormData({
+  //         name: e.target.name,
+  //         value: selectedArray,
+  //     });
+  // };
+
+  const handleModalVisit = (component) => {
+    setModalContent(component);
+    setModalVisible(true);
+  };
+
+  const handleOkModalClick = (name, value, subtitleID, subtitle) => {
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
+    setModalVisible(false);
+
+    if (value.constructor === Array) {
+      if (value.length > 0) {
+        document.getElementById(subtitleID).innerHTML = value.join(", ");
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    } else {
+      if (value.length !== 0) {
+        document.getElementById(subtitleID).innerHTML = value;
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    }
+
+    setFormData({
+      name: name,
+      value: value,
+    });
+  };
+
+  // const handleClick = () => {
+  //     console.log("hello");
+  // };
+
+  useEffect(() => {
+    if (modalVisible) {
+      const modal = document.getElementById("myModal");
+      modal.style.display = "block";
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+          setModalVisible(false);
         }
-        // update form element state with new array values
-        setFormData({
-            name: e.target.name,
-            value: selectedArray,
-        });
-    };
+      };
+    }
+  }, [modalVisible]);
 
-    const handleModalVisit = (component) => {
-        setModalContent(component);
-        setModalVisible(true);
-    };
+  //   useEffect(() => {
+  //     getData("/get-impairments").then((data) => setImpairments(data));
+  //   }, []);
 
-    const handleOkModalClick = (name, value, subtitleID) => {
-        const modal = document.getElementById("myModal");
-        modal.style.display = "none";
-        setModalVisible(false);
-        
-        if (value.constructor === Array) {
-            if (value.length > 0) {
-                document.getElementById(subtitleID).innerHTML =
-                    value.join(", ");
-            }
-        } else {
-            if (value.length != 0) {
-                document.getElementById(subtitleID).innerHTML = value;
-            }
-        }
+  useEffect(() => {
+    changeNavBold("nav-arm-bike");
 
-        setFormData({
-            name: name,
-            value: value,
-        });
-        console.log(formData.patient);
-    };
+    // make sure collapsed content in nav is shown if browser refreshed
+    const collapsed = document.getElementById("component-collapse-ther-ex");
+    collapsed.classList.add("show");
+  }, []);
 
-    const handleClick = () => {
-        console.log("hello");
-    };
+  const terminology = (
+    <SingleSelectModal
+      key={"patient-terminology"}
+      name={"patient"}
+      subtitleID="pt-terminology-subtitle-id"
+      subtitle="Select setting-specific patient terminology"
+      options={patient_name_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.patient}
+    />
+  );
 
-    useEffect(() => {
-        if (modalVisible) {
-            const modal = document.getElementById("myModal");
-            modal.style.display = "block";
-            window.onclick = function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                    setModalVisible(false);
-                }
-            };
-        }
-    }, [modalVisible]);
+  const armBikeName = (
+    <SingleSelectModal
+      key={"arm-bike-name"}
+      name={"name"}
+      subtitleID="arm-bike-name-subtitle-id"
+      subtitle="Select arm bike name"
+      options={arm_bike_name_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.name}
+    />
+  );
 
-    useEffect(() => {
-        getData("/get-impairments").then((data) => setImpairments(data));
-    }, []);
+  const goals = (
+    <MultiSelectModal
+      key={"goals"}
+      name={"goals"}
+      subtitleID="goals-subtitle-id"
+      options={goal_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.goals}
+      subtitle="Select one or more goal areas"
+    />
+  );
 
-    useEffect(() => {
-        changeNavBold("nav-arm-bike");
+  const impairments = (
+    <MultiSelectModal
+      key={"impairments"}
+      name={"impairments"}
+      subtitleID="impairments-subtitle-id"
+      options={impairment_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.impairments}
+      subtitle="Select one or more areas of impairment"
+    />
+  );
 
-        // make sure collapsed content in nav is shown if browser refreshed
-        const collapsed = document.getElementById("component-collapse-ther-ex");
-        collapsed.classList.add("show");
-    }, []);
 
-    const terminology = (
-        <SingleSelectModal
-            key={"patient-terminology"}
-            name={"patient"}
-            subtitleID="pt-terminology-subtitle-id"
-            options={[
-                { value: "Patient", id: "patient" },
-                { value: "Client", id: "client" },
-                {
-                    value: "Resident",
-                    id: "resident",
-                },
-            ]}
-            onOkayClick={handleOkModalClick}
-            prevSelected={formData.patient}
-        />
-    );
+  const fimModal = (
+    <SingleSelectModal
+      key={"fim-score"}
+      name={"physical_assistance"}
+      subtitleID="physical-assistance-subtitle-id"
+      subtitle="Select how much assistance was provided"
+      options={fim_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.physical_assistance}
+    />
+  );
 
-    const armBikeName = (
-        <SingleSelectModal
-            key={"arm-bike-name"}
-            name={"name"}
-            subtitleID="arm-bike-name-subtitle-id"
-            options={[
-                { value: "Arm Bike", id: "arm_bike" },
-                { value: "Restorator", id: "restorator" },
-                {
-                    value: "Omnicycle",
-                    id: "omnicycle",
-                },
-            ]}
-            onOkayClick={handleOkModalClick}
-            prevSelected={formData.name}
-        />
-    );
-
-    const goals = (
-        <MultiSelectModal
-            key={"goals"}
-            name={"goals"}
-            subtitleID="goals-subtitle-id"
-            options={[
-                { value: "Eating", id: "eating" },
-                { value: "Grooming", id: "grooming" },
-                { value: "Upper Body Dressing", id: "upper_body_dressing" },
-                { value: "Lower Body Dressing", id: "lower_body_dressing" },
-                { value: "Toileting", id: "toileting" },
-                { value: "Toilet Transfers", id: "toilet_transfers" },
-                { value: "Tub Transfers", id: "tub_transfers" },
-            ]}
-            onOkayClick={handleOkModalClick}
-            prevSelected={formData.goals}
-        />
-    );
-
-    return (
-        <>
-            <div className="wrapper">
-                <h1>Arm Bike</h1>
-                <form onSubmit={handleSubmit}>
-                    <fieldset>
-                        <FormSelect
-                            title="Patient Terminology"
-                            subtitle="Select setting-specific patient terminology"
-                            subtitleID="pt-terminology-subtitle-id"
-                            onClick={() => handleModalVisit(terminology)}
-                        />
-                        <FormSelect
-                            title="Arm Bike Name"
-                            subtitle="Select arm bike name"
-                            subtitleID="arm-bike-name-subtitle-id"
-                            onClick={() => handleModalVisit(armBikeName)}
-                        />
-                        <FormSelect
-                            title="Goals"
-                            subtitle="Select one or more goal areas"
-                            subtitleID="goals-subtitle-id"
-                            onClick={() => handleModalVisit(goals)}
-                        />
-                        <FormSelect
-                            title="Impairments"
-                            subtitle="Select one or more impairments"
-                            subtitleID="impairments-subtitle-id"
-                        />
-                        <FormSelect
-                            title="Education Topics"
-                            subtitle="Select education topics prior to activity"
-                            subtitleID="education-topics-subtitle-id"
-                        />
-                        <FormSelect
-                            title="Time"
-                            subtitle="Time spent on machine"
-                            subtitleID="time-subtitle-id"
-                        />
-                        <FormSelect
-                            title="Level"
-                            subtitle="Select resistance level"
-                            subtitleID="resistance-subtitle-id"
-                        />
-                        <FormSelect
-                            title="Physical Assistance"
-                            subtitle="Select how much assistance was provided"
-                            subtitleID="physical-assistance-subtitle-id"
-                        />
-                        <FormSelect
-                            title="Verbal Cues"
-                            subtitle="Select how many verbal cues were provided"
-                            subtitleID="verbal-cues-subtitle-id"
-                        />
-                        <FormSelect
-                            title="Plan"
-                            subtitle="Select plan for future treatments"
-                            subtitleID="plan-subtitle-id"
-                        />
-                        <Modal modalContent={modalContent} />
-                        {/* Patient terminology */}
-                        {/* <SelectInput
+  return (
+    <>
+      <div className="wrapper">
+        <h1>Arm Bike</h1>
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            <FormSelect
+              title="Patient Terminology"
+              subtitle="Select setting-specific patient terminology"
+              subtitleID="pt-terminology-subtitle-id"
+              onClick={() => handleModalVisit(terminology)}
+            />
+            <FormSelect
+              title="Arm Bike Name"
+              subtitle="Select arm bike name"
+              subtitleID="arm-bike-name-subtitle-id"
+              onClick={() => handleModalVisit(armBikeName)}
+            />
+            <FormSelect
+              title="Goals"
+              subtitle="Select one or more goal areas"
+              subtitleID="goals-subtitle-id"
+              onClick={() => handleModalVisit(goals)}
+            />
+            <FormSelect
+              title="Impairments"
+              subtitle="Select one or more impairments"
+              subtitleID="impairments-subtitle-id"
+              onClick={() => handleModalVisit(impairments)}
+            />
+            <FormSelect
+              title="Time"
+              subtitle="Time spent on machine"
+              subtitleID="time-subtitle-id"
+            />
+            <FormSelect
+              title="Level"
+              subtitle="Select resistance level"
+              subtitleID="resistance-subtitle-id"
+            />
+            <FormSelect
+              title="Physical Assistance"
+              subtitle="Select how much assistance was provided"
+              subtitleID="physical-assistance-subtitle-id"
+              onClick={() => handleModalVisit(fimModal)}
+            />
+            <FormSelect
+              title="Verbal Cues"
+              subtitle="Select how many verbal cues were provided"
+              subtitleID="verbal-cues-subtitle-id"
+            />
+            <FormSelect
+              title="Plan"
+              subtitle="Select plan for future treatments"
+              subtitleID="plan-subtitle-id"
+            />
+            <Modal modalContent={modalContent} />
+            {/* Patient terminology */}
+            {/* <SelectInput
                             label="Healthcare Receiver Terminology"
                             id="patient"
                             name="patient"
@@ -282,7 +334,7 @@ const ArmBike = () => {
                             isRequired={true}
                         />
                         {/* Arm bike name */}
-                        {/* <SelectInput
+            {/* <SelectInput
                             label="Arm Bike Name"
                             id="name"
                             name="name"
@@ -290,8 +342,8 @@ const ArmBike = () => {
                             options={constants.armBikeNames}
                             isRequired={true}
                         /> */}
-                        {/* Position of patient */}
-                        {/* <SelectInput
+            {/* Position of patient */}
+            {/* <SelectInput
                             label="Patient Position"
                             id="position"
                             name="position"
@@ -299,24 +351,24 @@ const ArmBike = () => {
                             options={constants.position_exercise}
                             isRequired={true}
                         /> */}
-                        {/* Goals */}
-                        {/* <MultiSelectInput
+            {/* Goals */}
+            {/* <MultiSelectInput
                             label="Goals Targeted"
                             name="goals"
                             id="goals"
                             handleChange={handleMultiSelectChange}
                             options={constants.goals}
                         /> */}
-                        {/* Physical Impairments */}
-                        {/* <MultiSelectInput
+            {/* Physical Impairments */}
+            {/* <MultiSelectInput
                             label="Impairments Addressed"
                             name="impairments"
                             id="impairments"
                             handleChange={handleMultiSelectChange}
                             options={impairments}
                         /> */}
-                        {/* Education topics prior to activity */}
-                        {/* <MultiSelectInput
+            {/* Education topics prior to activity */}
+            {/* <MultiSelectInput
                             label="Pre-Activity Education Topics"
                             id="education"
                             name="education"
@@ -325,8 +377,8 @@ const ArmBike = () => {
                                 constants.functionalActivityEducationTopics
                             }
                         /> */}
-                        {/* Time on activity */}
-                        {/* <NumberInput
+            {/* Time on activity */}
+            {/* <NumberInput
                             name="time"
                             id="time"
                             label="Time"
@@ -334,8 +386,8 @@ const ArmBike = () => {
                             max="15"
                             handleChange={handleSingleSelectChange}
                         /> */}
-                        {/* Activity resistance level */}
-                        {/* <NumberInput
+            {/* Activity resistance level */}
+            {/* <NumberInput
                             name="level"
                             id="level"
                             label="Level"
@@ -343,8 +395,8 @@ const ArmBike = () => {
                             max="10"
                             handleChange={handleSingleSelectChange}
                         /> */}
-                        {/* Physical assistance needed for activity */}
-                        {/* <SelectInput
+            {/* Physical assistance needed for activity */}
+            {/* <SelectInput
                             label="Physical Assistance Provided"
                             id="physical_assistance"
                             name="physical_assistance"
@@ -352,8 +404,8 @@ const ArmBike = () => {
                             options={constants.assessments.fim}
                             isRequired={true}
                         /> */}
-                        {/* Verbal cueing required */}
-                        {/* <SelectInput
+            {/* Verbal cueing required */}
+            {/* <SelectInput
                             label="Verbal Cueing Required"
                             name="verbal_cueing"
                             id="verbal_cueing"
@@ -361,16 +413,16 @@ const ArmBike = () => {
                             options={constants.assessments.verbalCues}
                             isRequired={true}
                         /> */}
-                        {/* Specific verbal cues */}
-                        {/* <MultiSelectInput
+            {/* Specific verbal cues */}
+            {/* <MultiSelectInput
                             label="Verbal Cues Given"
                             name="verbal_cues_given"
                             id="verbal_cues_given"
                             handleChange={handleMultiSelectChange}
                             options={constants.armBike.verbalCues}
                         /> */}
-                        {/* Plan for future sessions */}
-                        {/* <SelectInput
+            {/* Plan for future sessions */}
+            {/* <SelectInput
                             label="Plan"
                             name="plan"
                             id="plan"
@@ -378,7 +430,7 @@ const ArmBike = () => {
                             options={constants.plan}
                             isRequired={true}
                         /> */}
-                        {/* <Accordian
+            {/* <Accordian
                             categories={[
                                 {
                                     // FIM scoring for all ADLs
@@ -414,15 +466,15 @@ const ArmBike = () => {
                                     label: "Vitals",
                                 },
                             ]} */}
-                        {/* /> */}
-                    </fieldset>
-                    <SubmitButton />
-                </form>
+            {/* /> */}
+          </fieldset>
+          <SubmitButton />
+        </form>
 
-                <NarrativeBlurb text={blurb} id="goal_blurb" />
-            </div>
-        </>
-    );
+        <NarrativeBlurb text={blurb} id="goal_blurb" />
+      </div>
+    </>
+  );
 };
 
 export default ArmBike;

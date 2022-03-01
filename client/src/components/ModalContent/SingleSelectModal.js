@@ -1,116 +1,139 @@
 import React, { useState, useEffect } from "react";
 
 const SingleSelectModal = (
-    options,
-    prevSelected,
-    onOkayClick,
-    onClickNext,
-    name,
-    subtitleID,
-    nextModal
+  options, // items to select
+  name, // db name associated with modal category
+  subtitleID,
+  subtitle,
+  prevSelected, // previously saved item, if any
+  onOkayClick, // handles OK button clicks
+  onClickNext, // handles NEXT button clicks
+  nextModal // where clicking NEXT will take user
 ) => {
-    
-    const [selected, setSelected] = useState(options.prevSelected);
-    let chosen = options.prevSelected;
+  /**
+   * if a user clicks to edit the item with a value already stored from a prior attempt,
+   * this previous value is converted from an array of values to an array of IDs to
+   * make it easier to track click events
+   */
+  let chosen = "";
+  Object.keys(options.options).forEach((key) => {
+    if (options.options[key] === options.prevSelected) {
+      chosen = key;
+    }
+  });
 
-    const removeSelected = () => {
-        const collection = document.getElementsByClassName("modal-option");
-        for (let div of collection) {
-            document
-                .getElementById(div.id)
-                .classList.remove("modal-option-selected");
-            document.getElementById(div.id).classList.add("modal-option-hover");
-        }
-    };
+  const [selected, setSelected] = useState(chosen);
 
-    const remainSelected = () => {
-        const collection = document.getElementsByClassName("modal-option");
-        for (let div of collection) {
-            document
-                .getElementById(div.id)
-                .classList.remove("modal-option-selected");
-            document.getElementById(div.id).classList.add("modal-option-hover");
-        }
+  /**
+   * This clears all highlighted items from a modal
+   */
+  const removeSelected = () => {
+    const collection = document.getElementsByClassName("modal-option");
+    for (let div of collection) {
+      document.getElementById(div.id).classList.remove("modal-option-selected");
+      document.getElementById(div.id).classList.add("modal-option-hover");
+    }
+  };
 
-        document
-            .getElementById(selected)
-            .classList.add("modal-option-selected");
-        document
-            .getElementById(selected)
-            .classList.remove("modal-option-hover");
-    };
+  /**
+   * This clears all highlighted items from a modal but adds a highlight to
+   * an item if it was chosen
+   */
+  const remainSelected = () => {
+    const collection = document.getElementsByClassName("modal-option");
+    for (let div of collection) {
+      document.getElementById(div.id).classList.remove("modal-option-selected");
+      document.getElementById(div.id).classList.add("modal-option-hover");
+    }
 
-    useEffect(() => {
-        console.log(options.prevSelected);
-        if (selected === "") {
-            removeSelected();
-        } else {
-            remainSelected();
-        }
-    });
+    document.getElementById(selected).classList.add("modal-option-selected");
+    document.getElementById(selected).classList.remove("modal-option-hover");
+  };
 
-    const handleOnClick = (id, option) => {
-        const selectedDiv = document.getElementById(id);
-        if (chosen === id) {
-            selectedDiv.classList.remove("modal-option-selected");
-            selectedDiv.classList.add("modal-option-hover");
-            chosen = id;
-        } else {
-            if (chosen !== "") {
-                console.log(chosen);
-                const prevDiv = document.getElementById(chosen);
-                prevDiv.classList.remove("modal-option-selected");
-                prevDiv.classList.add("modal-option-hover");
-            }
+  /**
+   * Denotes a selected item as chosen and changes the color of the item to
+   * highlight it. If an item is already chosen, it is removed and the formatting
+   * is cleared.
+   * @param {string} id element id of clicked item
+   */
+  const handleClick = (id) => {
+    const selectedDiv = document.getElementById(id);
+    if (chosen === id) {
+      selectedDiv.classList.remove("modal-option-selected");
+      selectedDiv.classList.add("modal-option-hover");
+      chosen = "";
+    } else {
+      if (chosen !== "") {
+        const prevDiv = document.getElementById(chosen);
+        prevDiv.classList.remove("modal-option-selected");
+        prevDiv.classList.add("modal-option-hover");
+      }
 
-            selectedDiv.classList.add("modal-option-selected");
-            selectedDiv.classList.remove("modal-option-hover");
-            chosen = id;
-        }
-    };
+      selectedDiv.classList.add("modal-option-selected");
+      selectedDiv.classList.remove("modal-option-hover");
+      chosen = id;
+    }
+  };
 
-    return (
-        <div className="modal-content">
-            {options.options.map((option, index) => {
-                return (
-                    <div
-                        key={index}
-                        id={option.id}
-                        className="modal-option modal-option-hover"
-                        onClick={() => handleOnClick(option.id, option.value)}
-                    >
-                        {option.value}
-                    </div>
-                );
-            })}
-            <div className="modal-btn-container">
-                <div
-                    className="btn-modal"
-                    onClick={() => {
-                        setSelected(chosen);
-                        options.onOkayClick(
-                            options.name,
-                            chosen,
-                            options.subtitleID
-                        );
-                    }}
-                >
-                    OK
-                </div>
-                {nextModal !== "" && (
-                    <div
-                        className="btn-modal"
-                        onClick={() => {
-                            setSelected(chosen);
-                            onClickNext(nextModal, name, chosen, subtitleID);
-                        }}
-                    >
-                        NEXT
-                    </div>
-                )}
-            </div>
+  /**
+   * Enable highlighting of selected items if any was selected
+   * prior
+   */
+  useEffect(() => {
+    if (selected === "") {
+      removeSelected();
+    } else {
+      remainSelected();
+    }
+  });
+
+  return (
+    <div className="modal-content">
+      {Object.keys(options.options).map((key, index) => {
+        return (
+          <div
+            key={index}
+            id={key}
+            className="modal-option modal-option-hover"
+            onClick={() => handleClick(key)}
+          >
+            {options.options[key]}
+          </div>
+        );
+      })}
+      <div className="modal-btn-container">
+        <div
+          className="btn-modal"
+          onClick={() => {
+            setSelected(chosen);
+            const selectedOption =
+              options.options[chosen] === undefined
+                ? ""
+                : options.options[chosen];
+            options.onOkayClick(
+              options.name,
+              selectedOption,
+              options.subtitleID,
+              options.subtitle
+            );
+          }}
+        >
+          OK
         </div>
-    );
+        {nextModal !== "" && (
+          <div
+            className="btn-modal"
+            onClick={() => {
+              setSelected(chosen);
+              onClickNext(nextModal, name, chosen, subtitleID);
+            }}
+          >
+            NEXT
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default SingleSelectModal;

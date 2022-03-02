@@ -90,6 +90,7 @@ const SingleSelectModal = (
 
   return (
     <div className="modal-content">
+      <div className="modal-title">{options.title}</div>
       {Object.keys(options.options).map((key, index) => {
         return (
           <div
@@ -121,7 +122,7 @@ const SingleSelectModal = (
         >
           OK
         </div>
-        {(nextModal !== "" && nextModal !== undefined) && (
+        {options.nextModal !== "" && options.nextModal !== undefined && (
           <div
             className="btn-modal"
             onClick={() => {

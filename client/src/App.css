@@ -180,9 +180,11 @@ fieldset {
 
 .modal-title {
   display: flex;
+  font-weight: bold;
   justify-content: center;
   font-size: 18px;
   padding: 20px 10px 10px 10px;
+  border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 .modal-option {

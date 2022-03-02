@@ -3,13 +3,14 @@ import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
 
 const MultiSelectModal = (
   options,
+  name,
+  title,
+  subtitle,
+  subtitleID,
   prevSelected,
   onOkayClick,
   onClickNext,
-  name,
-  subtitleID,
-  nextModal,
-  subtitle
+  nextModal
 ) => {
   /**
    * if a user clicks to edit the item with a value already stored from a prior attempt,
@@ -98,6 +99,7 @@ const MultiSelectModal = (
 
   return (
     <div className="modal-content">
+      <div className="modal-title">{options.title}</div>
       {Object.keys(options.options).map((key, index) => {
         return (
           <div
@@ -127,7 +129,7 @@ const MultiSelectModal = (
         >
           OK
         </div>
-        {nextModal !== "" && (
+        {options.nextModal !== "" && (
           <div
             className="btn-modal"
             onClick={() => {

@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const NumberInputModal = ({
-  name,
-  ID,
-  label,
-  min,
-  max,
-  prevValue,
-  nextModal,
-  onOkayClick,
-  onClickNext,
+  name, // db name
   subtitleID,
   subtitle,
+  ID, // id to match label with input
+  label, // input label
+  min, // min number value allowed
+  max, // max number value allowed
+  prevValue, // previously selected number, if any
+  onOkayClick, // handles OK click
+  onClickNext, // handles NEXT click
+  nextModal, // clicking next will navigate here
 }) => {
   const [minutes, setMinutes] = useState(prevValue);
+
+  /**
+   * Updates the state of minutes if a number value changes
+   * @param {event} e click event
+   */
   const handleChange = (e) => {
     setMinutes(e.target.value);
   };
@@ -39,11 +44,7 @@ const NumberInputModal = ({
         <div
           className="btn-modal"
           onClick={() => {
-            // setSelected(chosen);
-            // const selectedOption =
-            //   options.options[chosen] === undefined
-            //     ? ""
-            //     : options.options[chosen];
+            setMinutes(minutes);
             onOkayClick(name, minutes, subtitleID, subtitle);
           }}
         >

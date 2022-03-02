@@ -1,23 +1,11 @@
 import React, { useState, useReducer, useEffect } from "react";
-// import NumberInput from "../NumberInput";
-// import Vitals from "../Vitals";
-// import SelectInput from "../SelectInput";
-// import MultiSelectInput from "../MultiSelectInput";
 import NarrativeBlurb from "../NarrativeBlurb";
-// import Accordian from "../Accordian";
-// import Assessments from "../Assessments";
 import SubmitButton from "../SubmitButton";
-// import FimBloc from "../FimBloc";
 import postData from "../../utils/postRequest";
-import getData from "../../utils/getRequest";
-// import constants from "../../utils/constants";
-import changeNavBold from "../../utils/changeNavBold";
-// import toggleMultiSelect from "../../utils/toggleMultiSelect";
 import FormSelect from "../FormSelect";
 import Modal from "../Modal";
 import MultiSelectModal from "../ModalContent/MultiSelectModal";
 import SingleSelectModal from "../ModalContent/SingleSelectModal";
-import { plan } from "../../utils/constants";
 import NumberInputModal from "../ModalContent/NumberInputModal";
 import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
 
@@ -143,43 +131,12 @@ const ArmBike = () => {
   const [modalContent, setModalContent] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
-  console.log(formData);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     postData("/arm-bike", formData).then((data) => {
       setBlurb(data);
     });
   };
-
-  //   console.log(formData);
-
-  // const handleSingleSelectChange = (event) => {
-  //     toggleMultiSelect(
-  //         "verbal_cueing",
-  //         "verbal_cues_given",
-  //         "no verbal cueing",
-  //         setFormData
-  //     );
-  //     setFormData({
-  //         name: event.target.name,
-  //         value: event.target.value,
-  //     });
-  // };
-
-  // const handleMultiSelectChange = (e) => {
-  //     // make array of multi selected options
-  //     const selected = document.getElementById(e.target.id).selectedOptions;
-  //     let selectedArray = [];
-  //     for (let element of selected) {
-  //         selectedArray.push(element.value);
-  //     }
-  //     // update form element state with new array values
-  //     setFormData({
-  //         name: e.target.name,
-  //         value: selectedArray,
-  //     });
-  // };
 
   const onClickNext = (modal, name, value, subtitleID, subtitle) => {
     setModalContent(modal);
@@ -243,10 +200,6 @@ const ArmBike = () => {
     });
   };
 
-  // const handleClick = () => {
-  //     console.log("hello");
-  // };
-
   useEffect(() => {
     if (modalVisible) {
       const modal = document.getElementById("myModal");
@@ -260,22 +213,11 @@ const ArmBike = () => {
     }
   }, [modalVisible]);
 
-  //   useEffect(() => {
-  //     getData("/get-impairments").then((data) => setImpairments(data));
-  //   }, []);
-
-  useEffect(() => {
-    changeNavBold("nav-arm-bike");
-
-    // make sure collapsed content in nav is shown if browser refreshed
-    const collapsed = document.getElementById("component-collapse-ther-ex");
-    collapsed.classList.add("show");
-  }, []);
-
   const planModal = (
     <SingleSelectModal
       key={"plan"}
       name={"plan"}
+      title={"Plan"}
       subtitleID="plan-subtitle-id"
       options={plan_options}
       onOkayClick={handleOkModalClick}
@@ -289,6 +231,7 @@ const ArmBike = () => {
     <MultiSelectModal
       key={"verbal_cues_given"}
       name={"verbal_cues_given"}
+      title={"Verbal Cues Provided"}
       subtitleID="verbal-cues-given-subtitle-id"
       options={verbal_cues}
       onOkayClick={handleOkModalClick}
@@ -302,6 +245,7 @@ const ArmBike = () => {
     <SingleSelectModal
       key={"verbal-cues-score"}
       name={"verbal_cueing"}
+      title={"Verbal Cues"}
       subtitleID="verbal-cues-subtitle-id"
       subtitle="Select how many verbal cues were provided"
       options={verbal_cues_options}
@@ -316,6 +260,7 @@ const ArmBike = () => {
     <SingleSelectModal
       key={"fim-score"}
       name={"physical_assistance"}
+      title={"FIM"}
       subtitleID="physical-assistance-subtitle-id"
       subtitle="Select how much assistance was provided"
       options={fim_options}
@@ -364,6 +309,7 @@ const ArmBike = () => {
     <MultiSelectModal
       key={"education"}
       name={"education"}
+      title={"Education Topics"}
       subtitleID="education-subtitle-id"
       options={education_topics_options}
       onOkayClick={handleOkModalClick}
@@ -378,6 +324,7 @@ const ArmBike = () => {
     <MultiSelectModal
       key={"impairments"}
       name={"impairments"}
+      title={"Impairments"}
       subtitleID="impairments-subtitle-id"
       options={impairment_options}
       onOkayClick={handleOkModalClick}
@@ -392,6 +339,7 @@ const ArmBike = () => {
     <MultiSelectModal
       key={"goals"}
       name={"goals"}
+      title={"Goals"}
       subtitleID="goals-subtitle-id"
       options={goal_options}
       onOkayClick={handleOkModalClick}
@@ -406,6 +354,7 @@ const ArmBike = () => {
     <SingleSelectModal
       key={"arm-bike-name"}
       name={"name"}
+      title={"Arm Bike Name"}
       subtitleID="arm-bike-name-subtitle-id"
       subtitle="Select arm bike name"
       options={arm_bike_name_options}
@@ -420,6 +369,7 @@ const ArmBike = () => {
     <SingleSelectModal
       key={"patient-terminology"}
       name={"patient"}
+      title={"Terminology"}
       subtitleID="pt-terminology-subtitle-id"
       subtitle="Select setting-specific patient terminology"
       options={patient_name_options}

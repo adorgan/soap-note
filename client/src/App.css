@@ -135,14 +135,14 @@ fieldset {
 
 .form-select-subtext {
   color: black;
-  opacity: 87%;
+  opacity: .88;
   font-size: 12px;
   margin-top: 5px;
 }
 
 .form-select-arrow {
   color: black;
-  opacity: 87%;
+  opacity: .88;
 }
 
 .form-select-parent {

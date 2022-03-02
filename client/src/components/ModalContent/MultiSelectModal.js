@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
 
 const MultiSelectModal = (
   options,
@@ -105,7 +106,7 @@ const MultiSelectModal = (
             className="modal-option modal-option-hover"
             onClick={() => handleClick(key)}
           >
-            {options.options[key]}
+            {capitalizeEveryWord(options.options[key])}
           </div>
         );
       })}
@@ -131,7 +132,15 @@ const MultiSelectModal = (
             className="btn-modal"
             onClick={() => {
               setSelected(chosen);
-              onClickNext(nextModal, name, chosen, subtitleID);
+              let usableValues = [];
+              chosen.forEach((id) => usableValues.push(options.options[id]));
+              options.onClickNext(
+                options.nextModal,
+                options.name,
+                usableValues,
+                options.subtitleID,
+                options.subtitle
+              );
             }}
           >
             NEXT

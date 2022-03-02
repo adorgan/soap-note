@@ -17,6 +17,9 @@ import FormSelect from "../FormSelect";
 import Modal from "../Modal";
 import MultiSelectModal from "../ModalContent/MultiSelectModal";
 import SingleSelectModal from "../ModalContent/SingleSelectModal";
+import { plan } from "../../utils/constants";
+import NumberInputModal from "../ModalContent/NumberInputModal";
+import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
 
 const defaultState = {
   patient: "",
@@ -31,6 +34,7 @@ const defaultState = {
   verbal_cues_given: [],
   plan: "",
   eating: "",
+  education: [],
   grooming: "",
   upper_body_dressing: "",
   lower_body_dressing: "",
@@ -50,47 +54,75 @@ const defaultState = {
 };
 
 const patient_name_options = {
-  patient: "Patient",
-  client: "Client",
-  resident: "Resident",
+  patient: "patient",
+  client: "client",
+  resident: "resident",
 };
 
 const arm_bike_name_options = {
-  arm_bike: "Arm Bike",
-  omnicycle: "Omnicycle",
-  restorator: "Restorator",
+  arm_bike: "arm bike",
+  omnicycle: "omnicycle",
+  restorator: "restorator",
 };
 
 const goal_options = {
-  eating: "Eating",
-  grooming: "Grooming",
-  bathing: "Bathing",
-  upper_body_dressing: "Upper Body Dressing",
-  lower_body_dressing: "Lower Body Dressing",
-  toileting: "Toileting",
-  toilet_transfers: "Toilet Transfers",
-  tub_transfers: "Tub Transfers",
+  eating: "eating",
+  grooming: "grooming",
+  bathing: "bathing",
+  upper_body_dressing: "upper body dressing",
+  lower_body_dressing: "lower body dressing",
+  toileting: "toileting",
+  toilet_transfers: "toilet transfers",
+  tub_transfers: "tub transfers",
 };
 
 const impairment_options = {
-  strength: "Strength",
-  standing_balance: "Standing Balance",
-  sitting_balance: "Sitting Balance",
-  gross_motor_coordination: "Gross Motor Coordination",
-  fine_motor_coordination: "Fine Motor Coordination",
-  cognition: "Cognition",
-  endurance: "Endurance",
-  sensation: "Sensation",
+  strength: "strength",
+  standing_balance: "standing balance",
+  sitting_balance: "sitting balance",
+  gross_motor_coordination: "gross Motor Coordination",
+  fine_motor_coordination: "fine Motor Coordination",
+  cognition: "cognition",
+  endurance: "endurance",
+  sensation: "sensation",
 };
 
 const fim_options = {
-  independent: "Independent",
-  modified_independent: "Modified Independent",
-  supervision: "Supervision",
-  minimum_assistance: "Minimum Assistance",
-  moderate_assistance: "Moderate Assistance",
-  maximum_assistance: "Maximum Assistance",
-  total_assistance: "Total Assistance",
+  independent: "independent",
+  modified_independent: "modified independent",
+  supervision: "supervision",
+  minimum_assistance: "minimum assistance",
+  moderate_assistance: "moderate assistance",
+  maximum_assistance: "maximum assistance",
+  total_assistance: "total assistance",
+};
+
+const plan_options = {
+  upgrade: "upgrade",
+  maintain: "maintain",
+  downgrade: "downgrade",
+};
+
+const verbal_cues_options = {
+  none: "no verbal cueing",
+  minimum: "minimum verbal cueing",
+  moderate: "moderate verbal cueing",
+  maximum: "maximum verbal cueing",
+};
+
+const education_topics_options = {
+  safety: "safety awareness",
+  ue_position: "upper extremity position",
+  pacing: "pacing strategies",
+  task_sequencing: "task sequencing",
+};
+
+const verbal_cues = {
+  hand_placement: "hand placement",
+  speed: "speed",
+  posture: "posture",
+  rest_breaks: "rest breaks",
+  pursed_lip_breathing: "pursed lip breathing",
 };
 
 const formReducer = (state, event) => {
@@ -110,6 +142,8 @@ const ArmBike = () => {
   const [blurb, setBlurb] = useState("");
   const [modalContent, setModalContent] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+
+  console.log(formData);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -147,6 +181,33 @@ const ArmBike = () => {
   //     });
   // };
 
+  const onClickNext = (modal, name, value, subtitleID, subtitle) => {
+    setModalContent(modal);
+    if (value.constructor === Array) {
+      if (value.length > 0) {
+        let str = value.join(", ");
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(str);
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    } else {
+      if (value === "0") {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      } else if (value.length !== 0) {
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(value);
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    }
+
+    setFormData({
+      name: name,
+      value: value,
+    });
+  };
+
   const handleModalVisit = (component) => {
     setModalContent(component);
     setModalVisible(true);
@@ -159,13 +220,18 @@ const ArmBike = () => {
 
     if (value.constructor === Array) {
       if (value.length > 0) {
-        document.getElementById(subtitleID).innerHTML = value.join(", ");
+        let str = value.join(", ");
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(str);
       } else {
         document.getElementById(subtitleID).innerHTML = subtitle;
       }
     } else {
-      if (value.length !== 0) {
-        document.getElementById(subtitleID).innerHTML = value;
+      if (value === "0") {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      } else if (value.length !== 0) {
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(value);
       } else {
         document.getElementById(subtitleID).innerHTML = subtitle;
       }
@@ -206,39 +272,105 @@ const ArmBike = () => {
     collapsed.classList.add("show");
   }, []);
 
-  const terminology = (
+  const planModal = (
     <SingleSelectModal
-      key={"patient-terminology"}
-      name={"patient"}
-      subtitleID="pt-terminology-subtitle-id"
-      subtitle="Select setting-specific patient terminology"
-      options={patient_name_options}
+      key={"plan"}
+      name={"plan"}
+      subtitleID="plan-subtitle-id"
+      options={plan_options}
       onOkayClick={handleOkModalClick}
-      prevSelected={formData.patient}
+      prevSelected={formData.plan}
+      subtitle="Select plan for future treatments"
+      onClickNext={onClickNext}
     />
   );
 
-  const armBikeName = (
-    <SingleSelectModal
-      key={"arm-bike-name"}
-      name={"name"}
-      subtitleID="arm-bike-name-subtitle-id"
-      subtitle="Select arm bike name"
-      options={arm_bike_name_options}
-      onOkayClick={handleOkModalClick}
-      prevSelected={formData.name}
-    />
-  );
-
-  const goals = (
+  const specificVerbalCuesModal = (
     <MultiSelectModal
-      key={"goals"}
-      name={"goals"}
-      subtitleID="goals-subtitle-id"
-      options={goal_options}
+      key={"verbal_cues_given"}
+      name={"verbal_cues_given"}
+      subtitleID="verbal-cues-given-subtitle-id"
+      options={verbal_cues}
       onOkayClick={handleOkModalClick}
-      prevSelected={formData.goals}
-      subtitle="Select one or more goal areas"
+      prevSelected={formData.verbal_cues_given}
+      subtitle="Select one or more verbal cues given"
+      nextModal={planModal}
+      onClickNext={onClickNext}
+    />
+  );
+  const verbalCuesModal = (
+    <SingleSelectModal
+      key={"verbal-cues-score"}
+      name={"verbal_cueing"}
+      subtitleID="verbal-cues-subtitle-id"
+      subtitle="Select how many verbal cues were provided"
+      options={verbal_cues_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.verbal_cueing}
+      nextModal={specificVerbalCuesModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const fimModal = (
+    <SingleSelectModal
+      key={"fim-score"}
+      name={"physical_assistance"}
+      subtitleID="physical-assistance-subtitle-id"
+      subtitle="Select how much assistance was provided"
+      options={fim_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.physical_assistance}
+      nextModal={verbalCuesModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const resistanceModal = (
+    <NumberInputModal
+      key="resistance-level"
+      name="level"
+      id="level"
+      label="Resistance Level"
+      min={0}
+      max={10}
+      prevValue={formData.level}
+      onOkayClick={handleOkModalClick}
+      subtitle="Select resistance level"
+      subtitleID="resistance-subtitle-id"
+      nextModal={fimModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const timeModal = (
+    <NumberInputModal
+      key="machine-time"
+      name="time"
+      id="time"
+      label="Time on Machine (mins)"
+      min={0}
+      max={30}
+      prevValue={formData.time}
+      onOkayClick={handleOkModalClick}
+      subtitle="Time spent on machine"
+      subtitleID="time-subtitle-id"
+      nextModal={resistanceModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const education_topics = (
+    <MultiSelectModal
+      key={"education"}
+      name={"education"}
+      subtitleID="education-subtitle-id"
+      options={education_topics_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.education}
+      subtitle="Select one or more education topics"
+      nextModal={timeModal}
+      onClickNext={onClickNext}
     />
   );
 
@@ -251,19 +383,50 @@ const ArmBike = () => {
       onOkayClick={handleOkModalClick}
       prevSelected={formData.impairments}
       subtitle="Select one or more areas of impairment"
+      nextModal={education_topics}
+      onClickNext={onClickNext}
     />
   );
 
-
-  const fimModal = (
-    <SingleSelectModal
-      key={"fim-score"}
-      name={"physical_assistance"}
-      subtitleID="physical-assistance-subtitle-id"
-      subtitle="Select how much assistance was provided"
-      options={fim_options}
+  const goals = (
+    <MultiSelectModal
+      key={"goals"}
+      name={"goals"}
+      subtitleID="goals-subtitle-id"
+      options={goal_options}
       onOkayClick={handleOkModalClick}
-      prevSelected={formData.physical_assistance}
+      prevSelected={formData.goals}
+      subtitle="Select one or more goal areas"
+      nextModal={impairments}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const armBikeName = (
+    <SingleSelectModal
+      key={"arm-bike-name"}
+      name={"name"}
+      subtitleID="arm-bike-name-subtitle-id"
+      subtitle="Select arm bike name"
+      options={arm_bike_name_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.name}
+      nextModal={goals}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const terminology = (
+    <SingleSelectModal
+      key={"patient-terminology"}
+      name={"patient"}
+      subtitleID="pt-terminology-subtitle-id"
+      subtitle="Select setting-specific patient terminology"
+      options={patient_name_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.patient}
+      nextModal={armBikeName}
+      onClickNext={onClickNext}
     />
   );
 
@@ -297,15 +460,25 @@ const ArmBike = () => {
               subtitleID="impairments-subtitle-id"
               onClick={() => handleModalVisit(impairments)}
             />
+
+            <FormSelect
+              title="Education Topics"
+              subtitle="Select one or more education topics"
+              subtitleID="education-subtitle-id"
+              onClick={() => handleModalVisit(education_topics)}
+            />
+
             <FormSelect
               title="Time"
               subtitle="Time spent on machine"
               subtitleID="time-subtitle-id"
+              onClick={() => handleModalVisit(timeModal)}
             />
             <FormSelect
               title="Level"
               subtitle="Select resistance level"
               subtitleID="resistance-subtitle-id"
+              onClick={() => handleModalVisit(resistanceModal)}
             />
             <FormSelect
               title="Physical Assistance"
@@ -317,11 +490,19 @@ const ArmBike = () => {
               title="Verbal Cues"
               subtitle="Select how many verbal cues were provided"
               subtitleID="verbal-cues-subtitle-id"
+              onClick={() => handleModalVisit(verbalCuesModal)}
+            />
+            <FormSelect
+              title="Specific Verbal Cues"
+              subtitle="Select one or more verbal cues given"
+              subtitleID="verbal-cues-given-subtitle-id"
+              onClick={() => handleModalVisit(specificVerbalCuesModal)}
             />
             <FormSelect
               title="Plan"
               subtitle="Select plan for future treatments"
               subtitleID="plan-subtitle-id"
+              onClick={() => handleModalVisit(planModal)}
             />
             <Modal modalContent={modalContent} />
             {/* Patient terminology */}

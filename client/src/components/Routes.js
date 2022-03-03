@@ -32,7 +32,7 @@ const Routes = () => {
         <HemiDressing />
       </Route>
       <Route path="/grooming">
-        <Grooming />
+        <Grooming title="Grooming" />
       </Route>
       <Route path="/toilet-transfer">
         <ToiletTransfer />

@@ -100,6 +100,14 @@ a {
   flex-direction: column;
 }
 
+.content-title {
+  font-size: 24px;
+  border-bottom: 1px solid #5158e2;
+  width: fit-content;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
 form {
   width: 75%;
   padding: 15px;

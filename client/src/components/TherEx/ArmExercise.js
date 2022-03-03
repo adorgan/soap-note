@@ -1,24 +1,14 @@
 import { useState, useEffect, useReducer } from "react";
-import SelectInput from "../SelectInput";
-import MultiSelectInput from "../MultiSelectInput";
-import NumberInput from "../NumberInput";
 import SubmitButton from "../SubmitButton";
 import NarrativeBlurb from "../NarrativeBlurb";
-import Vitals from "../Vitals";
-import FimBloc from "../FimBloc";
-import Accordian from "../Accordian";
-import Assessments from "../Assessments";
-import getData from "../../utils/getRequest";
 import postData from "../../utils/postRequest";
-import changeNavBold from "../../utils/changeNavBold";
-import toggleMultiSelect from "../../utils/toggleMultiSelect";
 import FormSelect from "../FormSelect";
 import Modal from "../Modal";
 import MultiSelectModal from "../ModalContent/MultiSelectModal";
 import SingleSelectModal from "../ModalContent/SingleSelectModal";
 import NumberInputModal from "../ModalContent/NumberInputModal";
 import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
-import constants, { extremities } from "../../utils/constants";
+import constants from "../../utils/constants";
 
 const defaultFormState = {
   patient: "",

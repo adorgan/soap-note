@@ -9,7 +9,6 @@ import Grooming from "./SelfCare/Grooming";
 import ToiletTransfer from "./FunctionalMobility/ToiletTransfer";
 import ADL from "./ADL";
 import FunctionalMobility from "./FunctionalMobility";
-import Balance from "./Balance";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import DynamicBalance from "./Balance/DynamicBalance";

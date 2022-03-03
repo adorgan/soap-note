@@ -53,7 +53,7 @@ const formReducer = (state, event) => {
 };
 
 // Component
-const ArmBike = ({title}) => {
+const ArmBike = ({ title }) => {
   //   const [impairments, setImpairments] = useState([]);
   const [formData, setFormData] = useReducer(formReducer, defaultState);
   const [blurb, setBlurb] = useState("");
@@ -314,8 +314,7 @@ const ArmBike = ({title}) => {
   return (
     <>
       <div className="wrapper">
-      <div className="content-title">{title}</div>
-
+        <div className="content-title">{title}</div>
         <form onSubmit={handleSubmit}>
           <fieldset>
             <FormSelect

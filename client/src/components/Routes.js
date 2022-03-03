@@ -12,6 +12,8 @@ import FunctionalMobility from "./FunctionalMobility";
 import Balance from "./Balance";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
+import DynamicBalance from "./Balance/DynamicBalance";
+import StaticBalance from "./Balance/StaticBalance";
 
 const Routes = () => {
   return (
@@ -20,7 +22,7 @@ const Routes = () => {
         <MyNotes />
       </Route>
       <Route path="/fim">
-        <FIM />
+        <FIM title="FIM"/>
       </Route>
       <Route path="/arm-bike">
         <ArmBike title="Arm Bike"/>
@@ -43,8 +45,11 @@ const Routes = () => {
       <Route path="/functional-mobility">
         <FunctionalMobility />
       </Route>
-      <Route path="/balance">
-        <Balance />
+      <Route path="/dynamic-balance">
+        <DynamicBalance />
+      </Route>
+      <Route path="/static-balance">
+        <StaticBalance />
       </Route>
       <Route path="/login">
         <Login />

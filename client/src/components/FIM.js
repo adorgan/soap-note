@@ -33,7 +33,7 @@ const formReducer = (state, event) => {
   };
 };
 
-function FIM() {
+function FIM({ title }) {
   const [showFimBlurb, setShowFimBlurb] = useState(false);
   const [formData, setFormData] = useReducer(formReducer, defaultState);
   const [modalContent, setModalContent] = useState("");
@@ -85,8 +85,6 @@ function FIM() {
     setModalVisible(true);
   };
 
-
-
   useEffect(() => {
     if (modalVisible) {
       const modal = document.getElementById("myModal");
@@ -120,9 +118,7 @@ function FIM() {
       subtitleID="toilet-transfers-subtitle-id"
       name="toilet_transfer"
       prevSelected={formData.toilet_transfer}
-      nextModal={
-        tubTransferModal
-      }
+      nextModal={tubTransferModal}
       onClickNext={onClickNext}
     />
   );
@@ -206,6 +202,7 @@ function FIM() {
 
   return (
     <>
+      <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
         <fieldset>
           <FormSelect

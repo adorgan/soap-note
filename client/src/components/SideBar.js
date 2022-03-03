@@ -7,16 +7,22 @@ import SideBarDropDownLink from "./SideBarDropDownLink";
 
 const SideBar = () => {
   const [ADLDropDownShowing, setADLDropDownShowing] = useState(false);
-  const [TherExDropDownShowing, setTherExDropDownShowing] = useState(false);
-  const [FuncMobDropDownShowing, setFuncMobDropDownShowing] = useState(false);
+  const [therExDropDownShowing, setTherExDropDownShowing] = useState(false);
+  const [funcMobDropDownShowing, setFuncMobDropDownShowing] = useState(false);
+  const [balanceDropDownShowing, setBalanceDropDownShowing] = useState(false);
+
 
   useEffect(() => {
     const ADLDropDown = document.getElementById("component-collapse-adl");
-    const TherExDropDown = document.getElementById(
+    const therExDropDown = document.getElementById(
       "component-collapse-ther-ex"
     );
-    const FuncMobDropDown = document.getElementById(
+    const funcMobDropDown = document.getElementById(
       "component-collapse-mobility"
+    );
+
+    const balanceDropDown = document.getElementById(
+      "component-collapse-balance"
     );
 
     if (ADLDropDownShowing) {
@@ -27,20 +33,28 @@ const SideBar = () => {
       ADLDropDown.classList.remove("fadeIn");
     }
 
-    if (TherExDropDownShowing) {
-      TherExDropDown.classList.add("fadeIn");
-      TherExDropDown.classList.remove("fadedOut");
+    if (therExDropDownShowing) {
+      therExDropDown.classList.add("fadeIn");
+      therExDropDown.classList.remove("fadedOut");
     } else {
-      TherExDropDown.classList.add("fadedOut");
-      TherExDropDown.classList.remove("fadeIn");
+      therExDropDown.classList.add("fadedOut");
+      therExDropDown.classList.remove("fadeIn");
     }
 
-    if (FuncMobDropDownShowing) {
-      FuncMobDropDown.classList.add("fadeIn");
-      FuncMobDropDown.classList.remove("fadedOut");
+    if (funcMobDropDownShowing) {
+      funcMobDropDown.classList.add("fadeIn");
+      funcMobDropDown.classList.remove("fadedOut");
     } else {
-      FuncMobDropDown.classList.add("fadedOut");
-      FuncMobDropDown.classList.remove("fadeIn");
+      funcMobDropDown.classList.add("fadedOut");
+      funcMobDropDown.classList.remove("fadeIn");
+    }
+
+    if (balanceDropDownShowing) {
+      balanceDropDown.classList.add("fadeIn");
+      balanceDropDown.classList.remove("fadedOut");
+    } else {
+      balanceDropDown.classList.add("fadedOut");
+      balanceDropDown.classList.remove("fadeIn");
     }
   });
 
@@ -101,7 +115,25 @@ const SideBar = () => {
         />
       </div>
 
-      <SideBarPrimaryLink id="nav-balance" url="/balance" title="Balance" />
+      <SideBarDropDownLink
+        target="#component-collapse-balance"
+        title="Balance"
+        onClick={() => setBalanceDropDownShowing((prev) => !prev)}
+      />
+      <div className="collapse fadedOut" id="component-collapse-balance">
+        <SideBarSubLink
+          id="nav-dynamic-balance"
+          url="/dynamic-balance"
+          title="Dynamic Balance"
+        />
+        <SideBarSubLink
+          id="nav-static-balance"
+          url="/static-balance"
+          title="Static Balance"
+        />
+      </div>
+
+      {/* <SideBarPrimaryLink id="nav-balance" url="/balance" title="Balance" /> */}
 
       <SideBarPrimaryLink id="nav-fim" url="/fim" title="FIM" />
 

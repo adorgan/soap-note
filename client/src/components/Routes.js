@@ -23,10 +23,10 @@ const Routes = () => {
         <FIM />
       </Route>
       <Route path="/arm-bike">
-        <ArmBike />
+        <ArmBike title="Arm Bike"/>
       </Route>
       <Route path="/arm-exercises">
-        <ArmExercise />
+        <ArmExercise title="Arm Exercises" />
       </Route>
       <Route path="/hemi-dressing">
         <HemiDressing />

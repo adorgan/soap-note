@@ -94,6 +94,7 @@ a {
 .content {
   margin-top: 70px;
   margin-left: 20px;
+  margin-bottom: 100px;
   display: flex;
   flex: 1;
   justify-content: flex-start;
@@ -142,15 +143,14 @@ fieldset {
 }
 
 .form-select-subtext {
-  color: black;
-  opacity: .88;
+  color: rgb(94, 94, 94);
   font-size: 12px;
   margin-top: 5px;
 }
 
 .form-select-arrow {
-  color: black;
-  opacity: .88;
+  color: rgb(94, 94, 94);
+
 }
 
 .form-select-parent {

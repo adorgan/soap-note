@@ -8,11 +8,17 @@ import Vitals from "../Vitals";
 import FimBloc from "../FimBloc";
 import Accordian from "../Accordian";
 import Assessments from "../Assessments";
-import constants from "../../utils/constants";
 import getData from "../../utils/getRequest";
 import postData from "../../utils/postRequest";
 import changeNavBold from "../../utils/changeNavBold";
 import toggleMultiSelect from "../../utils/toggleMultiSelect";
+import FormSelect from "../FormSelect";
+import Modal from "../Modal";
+import MultiSelectModal from "../ModalContent/MultiSelectModal";
+import SingleSelectModal from "../ModalContent/SingleSelectModal";
+import NumberInputModal from "../ModalContent/NumberInputModal";
+import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
+import constants, { extremities } from "../../utils/constants";
 
 const defaultFormState = {
   patient: "",
@@ -59,194 +65,421 @@ const formReducer = (state, event) => {
   };
 };
 
-export default function ArmExercise() {
+export default function ArmExercise({ title }) {
   const [blurb, setBlurb] = useState("");
-  const [impairments, setImpairments] = useState([]);
   const [formData, setFormData] = useReducer(formReducer, defaultFormState);
-
-  const handleSingleSelectChange = (event) => {
-    toggleMultiSelect(
-        "verbal_cueing",
-        "verbal_cues_given",
-        "no verbal cueing",
-        setFormData
-      );
-    setFormData({
-      name: event.target.name,
-      value: event.target.value,
-    });
-  };
-
-  const handleMultiSelectChange = (e) => {
-    // make array of multi selected options
-    const selected = document.getElementById(e.target.id).selectedOptions;
-    let selectedArray = [];
-    for (let element of selected) {
-      selectedArray.push(element.value);
-    }
-    // update form element state with new array values
-    setFormData({
-      name: e.target.name,
-      value: selectedArray,
-    });
-  };
+  const [modalContent, setModalContent] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [blurbVisible, setBlurbVisible] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     postData("/arm-exercises", formData).then((data) => {
-      // setShowGoalBlurb(true);
-      // document.getElementById("goal_blurb").innerHTML = data;
       setBlurb(data);
+      setBlurbVisible(true);
+    });
+  };
+
+  const onClickNext = (modal, name, value, subtitleID, subtitle) => {
+    setModalContent(modal);
+    if (value.constructor === Array) {
+      if (value.length > 0) {
+        let str = value.join(", ");
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(str);
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    } else {
+      if (value === "0") {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      } else if (value.length !== 0) {
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(value);
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    }
+
+    setFormData({
+      name: name,
+      value: value,
+    });
+  };
+
+  const handleModalVisit = (component) => {
+    setModalContent(component);
+    setModalVisible(true);
+  };
+
+  const handleOkModalClick = (name, value, subtitleID, subtitle) => {
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
+    setModalVisible(false);
+
+    if (value.constructor === Array) {
+      if (value.length > 0) {
+        let str = value.join(", ");
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(str);
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    } else {
+      if (value === "0") {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      } else if (value.length !== 0) {
+        document.getElementById(subtitleID).innerHTML =
+          capitalizeEveryWord(value);
+      } else {
+        document.getElementById(subtitleID).innerHTML = subtitle;
+      }
+    }
+
+    setFormData({
+      name: name,
+      value: value,
     });
   };
 
   useEffect(() => {
-    getData("/get-impairments").then((data) => setImpairments(data));
-  }, []);
+    if (modalVisible) {
+      const modal = document.getElementById("myModal");
+      modal.style.display = "block";
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+          setModalVisible(false);
+        }
+      };
+    }
+  }, [modalVisible]);
 
-  useEffect(() => {
-    changeNavBold("nav-arm-exercises");
+  const planModal = (
+    <SingleSelectModal
+      key={"plan"}
+      name={"plan"}
+      title={"Plan"}
+      subtitleID="plan-subtitle-id"
+      options={constants.armBike.plan_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.plan}
+      subtitle="Select plan for future treatments"
+      onClickNext={onClickNext}
+    />
+  );
 
-    // make sure collapsed content is shown if browser refreshed
-    const collapsed = document.getElementById("component-collapse-ther-ex");
-    collapsed.classList.add("show");
-  }, []);
+  const specificVerbalCuesModal = (
+    <MultiSelectModal
+      key={"verbal_cues_given"}
+      name={"verbal_cues_given"}
+      title={"Verbal Cues Provided"}
+      subtitleID="verbal-cues-given-subtitle-id"
+      options={constants.exercise.verbalCues}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.verbal_cues_given}
+      subtitle="Select one or more verbal cues given"
+      nextModal={planModal}
+      onClickNext={onClickNext}
+    />
+  );
+  const verbalCuesModal = (
+    <SingleSelectModal
+      key={"verbal-cues-score"}
+      name={"verbal_cueing"}
+      title={"Verbal Cues"}
+      subtitleID="verbal-cues-subtitle-id"
+      subtitle="Select how many verbal cues were provided"
+      options={constants.armBike.verbal_cues_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.verbal_cueing}
+      nextModal={specificVerbalCuesModal}
+      onClickNext={onClickNext}
+    />
+  );
 
+  const fimModal = (
+    <SingleSelectModal
+      key={"fim-score"}
+      name={"physical_assistance"}
+      title={"FIM"}
+      subtitleID="physical-assistance-subtitle-id"
+      subtitle="Select how much assistance was provided"
+      options={constants.armBike.fim_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.physical_assistance}
+      nextModal={verbalCuesModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const exercseBandsModal = (
+    <SingleSelectModal
+      key={"exercise_band"}
+      name={"exercise_band"}
+      title={"Exercise Band"}
+      subtitleID="exercise-band-subtitle-id"
+      subtitle="Select color of exercise band used"
+      options={constants.exercise.bandColors}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.exercise_band}
+      onClickNext={onClickNext}
+      nextModal={fimModal}
+    />
+  );
+
+  const weightModal = (
+    <NumberInputModal
+      key="weight_level"
+      name="weight"
+      id="weight"
+      label="Weight (lbs)"
+      min={0}
+      max={20}
+      prevValue={formData.weight}
+      onOkayClick={handleOkModalClick}
+      subtitle="Select weight level used"
+      subtitleID="weight-subtitle-id"
+      nextModal={exercseBandsModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const repsModal = (
+    <NumberInputModal
+      key="reps"
+      name="reps"
+      id="reps"
+      label="Repetitions"
+      min={0}
+      max={50}
+      prevValue={formData.reps}
+      onOkayClick={handleOkModalClick}
+      subtitle="Select number of repetitions completed per set"
+      subtitleID="repetitions-subtitle-id"
+      nextModal={weightModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const setsModal = (
+    <NumberInputModal
+      key="sets"
+      name="sets"
+      id="sets"
+      label="Sets"
+      min={0}
+      max={10}
+      prevValue={formData.sets}
+      onOkayClick={handleOkModalClick}
+      subtitle="Select number of sets completed"
+      subtitleID="sets-subtitle-id"
+      nextModal={repsModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const muscleGroupsModal = (
+    <MultiSelectModal
+      key={"muscle_groups"}
+      name={"muscle_groups"}
+      title={"Muscle Groups Targeted"}
+      subtitleID="muscle-groups-subtitle-id"
+      subtitle="Select one or more muscle groups targeted"
+      options={constants.muscleGroups}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.muscle_groups}
+      nextModal={setsModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const extremitiesModal = (
+    <SingleSelectModal
+      key={"extremities"}
+      name={"extremities"}
+      title={"Extremeties Targeted"}
+      subtitleID="extremities-subtitle-id"
+      subtitle="Select extremeties used"
+      options={constants.extremities}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.extremities}
+      nextModal={muscleGroupsModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const positionModal = (
+    <SingleSelectModal
+      key="position"
+      name="position"
+      title="Position"
+      subtitleID="position-subtitle-id"
+      subtitle="Select the position the activity was performed in"
+      options={constants.grooming.position}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.position}
+      nextModal={extremitiesModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const educationModal = (
+    <MultiSelectModal
+      key={"education"}
+      name={"education"}
+      title={"Pre-Activity Education Topics"}
+      subtitle="Select one or more education topics"
+      subtitleID="education-subtitle-id"
+      options={constants.functionalActivityEducationTopics}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.education}
+      nextModal={positionModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const impairmentsModal = (
+    <MultiSelectModal
+      key={"impairments"}
+      name={"impairments"}
+      title={"Impairments"}
+      subtitleID="impairments-subtitle-id"
+      options={constants.armBike.impairment_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.impairments}
+      subtitle="Select one or more areas of impairment"
+      nextModal={educationModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const goalsModal = (
+    <MultiSelectModal
+      key={"goals"}
+      name={"goals"}
+      title={"Goals"}
+      subtitleID="goals-subtitle-id"
+      options={constants.armBike.goal_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.goals}
+      subtitle="Select one or more goal areas"
+      nextModal={impairmentsModal}
+      onClickNext={onClickNext}
+    />
+  );
+
+  const terminologyModal = (
+    <SingleSelectModal
+      key={"patient-terminology"}
+      name={"patient"}
+      title={"Terminology"}
+      subtitleID="pt-terminology-subtitle-id"
+      subtitle="Select setting-specific patient terminology"
+      options={constants.armBike.patient_name_options}
+      onOkayClick={handleOkModalClick}
+      prevSelected={formData.patient}
+      nextModal={goalsModal}
+      onClickNext={onClickNext}
+    />
+  );
   return (
     <>
+      <div className="content-title">{title}</div>
+
       <form onSubmit={handleSubmit}>
-        {/* Patient terminology */}
-        <SelectInput
-          label="Healthcare Receiver Terminology"
-          id="patient"
-          name="patient"
-          handleChange={handleSingleSelectChange}
-          options={constants.patientTerm}
+        <FormSelect
+          title="Patient Terminology"
+          subtitle="Select setting-specific patient terminology"
+          subtitleID="pt-terminology-subtitle-id"
+          onClick={() => handleModalVisit(terminologyModal)}
         />
-        {/* Position of patient */}
+        <FormSelect
+          title="Goals"
+          subtitle="Select one or more goal areas"
+          subtitleID="goals-subtitle-id"
+          onClick={() => handleModalVisit(goalsModal)}
+        />
+        <FormSelect
+          title="Impairments"
+          subtitle="Select one or more impairments"
+          subtitleID="impairments-subtitle-id"
+          onClick={() => handleModalVisit(impairmentsModal)}
+        />
+        <FormSelect
+          title={"Pre-Activity Education Topics"}
+          subtitle="Select one or more education topics"
+          subtitleID="education-subtitle-id"
+          onClick={() => handleModalVisit(educationModal)}
+        />
+        <FormSelect
+          title="Position"
+          subtitleID="position-subtitle-id"
+          subtitle="Select the position the activity was performed in"
+          onClick={() => handleModalVisit(positionModal)}
+        />
+        <FormSelect
+          title={"Extremeties Targeted"}
+          subtitleID="extremities-subtitle-id"
+          subtitle="Select extremeties used"
+          onClick={() => handleModalVisit(extremitiesModal)}
+        />
 
-        {/* Goals */}
-        <MultiSelectInput
-          label="Goals Targeted"
-          name="goals"
-          id="goals"
-          handleChange={handleMultiSelectChange}
-          options={constants.goals}
+        <FormSelect
+          title={"Muscle Groups Targeted"}
+          subtitleID="muscle-groups-subtitle-id"
+          subtitle="Select one or more muscle groups targeted"
+          onClick={() => handleModalVisit(muscleGroupsModal)}
         />
-        {/* Impairments */}
-        <MultiSelectInput
-          label="Impairments Addressed"
-          name="impairments"
-          id="impairments"
-          handleChange={handleMultiSelectChange}
-          // value={formData.impairments}
-          options={impairments}
+        <FormSelect
+          title="Sets"
+          subtitle="Select number of sets completed"
+          subtitleID="sets-subtitle-id"
+          onClick={() => handleModalVisit(setsModal)}
         />
-        {/* Education topics prior to activity */}
-        <MultiSelectInput
-          label="Pre-Activity Education Topics"
-          id="education"
-          name="education"
-          handleChange={handleMultiSelectChange}
-          options={constants.functionalActivityEducationTopics}
+        <FormSelect
+          title="Repetitions"
+          subtitle="Select number of repetitions completed per set"
+          subtitleID="repetitions-subtitle-id"
+          onClick={() => handleModalVisit(repsModal)}
         />
-        <SelectInput
-          label="Patient Position"
-          id="position"
-          name="position"
-          handleChange={handleSingleSelectChange}
-          options={constants.position_exercise}
-          isRequired={true}
+        <FormSelect
+          title="Weight"
+          subtitle="Select weight level used"
+          subtitleID="weight-subtitle-id"
+          onClick={() => handleModalVisit(weightModal)}
         />
-        {/* Extremities Used */}
-        <SelectInput
-          label="Extremities Used"
-          name="extremities"
-          id="extremities"
-          handleChange={handleSingleSelectChange}
-          options={constants.extremities}
+        <FormSelect
+          title={"Exercise Band"}
+          subtitleID="exercise-band-subtitle-id"
+          subtitle="Select color of exercise band used"
+          onClick={() => handleModalVisit(exercseBandsModal)}
         />
-        {/* Muscle Groups */}
-        <MultiSelectInput
-          label="Muscle Groups Targeted"
-          name="muscle_groups"
-          id="muscle_groups"
-          handleChange={handleMultiSelectChange}
-          options={constants.muscleGroups}
+        <FormSelect
+          title={"FIM"}
+          subtitleID="physical-assistance-subtitle-id"
+          subtitle="Select how much assistance was provided"
+          onClick={() => handleModalVisit(fimModal)}
         />
-        {/* Number of sets */}
-        <div>
-          <NumberInput
-            name="sets"
-            id="sets"
-            label="Sets"
-            min="1"
-            max="10"
-            handleChange={handleSingleSelectChange}
-          />
-        </div>
-
-        {/* Number of reps */}
-        <div>
-          <NumberInput
-            name="reps"
-            id="reps"
-            label="Repetitions"
-            min="1"
-            max="20"
-            handleChange={handleSingleSelectChange}
-          />
-        </div>
-        {/* Amount of weight used */}
-        <div>
-          <NumberInput
-            name="weight"
-            id="weight"
-            label="Weight(lbs)"
-            min="1"
-            max="20"
-            handleChange={handleSingleSelectChange}
-          />
-        </div>
-        <SelectInput
-          label="Exercise Band"
-          name="exercise_band"
-          id="exercise_band"
-          handleChange={handleSingleSelectChange}
-          options={constants.exercise.bandColors}
+        <FormSelect
+          title="Verbal Cues"
+          subtitle="Select how many verbal cues were provided"
+          subtitleID="verbal-cues-subtitle-id"
+          onClick={() => handleModalVisit(verbalCuesModal)}
         />
-        {/* Physical assistance needed for activity */}
-        <SelectInput
-          label="Physical Assistance Provided"
-          id="physical_assistance"
-          name="physical_assistance"
-          handleChange={handleSingleSelectChange}
-          options={constants.assessments.fim}
-          isRequired={true}
+        <FormSelect
+          title="Specific Verbal Cues"
+          subtitle="Select one or more verbal cues given"
+          subtitleID="verbal-cues-given-subtitle-id"
+          onClick={() => handleModalVisit(specificVerbalCuesModal)}
         />
-        <SelectInput
-          label="Verbal Cueing Required"
-          name="verbal_cueing"
-          id="verbal_cueing"
-          handleChange={handleSingleSelectChange}
-          options={constants.assessments.verbalCues}
+        <FormSelect
+          title="Plan"
+          subtitle="Select plan for future treatments"
+          subtitleID="plan-subtitle-id"
+          onClick={() => handleModalVisit(planModal)}
         />
-        {/* Specific verbal cues */}
-        <MultiSelectInput
-          label="Verbal Cues Given"
-          name="verbal_cues_given"
-          id="verbal_cues_given"
-          handleChange={handleMultiSelectChange}
-          options={constants.exercise.verbalCues}
-        />
-        <SelectInput
-          label="Plan"
-          name="plan"
-          id="plan"
-          handleChange={handleSingleSelectChange}
-          options={constants.plan}
-        />
-        <Accordian
+        {/* <Accordian
           categories={[
             {
               // FIM scoring for all ADLs
@@ -266,10 +499,13 @@ export default function ArmExercise() {
               label: "Vitals",
             },
           ]}
-        />
+        /> */}
+        <Modal modalContent={modalContent} />
+
         <SubmitButton />
       </form>
-      <NarrativeBlurb text={blurb} id="blurb" />
+      {blurbVisible && <NarrativeBlurb text={blurb} id="goal_blurb" />}
+
     </>
   );
 }

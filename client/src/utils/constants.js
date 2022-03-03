@@ -66,19 +66,19 @@ module.exports = {
     "restorator",
   ],
   patientTerm: ["patient", "client", "resident"],
-  extremities: ["BUE", "LUE", "RUE"],
-  muscleGroups: [
-    "bicep",
-    "tricep",
-    "deltoid",
-    "trapezius",
-    "pectoralis major",
-    "wrist flexor",
-    "wrist extensor",
-    "grip",
-    "forearm supinator",
-    "forearm prontator",
-  ],
+  extremities: { bue: "BUE", lue: "LUE", rue: "RUE" },
+  muscleGroups: {
+    bicep: "bicep",
+    tricep: "tricep",
+    deltoid: "deltoid",
+    trapezius: "trapezius",
+    pectoralis: "pectoralis major",
+    wrist_flexor: "wrist flexor",
+    wrist_extensor: "wrist extensor",
+    grip: "grip",
+    forearm_supinator: "forearm supinator",
+    forearm_pronator: "forearm prontator",
+  },
   functionalActivityEducationTopics: {
     purpose: "purpose",
     frequence: "frequency",
@@ -235,13 +235,19 @@ module.exports = {
     },
   },
   exercise: {
-    bandColors: ["yellow", "red", "green", "blue", "black"],
-    verbalCues: [
-      "counting repetitions",
-      "pacing",
-      "correct form",
-      "breathing strategies",
-    ],
+    bandColors: {
+      yellow: "yellow",
+      red: "red",
+      green: "green",
+      blue: "blue",
+      black: "black",
+    },
+    verbalCues: {
+      counting: "counting repetitions",
+      pacing: "pacing",
+      form: "correct form",
+      breathing: "breathing strategies",
+    },
   },
   eating: {
     position: [
@@ -303,8 +309,8 @@ module.exports = {
     },
     position: {
       sitting: "sitting",
-      standing: "standing"
-    }
+      standing: "standing",
+    },
   },
   bathing: {
     position: ["in shower chair", "on tub bench", "in wheelchair", "supine"],

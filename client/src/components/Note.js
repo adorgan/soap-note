@@ -34,20 +34,21 @@ export default function Note({ title, body, id, onClickDelete }) {
     }, [editId, saveId, noteId]);
 
     return (
-        <>
-            <h3 className="note-title">{title}</h3>
+        <div className="note-container">
+            <div className="note-title">{title}</div>
             <textarea
                 id={noteId}
+                className="note-textarea"
                 onChange={handleChange}
                 value={note}
             ></textarea>
             <div>
-                <button id={editId} className="btn btn-primary m-1">
+                <button id={editId} className="btn-note">
                     Edit
                 </button>
                 <button
                     id={saveId}
-                    className="btn btn-primary m-1"
+                    className="btn-note"
                     onClick={saveChanges}
                 >
                     Save
@@ -55,11 +56,11 @@ export default function Note({ title, body, id, onClickDelete }) {
                 <button
                     id={id}
                     onClick={onClickDelete}
-                    className="btn btn-primary m-1"
+                    className="btn-note"
                 >
                     Delete
                 </button>
             </div>
-        </>
+        </div>
     );
 }

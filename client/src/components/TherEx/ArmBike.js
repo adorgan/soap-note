@@ -8,6 +8,7 @@ import MultiSelectModal from "../ModalContent/MultiSelectModal";
 import SingleSelectModal from "../ModalContent/SingleSelectModal";
 import NumberInputModal from "../ModalContent/NumberInputModal";
 import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
+import constants from "../../utils/constants";
 
 const defaultState = {
   patient: "",
@@ -41,78 +42,6 @@ const defaultState = {
   saturation: "",
 };
 
-const patient_name_options = {
-  patient: "patient",
-  client: "client",
-  resident: "resident",
-};
-
-const arm_bike_name_options = {
-  arm_bike: "arm bike",
-  omnicycle: "omnicycle",
-  restorator: "restorator",
-};
-
-const goal_options = {
-  eating: "eating",
-  grooming: "grooming",
-  bathing: "bathing",
-  upper_body_dressing: "upper body dressing",
-  lower_body_dressing: "lower body dressing",
-  toileting: "toileting",
-  toilet_transfers: "toilet transfers",
-  tub_transfers: "tub transfers",
-};
-
-const impairment_options = {
-  strength: "strength",
-  standing_balance: "standing balance",
-  sitting_balance: "sitting balance",
-  gross_motor_coordination: "gross Motor Coordination",
-  fine_motor_coordination: "fine Motor Coordination",
-  cognition: "cognition",
-  endurance: "endurance",
-  sensation: "sensation",
-};
-
-const fim_options = {
-  independent: "independent",
-  modified_independent: "modified independent",
-  supervision: "supervision",
-  minimum_assistance: "minimum assistance",
-  moderate_assistance: "moderate assistance",
-  maximum_assistance: "maximum assistance",
-  total_assistance: "total assistance",
-};
-
-const plan_options = {
-  upgrade: "upgrade",
-  maintain: "maintain",
-  downgrade: "downgrade",
-};
-
-const verbal_cues_options = {
-  none: "no verbal cueing",
-  minimum: "minimum verbal cueing",
-  moderate: "moderate verbal cueing",
-  maximum: "maximum verbal cueing",
-};
-
-const education_topics_options = {
-  safety: "safety awareness",
-  ue_position: "upper extremity position",
-  pacing: "pacing strategies",
-  task_sequencing: "task sequencing",
-};
-
-const verbal_cues = {
-  hand_placement: "hand placement",
-  speed: "speed",
-  posture: "posture",
-  rest_breaks: "rest breaks",
-  pursed_lip_breathing: "pursed lip breathing",
-};
-
 const formReducer = (state, event) => {
   if (event.reset) {
     return defaultState;
@@ -130,11 +59,13 @@ const ArmBike = () => {
   const [blurb, setBlurb] = useState("");
   const [modalContent, setModalContent] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [blurbVisible, setBlurbVisible] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     postData("/arm-bike", formData).then((data) => {
       setBlurb(data);
+      setBlurbVisible(true);
     });
   };
 
@@ -219,7 +150,7 @@ const ArmBike = () => {
       name={"plan"}
       title={"Plan"}
       subtitleID="plan-subtitle-id"
-      options={plan_options}
+      options={constants.armBike.plan_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.plan}
       subtitle="Select plan for future treatments"
@@ -233,7 +164,7 @@ const ArmBike = () => {
       name={"verbal_cues_given"}
       title={"Verbal Cues Provided"}
       subtitleID="verbal-cues-given-subtitle-id"
-      options={verbal_cues}
+      options={constants.armBike.verbal_cues}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.verbal_cues_given}
       subtitle="Select one or more verbal cues given"
@@ -248,7 +179,7 @@ const ArmBike = () => {
       title={"Verbal Cues"}
       subtitleID="verbal-cues-subtitle-id"
       subtitle="Select how many verbal cues were provided"
-      options={verbal_cues_options}
+      options={constants.armBike.verbal_cues_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.verbal_cueing}
       nextModal={specificVerbalCuesModal}
@@ -263,7 +194,7 @@ const ArmBike = () => {
       title={"FIM"}
       subtitleID="physical-assistance-subtitle-id"
       subtitle="Select how much assistance was provided"
-      options={fim_options}
+      options={constants.armBike.fim_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.physical_assistance}
       nextModal={verbalCuesModal}
@@ -311,7 +242,7 @@ const ArmBike = () => {
       name={"education"}
       title={"Education Topics"}
       subtitleID="education-subtitle-id"
-      options={education_topics_options}
+      options={constants.armBike.education_topics_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.education}
       subtitle="Select one or more education topics"
@@ -326,7 +257,7 @@ const ArmBike = () => {
       name={"impairments"}
       title={"Impairments"}
       subtitleID="impairments-subtitle-id"
-      options={impairment_options}
+      options={constants.armBike.impairment_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.impairments}
       subtitle="Select one or more areas of impairment"
@@ -341,7 +272,7 @@ const ArmBike = () => {
       name={"goals"}
       title={"Goals"}
       subtitleID="goals-subtitle-id"
-      options={goal_options}
+      options={constants.armBike.goal_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.goals}
       subtitle="Select one or more goal areas"
@@ -357,7 +288,7 @@ const ArmBike = () => {
       title={"Arm Bike Name"}
       subtitleID="arm-bike-name-subtitle-id"
       subtitle="Select arm bike name"
-      options={arm_bike_name_options}
+      options={constants.armBike.arm_bike_name_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.name}
       nextModal={goals}
@@ -372,7 +303,7 @@ const ArmBike = () => {
       title={"Terminology"}
       subtitleID="pt-terminology-subtitle-id"
       subtitle="Select setting-specific patient terminology"
-      options={patient_name_options}
+      options={constants.armBike.patient_name_options}
       onOkayClick={handleOkModalClick}
       prevSelected={formData.patient}
       nextModal={armBikeName}
@@ -455,11 +386,10 @@ const ArmBike = () => {
               onClick={() => handleModalVisit(planModal)}
             />
             <Modal modalContent={modalContent} />
-           
           </fieldset>
           <SubmitButton />
         </form>
-        <NarrativeBlurb text={blurb} id="goal_blurb" />
+        {blurbVisible && <NarrativeBlurb text={blurb} id="goal_blurb" />}
       </div>
     </>
   );

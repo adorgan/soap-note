@@ -244,3 +244,60 @@ fieldset {
   visibility: hidden;
   transition: linear 0.15s;
 }
+
+.narrative_blurb {
+  width: 75%;
+  padding: 15px;
+  background: white;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+/* My Notes */
+
+.note-container {
+  width: 75%;
+  margin-bottom: 20px;
+}
+.note-title {
+  font-weight: bold;
+}
+
+.btn-note {
+  background: #5158e2;
+  color: white;
+  padding: 5px;
+  margin-right: 5px;
+  border: 0;
+}
+
+.btn-note:hover {
+  cursor: pointer;
+  background-color: #6d73ec;
+}
+
+/* New Note */
+.note-textarea {
+  padding: 15px;
+}
+
+.new-note-div {
+  margin-bottom: 100px;
+}
+
+.new-note-label{
+  margin-right: 10px;
+}
+
+.new-note-title {
+  margin-bottom: 10px;
+}
+.new-note-body{
+  width: 95%;
+  padding: 15px;
+}
+
+.new-note-input{
+  width: 40%;
+  padding: 5px;
+}

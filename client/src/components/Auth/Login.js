@@ -1,6 +1,7 @@
-import { useState, useReducer } from "react";
+import { useState, useReducer, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import postData from "../../utils/postRequest";
+import { Context } from "../Context";
 
 const defaultFormState = {
     email: "",
@@ -20,6 +21,8 @@ const formReducer = (state, event) => {
 export default function Login() {
     const [formData, setFormData] = useReducer(formReducer, defaultFormState);
     const [success, setSuccess] = useState(false);
+    const [loggedIn, setLoggedIn] = useContext(Context);
+
     const handleChange = (event) => {
         setFormData({
             name: event.target.name,
@@ -32,8 +35,10 @@ export default function Login() {
         postData("/login", formData).then((data) => {
             if (data === "success") {
                 setSuccess(true);
+                setLoggedIn(true);
             } else {
                 setSuccess(false);
+                setLoggedIn(false);
             }
         });
     };

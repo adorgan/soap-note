@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import MyNotes from "./MyNotes";
 import FIM from "./FIM";
@@ -13,58 +13,63 @@ import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import DynamicBalance from "./Balance/DynamicBalance";
 import StaticBalance from "./Balance/StaticBalance";
+import { Context } from "./Context";
 
 const Routes = () => {
+  const [loggedIn, setLoggedIn] = useContext(Context);
   return (
-      <Switch>
-          <Route path="/notes">
-              <MyNotes />
-          </Route>
-          <Route path="/fim">
-              <FIM title="FIM" />
-          </Route>
-          <Route path="/arm-bike">
-              <ArmBike title="Arm Bike" />
-          </Route>
-          <Route path="/arm-exercises">
-              <ArmExercise title="Arm Exercises" />
-          </Route>
-          <Route path="/hemi-dressing">
-              <HemiDressing />
-          </Route>
-          <Route path="/grooming">
-              <Grooming title="Grooming" />
-          </Route>
-          <Route path="/toilet-transfer">
-              <ToiletTransfer />
-          </Route>
-          <Route path="/ADL">
-              <ADL />
-          </Route>
-          <Route path="/functional-mobility">
-              <FunctionalMobility />
-          </Route>
-          <Route path="/dynamic-balance">
-              <DynamicBalance title="Dynamic Balance" />
-          </Route>
-          <Route path="/static-balance">
-              <StaticBalance title="Static Balance" />
-          </Route>
-          <Route path="/login">
-              <Login />
-          </Route>
-          <Route path="/register">
-              <Register />
-          </Route>
-          <Route path="/">
-              <Home />
-          </Route>
-      </Switch>
+    <Switch>
+      {loggedIn && (
+        <Route path="/notes">
+          <MyNotes />
+        </Route>
+      )}
+
+      <Route path="/fim">
+        <FIM title="FIM" />
+      </Route>
+      <Route path="/arm-bike">
+        <ArmBike title="Arm Bike" />
+      </Route>
+      <Route path="/arm-exercises">
+        <ArmExercise title="Arm Exercises" />
+      </Route>
+      <Route path="/hemi-dressing">
+        <HemiDressing />
+      </Route>
+      <Route path="/grooming">
+        <Grooming title="Grooming" />
+      </Route>
+      <Route path="/toilet-transfer">
+        <ToiletTransfer />
+      </Route>
+      <Route path="/ADL">
+        <ADL />
+      </Route>
+      <Route path="/functional-mobility">
+        <FunctionalMobility />
+      </Route>
+      <Route path="/dynamic-balance">
+        <DynamicBalance title="Dynamic Balance" />
+      </Route>
+      <Route path="/static-balance">
+        <StaticBalance title="Static Balance" />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
+      <Route path="/">
+        <Home />
+      </Route>
+    </Switch>
   );
 };
 
 function Home() {
-    return <h2>Home</h2>;
-  }
+  return <h2>Home</h2>;
+}
 
 export default Routes;

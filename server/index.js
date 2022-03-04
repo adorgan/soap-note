@@ -31,18 +31,18 @@ app.use(bodyParser.json());
 
 
 
-// const store = new MongoDbSession({
-//     uri: db,
-//     collection: "userSessions",
-// });
-// app.use(
-//     session({
-//         secret: "secret key",
-//         resave: false,
-//         saveUninitialized: false,
-//         store: store,
-//     })
-// );
+const store = new MongoDbSession({
+    uri: db,
+    collection: process.env.STORE_COLLECTION,
+});
+app.use(
+    session({
+        secret: process.env.COOKIE_SECRET_KEY,
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+    })
+);
 
 
 

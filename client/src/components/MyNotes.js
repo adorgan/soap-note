@@ -66,9 +66,9 @@ const MyNotes = () => {
     });
   }, []);
 
-  useEffect(() => {
-    changeNavBold("nav-my-notes");
-  }, []);
+  // useEffect(() => {
+  //   changeNavBold("nav-my-notes");
+  // }, []);
 
   return (
     <>

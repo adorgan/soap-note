@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const SideBarPrimaryLink = ({ id, url, title }) => {
   return (
-    <div className="sidebar-links ">
-      <Link id={id} to={url}>
-        {title}
-      </Link>
-    </div>
+      <div className="sidebar-primary-links side-bar-non-dropdown-link">
+          <Link id={id} to={url}>
+              {title}
+          </Link>
+      </div>
   );
 };
 

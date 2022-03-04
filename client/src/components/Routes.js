@@ -45,7 +45,7 @@ const Routes = () => {
         <FunctionalMobility />
       </Route>
       <Route path="/dynamic-balance">
-        <DynamicBalance />
+        <DynamicBalance title="Dynamic Balance" />
       </Route>
       <Route path="/static-balance">
         <StaticBalance />

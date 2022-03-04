@@ -1,4 +1,38 @@
 module.exports = {
+  verbal_cues_options: {
+    none: "no verbal cueing",
+    minimum: "minimum verbal cueing",
+    moderate: "moderate verbal cueing",
+    maximum: "maximum verbal cueing",
+  },
+  fim_options: {
+    independent: "independent",
+    modified_independent: "modified independent",
+    supervision: "supervision",
+    minimum_assistance: "minimum assistance",
+    moderate_assistance: "moderate assistance",
+    maximum_assistance: "maximum assistance",
+    total_assistance: "total assistance",
+  },
+  patient_name_options: {
+    patient: "patient",
+    client: "client",
+    resident: "resident",
+  },
+  goal_options: {
+    eating: "eating",
+    grooming: "grooming",
+    bathing: "bathing",
+    upper_body_dressing: "upper body dressing",
+    lower_body_dressing: "lower body dressing",
+    toileting: "toileting",
+    toilet_transfers: "toilet transfers",
+    tub_transfers: "tub transfers",
+  },
+  position: {
+    sitting: "sitting",
+    standing: "standing",
+  },
   assessments: {
     balance: [
       "normal",
@@ -47,15 +81,6 @@ module.exports = {
       "total verbal cueing",
     ],
   },
-  goals: [
-    "eating",
-    "grooming",
-    "upper body dressing",
-    "lower body dressing",
-    "toileting",
-    "toilet transfers",
-    "tub transfers",
-  ],
 
   plan: ["upgrade", "downgrade", "maintain"],
   armBikeNames: [
@@ -135,7 +160,6 @@ module.exports = {
     fmc: "fine motor coordination",
   },
 
-  position: ["seated", "standing", "supine with head of bed elevated"],
   position_exercise: ["seated", "standing"],
   location: ["bedroom", "bathroom"],
   toiletTransfer: {
@@ -609,15 +633,22 @@ module.exports = {
   },
   dynamic_balance: {
     position: ["seated", "standing"],
-    support: ["parallel bars", "RW", "cane"],
-    tasks: [
-      "reach for cones in various positions",
-      "play balloon toss",
-      "insert pegs into peg board",
-      "toss a ball back and forth",
-      "complete BUE strengthening exercises",
-      "fold laundry",
-    ],
+    support: {
+      parallel_bars: "parallel bars",
+      standard_walker: "standard walker",
+      two_wheel_walker: "2 wheel walker",
+      rollator: "rollator",
+      cane: "cane",
+      unsupported: "unsupported",
+    },
+    tasks: {
+      reach_cones: "reach for cones in various positions",
+      balloon_toss: "play balloon toss",
+      insert_pegs: "insert pegs into peg board",
+      ball_toss: "toss a ball back and forth",
+      bue_strengthening: "complete BUE strengthening exercises",
+      fold_laundry: "fold laundry",
+    },
     education: [
       "purpose",
       "frequency",
@@ -628,25 +659,25 @@ module.exports = {
       "initiation",
       "termination",
     ],
-    instruction: [
-      "safely weight shift when reaching",
-      "maintain one UE on support device",
-      "establish a wide base of support",
-      "maintain an upright posture",
-      "avoid looking down",
-    ],
-    intervention: [
-      "task repetition",
-      "task simplification",
-      "forward chaining",
-      "backward chaining",
-      "adaptive equipment",
-      "tactile cueing",
-      "visual cueing",
-      "modeling",
-      "task modification",
-      "adapting the environment",
-    ],
+    instruction: {
+      weight_shift: "safely weight shift when reaching",
+      maintain_support: "maintain one UE on support device",
+      base_of_support: "establish a wide base of support",
+      posture: "maintain an upright posture",
+      looking_down: "avoid looking down",
+    },
+    intervention: {
+      task_repetition: "task repetition",
+      task_simplification: "task simplification",
+      forward_chaining: "forward chaining",
+      backward_chaining: "backward chaining",
+      adaptive_equipment: "adaptive equipment",
+      tactile_cueing: "tactile cueing",
+      visual_cueing: "visual cueing",
+      modeling: "modeling",
+      task_modification: "task modification",
+      adapt_environment: "adapting the environment",
+    },
   },
   static_balance: {
     position: ["seated", "standing"],

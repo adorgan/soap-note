@@ -1,15 +1,23 @@
 const Note = require("../../models/note");
+const User = require("../../models/User");
 
 const addNote = (req, res) => {
-    Note.create(req.body, (err, newNote) => {
+  Note.create(req.body, (err, newNote) => {
+    if (err) {
+      console.log(err);
+    } else {
+      let doc = User.findOne({ email: req.session.user }, (err, docs) => {
         if (err) {
-            console.log(err);
+          console.log(err);
         } else {
-            return res.json(newNote);
+          docs.notes.push(newNote.id);
+          docs.save();
         }
-    });
+      });
 
-    // console.log(req.body);
+      return res.json(newNote);
+    }
+  });
 };
 
 module.exports = addNote;

@@ -3,7 +3,6 @@ import React from "react";
 import Note from "./Note";
 import postData from "../utils/postRequest";
 import getData from "../utils/getRequest";
-import changeNavBold from "../utils/changeNavBold";
 
 const defaultState = {
   title: "",
@@ -23,6 +22,7 @@ const formReducer = (state, event) => {
 const MyNotes = () => {
   const [newNoteForm, setNewNoteForm] = useReducer(formReducer, defaultState);
   const [notes, setNotes] = useState([]);
+
 
   /**
    * Adds or deletes a note from the database and updates the state of notes
@@ -66,9 +66,7 @@ const MyNotes = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   changeNavBold("nav-my-notes");
-  // }, []);
+
 
   return (
     <>

@@ -16,6 +16,7 @@ const loginUser = async (req, res) => {
     }
 
     req.session.isAuth = true;
+    req.session.user = email;
 
     return res.json('success');
 };

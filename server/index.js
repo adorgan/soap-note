@@ -18,33 +18,28 @@ const balanceRoutes = require("./routes/balanceRoutes");
 const authRoutes = require("./routes/authRoutes");
 const db = require("./config/keys").mongoURI;
 mongoose
-    .connect(db, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log("MongoDB connected"))
-    .catch((err) => console.log(err));
-
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 app.use(cors());
 app.use(bodyParser.json());
 
-
-
 const store = new MongoDbSession({
-    uri: db,
-    collection: process.env.STORE_COLLECTION,
+  uri: db,
+  collection: process.env.STORE_COLLECTION,
 });
 app.use(
-    session({
-        secret: process.env.COOKIE_SECRET_KEY,
-        resave: false,
-        saveUninitialized: false,
-        store: store,
-    })
+  session({
+    secret: process.env.COOKIE_SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
 );
-
-
 
 app.use("/", therExRoutes);
 app.use("/", fimRoutes);
@@ -55,14 +50,16 @@ app.use("/", mobilityRoutes);
 app.use("/", balanceRoutes);
 app.use("/", authRoutes);
 
+// 1HuBhIpKkYH-D3OeZZe0xREwbZ4mxo3E
+// 1HuBhIpKkYH-D3OeZZe0xREwbZ4mxo3E
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {
-    //set static folder
-    const root = path.join(__dirname, "../client", "build");
-    app.use(express.static(root));
-    app.get("*", (req, res) => {
-        res.sendFile("index.html", { root });
-    });
+  //set static folder
+  const root = path.join(__dirname, "../client", "build");
+  app.use(express.static(root));
+  app.get("*", (req, res) => {
+    res.sendFile("index.html", { root });
+  });
 }
 
 const port = process.env.PORT || 5000;

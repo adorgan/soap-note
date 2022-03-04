@@ -8,6 +8,10 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    notes: {
+        type: Array,
+        required: false,
     }
 });
 

@@ -14,7 +14,6 @@ const SideBar = () => {
   const [assessmentsDropDownShowing, setAssessmentsDropDownShowing] =
     useState(false);
   const [loggedIn, setLoggedIn] = useContext(Context);
-  console.log(loggedIn);
 
   useEffect(() => {
     const ADLDropDown = document.getElementById("component-collapse-adl");
@@ -92,7 +91,7 @@ const SideBar = () => {
       </Link>
 
       <SideBarDropDownLink
-        icon={"icons/caret-right-solid.png"}
+        icon={"icons/angle-right-solid.png"}
         iconID="adl-icon"
         target="component-collapse-adl"
         title="ADLs/Self-Care"
@@ -110,7 +109,7 @@ const SideBar = () => {
       </div>
 
       <SideBarDropDownLink
-        icon={"icons/caret-right-solid.png"}
+        icon={"icons/angle-right-solid.png"}
         iconID="ther-ex-icon"
         target="#component-collapse-ther-ex"
         title="Therapuetic Exercise"
@@ -126,7 +125,7 @@ const SideBar = () => {
       </div>
 
       <SideBarDropDownLink
-        icon={"icons/caret-right-solid.png"}
+        icon={"icons/angle-right-solid.png"}
         iconID="func-mob-icon"
         target="#component-collapse-mobility"
         title="Functional Mobility"
@@ -146,7 +145,7 @@ const SideBar = () => {
       </div>
 
       <SideBarDropDownLink
-        icon={"icons/caret-right-solid.png"}
+        icon={"icons/angle-right-solid.png"}
         iconID="balance-icon"
         target="#component-collapse-balance"
         title="Balance"
@@ -166,7 +165,7 @@ const SideBar = () => {
       </div>
 
       <SideBarDropDownLink
-        icon={"icons/caret-right-solid.png"}
+        icon={"icons/angle-right-solid.png"}
         iconID="assessments-icon"
         target="#component-collapse-assessments"
         title="Assessments"

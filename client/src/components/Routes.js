@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import MyNotes from "./MyNotes";
 import FIM from "./FIM";
@@ -13,6 +13,7 @@ import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import DynamicBalance from "./Balance/DynamicBalance";
 import StaticBalance from "./Balance/StaticBalance";
+import Logout from "./Auth/Logout";
 import { Context } from "./Context";
 
 const Routes = () => {
@@ -60,6 +61,9 @@ const Routes = () => {
       </Route>
       <Route path="/register">
         <Register />
+      </Route>
+      <Route path="/logout">
+        <Logout />
       </Route>
       <Route path="/">
         <Home />

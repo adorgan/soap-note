@@ -50,6 +50,7 @@ body {
 
 .sidebar-icon {
   width: 8px;
+  height: 12px;
   margin-right: 5px;
   transition: transform 200ms;
 
@@ -62,6 +63,7 @@ body {
 
 .accent {
   filter: invert(39%) sepia(51%) saturate(5465%) hue-rotate(227deg) brightness(91%) contrast(94%);
+  /* filter: invert(99%) sepia(63%) saturate(2%) hue-rotate(18deg) brightness(110%) contrast(100%); */
 }
 
 .left-container a {
@@ -125,6 +127,8 @@ body {
   padding-right: 5px;
   padding-left: 5px;
   width: fit-content;
+  display: flex;
+  align-items: center;
 
 }
 

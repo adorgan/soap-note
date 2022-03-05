@@ -2,9 +2,7 @@ const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 
 const registerUser = async (req, res) => {
-    const {email, password} = req.body;
-
-    console.log(password);
+    const {email, password, captcha} = req.body;
 
     let user = await User.findOne({email});
 

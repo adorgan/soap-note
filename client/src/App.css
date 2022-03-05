@@ -80,6 +80,14 @@ body {
   margin-left: 200px;
 }
 
+.right-container-registration {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #4a4a4a;
+  margin-left: 0px;
+}
+
 .nav-container {
   box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
     0 2px 8px hsla(0, 0%, 0%, 0.05);
@@ -153,6 +161,15 @@ a {
   flex: 1;
   justify-content: flex-start;
   flex-direction: column;
+}
+
+.content-registration {
+  margin-bottom: 100px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .content-title {
@@ -362,4 +379,55 @@ fieldset {
 .new-note-input{
   width: 40%;
   padding: 5px;
+}
+
+/* Registration */
+.registration-form {
+  width: 304px;
+}
+.registration-input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.registration-div{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.registration-title{
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.btn-registration{
+  margin-top: 20px;
+}
+
+.registration-sidebar{
+  margin-right: 100px;
+  color: white;
+  font-size: 28px;
+}
+
+.registration-sidebar li {
+  font-size: 24px;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 200ms;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

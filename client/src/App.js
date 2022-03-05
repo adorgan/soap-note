@@ -21,11 +21,11 @@ function App() {
     <Router>
       <Context.Provider value={[loggedIn, setLoggedIn]}>
         <div className="flex-container">
-          <div className="left-container">
+          <div id="left-sidebar" className="left-container">
             <SideBar />
           </div>
 
-          <div className="right-container">
+          <div id="right-container" className="right-container">
             <HeaderRight />
 
             <div className="content" id="mainContent">

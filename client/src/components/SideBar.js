@@ -180,9 +180,6 @@ const SideBar = () => {
               /> */}
       </div>
 
-      {loggedIn && (
-        <SideBarPrimaryLink id="nav-my-notes" url="/notes" title="My Notes" />
-      )}
     </div>
   );
 };

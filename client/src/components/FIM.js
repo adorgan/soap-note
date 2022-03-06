@@ -207,7 +207,7 @@ function FIM({ title }) {
     );
 
     return (
-        <>
+        <div className="fade-in">
             <div className="content-title">{title}</div>
             <form onSubmit={handleSubmit}>
                 <fieldset>
@@ -280,7 +280,7 @@ function FIM({ title }) {
                     </button>
                 </>
             )}
-        </>
+        </div>
     );
 }
 

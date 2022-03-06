@@ -14,6 +14,7 @@ import Register from "./Auth/Register";
 import DynamicBalance from "./Balance/DynamicBalance";
 import StaticBalance from "./Balance/StaticBalance";
 import Logout from "./Auth/Logout";
+import Home from "./Home";
 import { Context } from "./Context";
 
 const Routes = () => {
@@ -71,9 +72,5 @@ const Routes = () => {
     </Switch>
   );
 };
-
-function Home() {
-  return <h2>Home</h2>;
-}
 
 export default Routes;

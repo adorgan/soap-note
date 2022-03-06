@@ -34,7 +34,7 @@ export default function Note({ title, body, id, onClickDelete }) {
     }, [editId, saveId, noteId]);
 
     return (
-        <div className="note-container">
+        <div className="note-container fade-in">
             <div className="note-title">{title}</div>
             <textarea
                 id={noteId}

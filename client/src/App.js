@@ -9,33 +9,36 @@ import { Context } from "./components/Context";
 import postData from "./utils/postRequest";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
 
-  useEffect(async()=> {
-    const status = await postData("/checkLoggedIn");
-    if (status === "success"){
-      setLoggedIn(true);
-    }
-  })
-  return (
-    <Router>
-      <Context.Provider value={[loggedIn, setLoggedIn]}>
-        <div className="flex-container">
-          <div id="left-sidebar" className="left-container">
-            <SideBar />
-          </div>
+    useEffect(() => {
+        const checkLoggedIn = async () => {
+            const status = await postData("/checkLoggedIn");
+            if (status === "success") {
+                setLoggedIn(true);
+            }
+        };
+        checkLoggedIn();
+    });
+    return (
+        <Router>
+            <Context.Provider value={[loggedIn, setLoggedIn]}>
+                <div className="flex-container">
+                    <div id="left-sidebar" className="left-container">
+                        <SideBar />
+                    </div>
 
-          <div id="right-container" className="right-container">
-            <HeaderRight />
+                    <div id="right-container" className="right-container">
+                        <HeaderRight />
 
-            <div className="content" id="mainContent">
-              <Routes />
-            </div>
-          </div>
-        </div>
-      </Context.Provider>
-    </Router>
-  );
+                        <div className="content" id="mainContent">
+                            <Routes />
+                        </div>
+                    </div>
+                </div>
+            </Context.Provider>
+        </Router>
+    );
 }
 
 export default App;

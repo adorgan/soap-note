@@ -1,24 +1,41 @@
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
+const verifyURL = "https://www.google.com/recaptcha/api/siteverify";
+const fetch = require("node-fetch");
 
 const loginUser = async (req, res) => {
-    const {email, password} = req.body;
+    try {
+        const recaptchaRes = await fetch(verifyURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${req.body.captcha}`,
+        }).then((res) => res.json());
 
-    const user = await User.findOne({email});
-    if(!user){
-        return res.json("failure");
+        if (recaptchaRes.success !== undefined && !recaptchaRes.success) {
+            return res.json("failed captcha");
+        } else {
+            let user = await User.findOne({ email: req.body.email });
+
+            if (!user) {
+                return res.json("no user");
+            }
+
+            const isMatch = await bcrypt.compare(req.body.password, user.password);
+
+            if (!isMatch) {
+                return res.json("incorrect password");
+            }
+
+            req.session.isAuth = true;
+            req.session.user = req.body.email;
+
+            return res.json("success");
+        }
+    } catch (error) {
+        console.log(error);
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if(!isMatch){
-        return res.json("failure");
-    }
-
-    req.session.isAuth = true;
-    req.session.user = email;
-
-    return res.json('success');
 };
 
 module.exports = loginUser;

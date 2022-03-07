@@ -33,6 +33,7 @@ function App() {
 
                         <div className="content" id="mainContent">
                             <Routes />
+                            <div id="snackbar">Some text some message..</div>
                         </div>
                     </div>
                 </div>

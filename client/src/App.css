@@ -53,16 +53,15 @@ body {
   height: 12px;
   margin-right: 5px;
   transition: transform 200ms;
-
 }
 
 .rotate {
-  transform: rotate(90deg); 
+  transform: rotate(90deg);
 }
 
-
 .accent {
-  filter: invert(39%) sepia(51%) saturate(5465%) hue-rotate(227deg) brightness(91%) contrast(94%);
+  filter: invert(39%) sepia(51%) saturate(5465%) hue-rotate(227deg)
+    brightness(91%) contrast(94%);
   /* filter: invert(99%) sepia(63%) saturate(2%) hue-rotate(18deg) brightness(110%) contrast(100%); */
 }
 
@@ -114,7 +113,7 @@ body {
 
 .nav-child-right {
   /* flex: 1; */
-  display:flex;
+  display: flex;
   padding-right: 210px;
   padding-left: 10px;
 }
@@ -146,15 +145,15 @@ body {
   width: fit-content;
   display: flex;
   align-items: center;
-
 }
 
-.sidebar-primary-links:hover, .sidebar-sublink:hover {
+.sidebar-primary-links:hover,
+.sidebar-sublink:hover {
   background: rgb(90, 90, 90);
   border-radius: 5px;
 }
 
-.sidebar-icon-container{
+.sidebar-icon-container {
   text-align: center;
   margin-bottom: 10px;
 }
@@ -183,7 +182,6 @@ a {
   flex: 1;
   justify-content: center;
   align-items: center;
-
 }
 
 .content-home {
@@ -191,7 +189,6 @@ a {
   flex: 1;
   justify-content: center;
   align-items: center;
-
 }
 
 .content-title {
@@ -243,7 +240,6 @@ fieldset {
 
 .form-select-arrow {
   color: rgb(94, 94, 94);
-
 }
 
 .form-select-parent {
@@ -391,19 +387,19 @@ fieldset {
   margin-bottom: 100px;
 }
 
-.new-note-label{
+.new-note-label {
   margin-right: 10px;
 }
 
 .new-note-title {
   margin-bottom: 10px;
 }
-.new-note-body{
+.new-note-body {
   width: 95%;
   padding: 15px;
 }
 
-.new-note-input{
+.new-note-input {
   width: 40%;
   padding: 5px;
 }
@@ -417,22 +413,22 @@ fieldset {
   padding: 10px;
   box-sizing: border-box;
 }
-.registration-div{
+.registration-div {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.registration-title{
+.registration-title {
   text-align: center;
   font-size: 28px;
   margin-bottom: 20px;
 }
 
-.btn-registration{
+.btn-registration {
   margin-top: 20px;
 }
 
-.registration-sidebar{
+.registration-sidebar {
   margin-right: 100px;
   color: white;
   font-size: 28px;
@@ -471,24 +467,24 @@ fieldset {
 }
 
 .fade-in {
-	opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 200ms;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 200ms;
 }
 
 @keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* HOME */
-.home-title{
+.home-title {
   font-size: 68px;
   margin-bottom: 20px;
   margin-top: 50px;
@@ -505,11 +501,11 @@ fieldset {
 }
 
 .home-div-left {
-  flex: .7;
+  flex: 0.7;
 }
 
 .home-icon-container {
-  flex: .3;
+  flex: 0.3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -565,40 +561,63 @@ fieldset {
 
 /* Animations to fade the snackbar in and out */
 @-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
 }
 
 @keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 
 @keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 
 /* DROPDOWN */
-/* .dropdown {
+.dropdown {
   position: absolute;
   display: inline-block;
 }
 
 .dropdown-content {
-  
-  display: none;
+  display: visible;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
   top: 42px;
   right: 8px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 3px;
 }
@@ -614,4 +633,3 @@ fieldset {
 .dropdown-content a:hover {
   background: rgb(90, 90, 90);
 }
-} */

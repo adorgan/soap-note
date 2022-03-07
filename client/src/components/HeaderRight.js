@@ -1,9 +1,11 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "./Context";
+import DropDown from "./ModalContent/DropDown";
 
 const HeaderRight = () => {
   const [loggedIn, setLoggedIn] = useContext(Context);
+  const [showDropDown, setShowDropDown] = useState(false);
   const accountDropDown = useRef(null);
   const iconRef = useRef(null);
 
@@ -48,11 +50,13 @@ const HeaderRight = () => {
               </Link>
               <img
                 ref={iconRef}
-                onClick={handleUserIconClick}
+                onClick={() => {setShowDropDown(true)}}
                 className="user-icon accent"
                 src="icons/user-icon.png"
                 alt="user icon"
               />
+              <DropDown show={showDropDown} onClickOutside = {() => {setShowDropDown(false)}}/>
+
             </>
           )}
         </div>

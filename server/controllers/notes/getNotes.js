@@ -15,7 +15,6 @@ const getNotes = async (req, res) => {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log(`notes ${allNotes}`);
                         return res.json(allNotes);
                     }
                 });

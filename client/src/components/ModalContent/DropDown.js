@@ -7,9 +7,7 @@ const DropDown = (props) => {
     const { onClickOutside } = props;
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (ref.current && !ref.current.contains(event.target)) {
-                onClickOutside && onClickOutside();
-            }
+            onClickOutside && onClickOutside();
         };
         document.addEventListener("click", handleClickOutside, true);
         return () => {
@@ -22,9 +20,7 @@ const DropDown = (props) => {
         <div className="dropdown" ref={ref}>
             <div className="dropdown-content fade-in">
                 <a href="#">Settings</a>
-                <Link to="/logout">
-                    Logout
-                </Link>
+                <Link to="/logout">Logout</Link>
             </div>
         </div>
     );

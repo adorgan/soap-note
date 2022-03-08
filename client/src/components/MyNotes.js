@@ -4,26 +4,14 @@ import Note from "./Note";
 import postData from "../utils/postRequest";
 import getData from "../utils/getRequest";
 import { Oval } from "react-loader-spinner";
-
-const defaultState = {
-    title: "",
-    body: "",
-};
-
-const formReducer = (state, event) => {
-    if (event.reset) {
-        return defaultState;
-    }
-    return {
-        ...state,
-        [event.name]: event.value,
-    };
-};
+import Modal from "./Modal";
+import NewNoteModal from "./ModalContent/NewNoteModal";
 
 const MyNotes = () => {
-    const [newNoteForm, setNewNoteForm] = useReducer(formReducer, defaultState);
     const [notes, setNotes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [modalContent, setModalContent] = useState("");
+    const [modalVisible, setModalVisible] = useState(false);
 
     /**
      * Adds or deletes a note from the database and updates the state of notes
@@ -37,11 +25,19 @@ const MyNotes = () => {
         setNotes(allNotes);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleAdd = (formData) => {
+        console.log(formData);
+        updateNotes("/add-note", formData);
+        setModalVisible(false);
+        const modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    };
 
-        // add note to database
-        updateNotes("/add-note", newNoteForm);
+    const handleNewNote = () => {
+        setModalVisible(true);
+        setModalContent(
+            <NewNoteModal onClickCancel={handleCancel} onClickAdd={handleAdd} />
+        );
     };
 
     const handleDelete = (e) => {
@@ -54,11 +50,10 @@ const MyNotes = () => {
         updateNotes("/delete-note", deleteData);
     };
 
-    const handleChange = (event) => {
-        setNewNoteForm({
-            name: event.target.name,
-            value: event.target.value,
-        });
+    const handleCancel = () => {
+        const modal = document.getElementById("myModal");
+        modal.style.display = "none";
+        setModalVisible(false);
     };
 
     useEffect(() => {
@@ -69,6 +64,19 @@ const MyNotes = () => {
         };
         getNotes();
     }, []);
+
+    useEffect(() => {
+        if (modalVisible) {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                    setModalVisible(false);
+                }
+            };
+        }
+    }, [modalVisible]);
 
     if (isLoading) {
         return (
@@ -100,50 +108,11 @@ const MyNotes = () => {
                         );
                     })}
                 </>
-
-                <div className="new-note-div">
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <div className="new-note-title">
-                                <label
-                                    className="new-note-label"
-                                    htmlFor="text"
-                                >
-                                    Note Title
-                                </label>
-                                <input
-                                    id="text"
-                                    className="new-note-input"
-                                    name="title"
-                                    type="text"
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div>
-                                <label
-                                    className="new-note-label"
-                                    htmlFor="body"
-                                >
-                                    Note
-                                </label>
-                                <textarea
-                                    className="new-note-body"
-                                    name="body"
-                                    id="body"
-                                    rows="5"
-                                    onChange={handleChange}
-                                ></textarea>
-                            </div>
-                        </div>
-
-                        <div className="div-submit-btn">
-                            <button className="btn-form" type="submit">
-                                Add Note
-                            </button>
-                        </div>
-                    </form>
-                </div>
             </div>
+            <div onClick={handleNewNote} className="float">
+                +
+            </div>
+            <Modal modalContent={modalContent} />
         </>
     );
 };

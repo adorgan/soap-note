@@ -42,7 +42,7 @@ function FIM({ title }) {
   };
 
   const copyToClipboard = () => {
-    showToast("Soap Note Copied to Clipboard!");
+    showToast("Note copied to clipboard!");
     setTimeout(() => {
       if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
         return navigator.clipboard.writeText(blurb);
@@ -60,18 +60,16 @@ function FIM({ title }) {
 
   const onSaveClick = (data) => {
     if (loggedIn) {
-      showToast("Soap Note Saved to My Notes");
+      showToast("Note saved!");
       let newNoteForm = {};
       newNoteForm.title = "FIM";
-      //   console.log(blurb);
-
       newNoteForm.body = data;
       updateNotes("/add-note", newNoteForm);
       setModalVisible(false);
       const modal = document.getElementById("myModal");
       modal.style.display = "none";
     } else {
-      showToast("Create an Account to Save Notes!");
+      showToast("Create an account to save notes!");
     }
   };
 

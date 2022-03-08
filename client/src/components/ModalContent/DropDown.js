@@ -1,31 +1,33 @@
 import React from "react";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const DropDown = (props) => {
-  const ref = useRef(null);
-  const { onClickOutside } = props;
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        onClickOutside && onClickOutside();
-      }
-    };
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, [onClickOutside]);
+    const ref = useRef(null);
+    const { onClickOutside } = props;
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) {
+                onClickOutside && onClickOutside();
+            }
+        };
+        document.addEventListener("click", handleClickOutside, true);
+        return () => {
+            document.removeEventListener("click", handleClickOutside, true);
+        };
+    }, [onClickOutside]);
 
-  if (!props.show) return null;
-  return (
-    <div className="dropdown">
-      <div className="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
-    </div>
-  );
+    if (!props.show) return null;
+    return (
+        <div className="dropdown" ref={ref}>
+            <div className="dropdown-content fade-in">
+                <a href="#">Settings</a>
+                <Link to="/logout">
+                    Logout
+                </Link>
+            </div>
+        </div>
+    );
 };
 
 export default DropDown;

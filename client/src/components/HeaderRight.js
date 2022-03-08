@@ -9,14 +9,6 @@ const HeaderRight = () => {
   const accountDropDown = useRef(null);
   const iconRef = useRef(null);
 
-  const handleUserIconClick = () => {
-    if (accountDropDown.current.style.display === "block") {
-      accountDropDown.current.style.display = "none";
-    } else {
-      accountDropDown.current.style.display = "block";
-    }
-  };
-
   return (
     <nav id="navRight" className="nav-container">
       <div
@@ -45,9 +37,7 @@ const HeaderRight = () => {
               <Link className="header-link" to="/notes">
                 My Notes
               </Link>
-              <Link className="header-link" to="/logout">
-                Logout
-              </Link>
+              
               <img
                 ref={iconRef}
                 onClick={() => {setShowDropDown(true)}}
@@ -55,7 +45,7 @@ const HeaderRight = () => {
                 src="icons/user-icon.png"
                 alt="user icon"
               />
-              <DropDown show={showDropDown} onClickOutside = {() => {setShowDropDown(false)}}/>
+              <DropDown show={showDropDown} onClickOutside = {() => setShowDropDown(false)}/>
 
             </>
           )}

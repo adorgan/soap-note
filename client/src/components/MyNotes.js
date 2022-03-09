@@ -93,21 +93,19 @@ const MyNotes = () => {
 
     return (
         <>
-            <div className="">
-                <>
-                    {notes.map((note) => {
-                        return (
-                            <Fragment key={note._id}>
-                                <Note
-                                    id={note._id}
-                                    title={note.title}
-                                    body={note.body}
-                                    onClickDelete={handleDelete}
-                                />
-                            </Fragment>
-                        );
-                    })}
-                </>
+            <div className="all-notes-container">
+                {notes.map((note) => {
+                    return (
+                        <Fragment key={note._id}>
+                            <Note
+                                id={note._id}
+                                title={note.title}
+                                body={note.body}
+                                onClickDelete={handleDelete}
+                            />
+                        </Fragment>
+                    );
+                })}
             </div>
             <div onClick={handleNewNote} className="float">
                 +

@@ -27,6 +27,8 @@ const SideBar = () => {
   const assessmentsDropDown = useRef(null);
   const assessmentsDropDownArrow = useRef(null);
 
+  const windowWidth = window.innerWidth;
+
   useEffect(() => {
     if (ADLDropDownShowing) {
       ADLDropDownArrow.current.classList.add("rotate");

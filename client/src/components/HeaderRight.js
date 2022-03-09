@@ -11,7 +11,7 @@ const HeaderRight = () => {
     const handleHamburgerClick = () => {
         const sidebar = document.getElementById("left-sidebar");
         if (sidebar.classList.contains("mobile-nav")) {
-            sidebar.classList.remove("mobile-nav");
+            sidebar.classList.remove("mobile-nav");   
         } else {
             sidebar.classList.add("mobile-nav");
         }

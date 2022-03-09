@@ -11,7 +11,7 @@ const Home = () => {
       </div>
       <div className="home-icon-container">
         <div className="home-icon">
-          <img src="icons/Untitled.png" alt="" style={{ width: "100px" }} />
+          <img src="icons/Untitled.png" alt="" className="home-icon-image" />
         </div>
       </div>
     </div>

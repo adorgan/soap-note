@@ -62,13 +62,17 @@ body {
   transform: rotate(90deg);
 }
 
+.rotate-backwards {
+  transform: rotate(-90deg);
+}
+
 .accent {
   filter: invert(39%) sepia(51%) saturate(5465%) hue-rotate(227deg)
     brightness(91%) contrast(94%);
   /* filter: invert(99%) sepia(63%) saturate(2%) hue-rotate(18deg) brightness(110%) contrast(100%); */
 }
 
-.left-container a {
+.sidebar-sublink {
   text-decoration: none;
   color: white;
   font-size: 14px;
@@ -129,6 +133,10 @@ body {
   padding-left: 10px;
 }
 
+.sidebar-home-link {
+  margin-left: 13px;
+}
+
 .side-bar-text {
   color: white;
   display: flex;
@@ -139,20 +147,17 @@ body {
   cursor: pointer;
 }
 
-.sidebar-sublink {
+.sidebar-sublink-container {
   margin-left: 20px;
   padding-left: 5px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   padding-right: 5px;
   width: fit-content;
 }
 
 .sidebar-primary-links {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-right: 5px;
-  padding-left: 5px;
+  padding: 5px;
   width: fit-content;
   display: flex;
   align-items: center;
@@ -281,7 +286,9 @@ fieldset {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 5% auto; /* 15% from the top and centered */
+  margin-top: 70px; /* 15% from the top and centered */
+  margin-left: auto;
+  margin-right: auto;
   width: fit-content;
   border-radius: 3px;
 }
@@ -581,7 +588,7 @@ fieldset {
 .header-link {
   color: #4a4a4a;
   padding: 5px;
-  align-self: center;
+  align-self: flex-end;
   border-radius: 5px;
   margin-right: 5px;
 }
@@ -592,6 +599,7 @@ fieldset {
 
 .hamburger {
   width: 20px;
+  transition: transform 200ms;
 }
 
 .user-icon {
@@ -706,6 +714,10 @@ fieldset {
 
 
 @media only screen and (max-width: 900px) {
+
+  .sidebar-sublink {
+    font-size:20px;
+  }
   .left-container {
     display: none;
     padding-top: 70px;
@@ -730,7 +742,6 @@ fieldset {
   .modal-content {
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 20px;
     width: auto;
   }
 
@@ -760,7 +771,7 @@ fieldset {
 
   .hamburger {
     display: flex;
-    padding-left: 16px;
+    margin-left: 16px;
   }
 
   .hamburger:hover {
@@ -776,9 +787,7 @@ fieldset {
     font-size: 24px;
   }
 
-  .left-container a {
-    font-size:20px;
-  }
+  
 
   .content-title {
     margin: 10px;
@@ -816,5 +825,13 @@ fieldset {
     margin-top: 16px;
   }
 
+  .sidebar-icon{
+    height: 16px;
+    width: 12px;
+  }
+
+  .sidebar-links-container {
+  padding-left: 18px;
+}
 
 }

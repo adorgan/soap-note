@@ -10,10 +10,13 @@ const HeaderRight = () => {
 
     const handleHamburgerClick = () => {
         const sidebar = document.getElementById("left-sidebar");
+        const ham = document.getElementById("hamburger-icon");
         if (sidebar.classList.contains("mobile-nav")) {
-            sidebar.classList.remove("mobile-nav");   
+            sidebar.classList.remove("mobile-nav");
+            ham.classList.remove("rotate-backwards");
         } else {
             sidebar.classList.add("mobile-nav");
+            ham.classList.add("rotate-backwards");
         }
     };
 
@@ -21,6 +24,7 @@ const HeaderRight = () => {
         <nav id="navRight" className="nav-container">
             <div className="nav-child-left">
                 <img
+                    id="hamburger-icon"
                     onClick={handleHamburgerClick}
                     className="hamburger"
                     src="icons/hamburger.png"

@@ -98,9 +98,9 @@ export default function Register() {
             .classList.add("content-registration");
 
         return () => {
-            document.getElementById("navRight").style.display = "block";
+            document.getElementById("navRight").style.display = "";
 
-            document.getElementById("left-sidebar").style.display = "block";
+            document.getElementById("left-sidebar").style.display = "";
             document
                 .getElementById("mainContent")
                 .classList.remove("content-registration");

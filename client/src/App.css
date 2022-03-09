@@ -463,6 +463,8 @@ fieldset {
 /* Registration */
 .registration-form {
   width: 304px;
+  padding: 16px;
+  border-radius: 3px;
 }
 .registration-input {
   width: 100%;

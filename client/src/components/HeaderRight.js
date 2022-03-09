@@ -36,10 +36,10 @@ const HeaderRight = () => {
                     {!loggedIn && (
                         <>
                             <Link className="header-link" to="/login">
-                                Login
+                                Log in
                             </Link>
                             <Link className="header-link" to="/register">
-                                Register
+                                Sign up
                             </Link>
                         </>
                     )}

@@ -4,7 +4,7 @@ const SideBarDropDownLink = ({ target, title, isShowing, onClick, icon, iconID, 
   
   return (
       <div>
-          <div onClick={onClick} className="side-bar-text sidebar-primary-links ">
+          <div onClick={onClick} className="side-bar-text sidebar-primary-links noselect">
               <img ref={myRef} id={iconID} src={icon} alt="" className="sidebar-icon accent" />
               {title}
           </div>

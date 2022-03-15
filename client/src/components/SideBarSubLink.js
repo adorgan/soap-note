@@ -20,7 +20,7 @@ const SideBarSubLink = ({ id, url, title }) => {
                 id={id}
                 to={url}
                 onClick={handleClick}
-                className="sidebar-sublink"
+                className="sidebar-sublink noselect"
             >
                 {title}
             </Link>

@@ -107,7 +107,7 @@ const SideBar = () => {
             <Link
                 to={"/"}
                 onClick={handleClick}
-                className="side-bar-text sidebar-primary-links sidebar-home-link"
+                className="side-bar-text sidebar-primary-links sidebar-home-link noselect"
             >
                 Home
             </Link>

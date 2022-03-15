@@ -9,7 +9,7 @@ const NarrativeModal = ({ blurb, onClickCopy, onClickSave }) => {
       <div className="modal-narrative">{blurb}</div>
 
       <div className="modal-btn-container">
-        <div className="btn-modal" onClick={onClickCopy}>
+        <div className="btn-modal" onClick={() => onClickCopy(blurb)}>
           Copy
         </div>
         <div className="btn-modal" onClick={() => onClickSave(blurb)}>Save</div>

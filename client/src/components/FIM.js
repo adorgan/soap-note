@@ -5,6 +5,7 @@ import FimModal from "./ModalContent/FimModal";
 import NarrativeModal from "./ModalContent/NarrativeModal";
 import { Context } from "./Context";
 import postData from "../utils/postRequest";
+import capitalizeEveryWord from "../utils/capitalizeEveryWord"
 
 const defaultState = {
   eating: "",
@@ -41,11 +42,11 @@ function FIM({ title }) {
     }, 2900);
   };
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (msg) => {
     showToast("Note copied to clipboard!");
     setTimeout(() => {
       if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
-        return navigator.clipboard.writeText(blurb);
+        return navigator.clipboard.writeText(msg);
       }
       return Promise.reject("The Clipboard API is not available.");
     }, 1000);
@@ -98,12 +99,12 @@ function FIM({ title }) {
   const onClickNext = (modal, name, value, subtitleID) => {
     setModalContent(modal);
     if (value !== "") {
-      document.getElementById(subtitleID).innerHTML = value;
+      document.getElementById(subtitleID).innerHTML = capitalizeEveryWord(value);
     }
 
     setFormData({
       name: name,
-      value: value.toLowerCase(),
+      value: value,
     });
   };
 
@@ -113,12 +114,12 @@ function FIM({ title }) {
     setModalVisible(false);
 
     if (value !== "") {
-      document.getElementById(subtitleID).innerHTML = value;
+      document.getElementById(subtitleID).innerHTML = capitalizeEveryWord(value);
     }
 
     setFormData({
       name: name,
-      value: value.toLowerCase(),
+      value: value,
     });
   };
 

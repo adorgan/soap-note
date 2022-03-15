@@ -29,7 +29,6 @@ const SideBar = () => {
 
   const handleClick = () => {
       const windowWidth = window.innerWidth;
-      console.log(windowWidth);
       if (windowWidth <= 900) {
           const sidebar = document.getElementById("left-sidebar");
           sidebar.classList.remove("mobile-nav");
@@ -37,13 +36,19 @@ const SideBar = () => {
               .getElementById("hamburger-icon")
               .classList.remove("rotate-backwards");
       }
+      setADLDropDownShowing(false);
+      setAssessmentsDropDownShowing(false);
+      setBalanceDropDownShowing(false);
+      setFuncMobDropDownShowing(false);
+      setTherExDropDownShowing(false);
   };
 
     useEffect(() => {
         if (ADLDropDownShowing) {
             ADLDropDownArrow.current.classList.add("rotate");
             ADLDropDown.current.classList.add("fadeIn");
-            ADLDropDown.current.classList.remove("fadedOut");
+            ADLDropDown.current.classList.remove("fadedOut"); 
+
         } else {
             ADLDropDownArrow.current.classList.remove("rotate");
             ADLDropDown.current.classList.add("fadedOut");
@@ -54,41 +59,48 @@ const SideBar = () => {
             therExDropDownArrow.current.classList.add("rotate");
             therExDropDown.current.classList.add("fadeIn");
             therExDropDown.current.classList.remove("fadedOut");
+            
         } else {
             therExDropDownArrow.current.classList.remove("rotate");
             therExDropDown.current.classList.add("fadedOut");
             therExDropDown.current.classList.remove("fadeIn");
+            
         }
 
         if (funcMobDropDownShowing) {
             funcMobDropDownArrow.current.classList.add("rotate");
-
             funcMobDropDown.current.classList.add("fadeIn");
             funcMobDropDown.current.classList.remove("fadedOut");
+            
         } else {
             funcMobDropDownArrow.current.classList.remove("rotate");
             funcMobDropDown.current.classList.add("fadedOut");
             funcMobDropDown.current.classList.remove("fadeIn");
+            
         }
 
         if (balanceDropDownShowing) {
             balanceDropDownArrow.current.classList.add("rotate");
             balanceDropDown.current.classList.add("fadeIn");
             balanceDropDown.current.classList.remove("fadedOut");
+            
         } else {
             balanceDropDownArrow.current.classList.remove("rotate");
             balanceDropDown.current.classList.add("fadedOut");
             balanceDropDown.current.classList.remove("fadeIn");
+            
         }
 
         if (assessmentsDropDownShowing) {
             assessmentsDropDownArrow.current.classList.add("rotate");
             assessmentsDropDown.current.classList.add("fadeIn");
             assessmentsDropDown.current.classList.remove("fadedOut");
+            
         } else {
             assessmentsDropDownArrow.current.classList.remove("rotate");
             assessmentsDropDown.current.classList.add("fadedOut");
             assessmentsDropDown.current.classList.remove("fadeIn");
+            
         }
     });
 

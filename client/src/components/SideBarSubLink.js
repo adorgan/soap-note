@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const SideBarSubLink = ({ id, url, title }) => {
     const handleClick = () => {
         const windowWidth = window.innerWidth;
-        console.log(windowWidth);
         if (windowWidth <= 900) {
             const sidebar = document.getElementById("left-sidebar");
             sidebar.classList.remove('mobile-nav')

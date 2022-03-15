@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState, Fragment } from "react";
+import { useEffect, useState, Fragment } from "react";
 import React from "react";
 import Note from "./Note";
 import postData from "../utils/postRequest";

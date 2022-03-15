@@ -512,6 +512,11 @@ fieldset {
   visibility: hidden;
 }
 
+.register-content-container {
+  display: flex;
+  align-items: center;
+}
+
 .login-create-account {
   text-align: center;
   margin-top: 20px;
@@ -834,6 +839,16 @@ fieldset {
 
   .sidebar-links-container {
   padding-left: 18px;
-}
+  }
+
+  .register-content-container {
+    display: flex;
+    flex-direction: column-reverse;
+
+  }
+
+  .registration-sidebar{
+    margin-right: 0px;
+  }
 
 }

@@ -26,7 +26,7 @@ export default function Note({ title, body, id, onClickDelete }) {
         const mynote = document.getElementById(noteId);
         mynote.readOnly = true;
         mynote.style.width = "100%";
-        mynote.style.height = mynote.scrollHeight + "px";
+        mynote.style.height = mynote.scrollHeight + 10 + "px";
         btn_edit.addEventListener("click", () => {
             mynote.readOnly = false;
             mynote.focus();

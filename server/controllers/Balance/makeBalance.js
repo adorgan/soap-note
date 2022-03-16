@@ -6,81 +6,81 @@ const makeBalance = (req, res) => {
     console.log(req.body);
     // Dynamic Balance
     const {
-        dynamic_balance_patient,
-        dynamic_balance_position,
-        dynamic_balance_support,
-        dynamic_balance_duration,
-        dynamic_balance_LOB,
-        dynamic_balance_fim,
-        dynamic_balance_verbal_cueing,
+        patient,
+        position,
+        support,
+        duration,
+        LOB,
+        fim,
+        verbal_cueing,
     } = req.body;
 
-    const dynamic_balance_goals = makeList(req.body.dynamic_balance_goals);
-    const dynamic_balance_tasks = makeList(req.body.dynamic_balance_tasks);
-    const dynamic_balance_education = makeList(
-        req.body.dynamic_balance_education
+    const goals = makeList(req.body.goals);
+    const tasks = makeList(req.body.tasks);
+    const education = makeList(
+        req.body.education
     );
-    const dynamic_balance_instruction = makeList(
-        req.body.dynamic_balance_instruction
+    const instruction = makeList(
+        req.body.instruction
     );
-    const dynamic_balance_interventions = makeList(
-        req.body.dynamic_balance_interventions
+    const interventions = makeList(
+        req.body.interventions
     );
 
     const dynamicBalanceBlurb = makeDynamicBalance(
-        dynamic_balance_patient,
-        dynamic_balance_goals,
-        dynamic_balance_position,
-        dynamic_balance_support,
-        dynamic_balance_duration,
-        dynamic_balance_LOB,
-        dynamic_balance_tasks,
-        dynamic_balance_education,
-        dynamic_balance_instruction,
-        dynamic_balance_interventions,
-        dynamic_balance_fim,
-        dynamic_balance_verbal_cueing
+        patient,
+        goals,
+        position,
+        support,
+        duration,
+        LOB,
+        tasks,
+        education,
+        instruction,
+        interventions,
+        fim,
+        verbal_cueing
     );
 
     // Static Balance
-    const {
-        static_balance_patient,
-        static_balance_position,
-        static_balance_support,
-        static_balance_duration,
-        static_balance_LOB,
-        static_balance_fim,
-        static_balance_verbal_cueing,
-    } = req.body;
+    // const {
+    //     patient,
+    //     position,
+    //     support,
+    //     duration,
+    //     LOB,
+    //     fim,
+    //     verbal_cueing,
+    // } = req.body;
 
-    const static_balance_goals = makeList(req.body.static_balance_goals);
-    const static_balance_tasks = makeList(req.body.static_balance_tasks);
-    const static_balance_education = makeList(
-        req.body.static_balance_education
-    );
-    const static_balance_instruction = makeList(
-        req.body.static_balance_instruction
-    );
-    const static_balance_interventions = makeList(
-        req.body.static_balance_interventions
-    );
+    // const goals = makeList(req.body.goals);
+    // const tasks = makeList(req.body.tasks);
+    // const education = makeList(
+    //     req.body.education
+    // );
+    // const instruction = makeList(
+    //     req.body.instruction
+    // );
+    // const interventions = makeList(
+    //     req.body.interventions
+    // );
 
-    const staticBalanceBlurb = makeStaticBalance(
-        static_balance_patient,
-        static_balance_goals,
-        static_balance_position,
-        static_balance_support,
-        static_balance_duration,
-        static_balance_LOB,
-        static_balance_tasks,
-        static_balance_education,
-        static_balance_instruction,
-        static_balance_interventions,
-        static_balance_fim,
-        static_balance_verbal_cueing
-    );
+    // const staticBalanceBlurb = makeStaticBalance(
+    //     patient,
+    //     goals,
+    //     position,
+    //     support,
+    //     duration,
+    //     LOB,
+    //     tasks,
+    //     education,
+    //     instruction,
+    //     interventions,
+    //     fim,
+    //     verbal_cueing
+    // );
 
-    return res.json(`${dynamicBalanceBlurb} ${staticBalanceBlurb}`);
+    return res.json(`${dynamicBalanceBlurb}`);
 };
 
 module.exports = makeBalance;

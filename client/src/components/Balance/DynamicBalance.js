@@ -1,14 +1,18 @@
-import { useState, useEffect, useReducer } from "react";
-import postData from "../../utils/postRequest";
-import FormSelect from "../FormSelect";
-import Modal from "../Modal";
-import MultiSelectModal from "../ModalContent/MultiSelectModal";
-import SingleSelectModal from "../ModalContent/SingleSelectModal";
-import NumberInputModal from "../ModalContent/NumberInputModal";
-import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
+import { useState, useEffect, useReducer, useContext } from "react";
+import SelectInput from "../SelectInput";
+import MultiSelectInput from "../MultiSelectInput";
 import constants from "../../utils/constants";
 import SubmitButton from "../SubmitButton";
 import NarrativeBlurb from "../NarrativeBlurb";
+import postData from "../../utils/postRequest";
+import SingleSelectModal from "../ModalContent/SingleSelectModal";
+import MultiSelectModal from "../ModalContent/MultiSelectModal";
+import capitalizeEveryWord from "../../utils/capitalizeEveryWord";
+import FormSelect from "../FormSelect";
+import Modal from "../Modal";
+import NarrativeModal from "../ModalContent/NarrativeModal";
+import { Context } from "../Context";
+import NumberInputModal from "../ModalContent/NumberInputModal";
 
 const defaultFormState = {
   patient: "",
@@ -36,17 +40,65 @@ const formReducer = (state, event) => {
 };
 
 export default function DynamicBalance({ title }) {
-  const [blurb, setBlurb] = useState("");
   const [formData, setFormData] = useReducer(formReducer, defaultFormState);
+  const [blurb, setBlurb] = useState("");
   const [modalContent, setModalContent] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [blurbVisible, setBlurbVisible] = useState(false);
+  const [loggedIn, setLoggedIn] = useContext(Context);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const showToast = (msg) => {
+    document.getElementById("snackbar").classList.add("show");
+    document.getElementById("snackbar").innerHTML = msg;
+    setTimeout(() => {
+      document.getElementById("snackbar").classList.remove("show");
+    }, 2900);
+  };
+
+  const copyToClipboard = (msg) => {
+    showToast("Note copied to clipboard!");
+    setTimeout(() => {
+      if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(msg);
+      }
+      return Promise.reject("The Clipboard API is not available.");
+    }, 1000);
+    setModalVisible(false);
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  };
+
+  async function updateNotes(url, data) {
+    await postData(url, data);
+  }
+
+  const onSaveClick = (data) => {
+    if (loggedIn) {
+      showToast("Note saved!");
+      let newNoteForm = {};
+      newNoteForm.title = "Dynamic Balance";
+      newNoteForm.body = data;
+      updateNotes("/add-note", newNoteForm);
+    } else {
+      showToast("Create an account to save notes!");
+    }
+    setModalVisible(false);
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     postData("/balance", formData).then((data) => {
       setBlurb(data);
-      setBlurbVisible(true);
+      setModalContent(
+        <NarrativeModal
+          blurb={data}
+          onClickCopy={copyToClipboard}
+          onClickSave={onSaveClick}
+        />
+      );
+      setModalVisible(true);
     });
   };
 
@@ -307,7 +359,7 @@ export default function DynamicBalance({ title }) {
   );
 
   return (
-    <>
+    <div className="fade-in">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
         <FormSelect
@@ -389,10 +441,9 @@ export default function DynamicBalance({ title }) {
           subtitle="Select how much assistance was provided"
           onClick={() => handleModalVisit(fimModal)}
         />
-        <Modal modalContent={modalContent} />
         <SubmitButton />
       </form>
-      {blurbVisible && <NarrativeBlurb text={blurb} id="goal_blurb" />}
-    </>
+      <Modal modalContent={modalContent} />
+    </div>
   );
 }

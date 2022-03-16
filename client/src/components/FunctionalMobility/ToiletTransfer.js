@@ -309,7 +309,7 @@ export default function ToiletTransfer({ title }) {
   );
 
   return (
-    <>
+    <div className="fade-in">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
         <FormSelect
@@ -378,8 +378,6 @@ export default function ToiletTransfer({ title }) {
 
         <SubmitButton />
       </form>
-
-      {blurbVisible && <NarrativeBlurb text={blurb} id="goal_blurb" />}
-    </>
+    </div>
   );
 }

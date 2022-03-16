@@ -197,11 +197,11 @@ const SideBar = () => {
                     url="/toilet-transfer"
                     title="Toilet Transfer"
                 />
-                <SideBarSubLink
+                {/* <SideBarSubLink
                     id="nav-transfers"
                     url="/functional-mobility"
                     title="Functional Mobility"
-                />
+                /> */}
             </div>
 
             <SideBarDropDownLink

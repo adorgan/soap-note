@@ -374,7 +374,7 @@ export default function ArmExercise({ title }) {
     />
   );
   return (
-    <>
+    <div className="fade-in">
       <div className="content-title">{title}</div>
 
       <form onSubmit={handleSubmit}>
@@ -496,6 +496,6 @@ export default function ArmExercise({ title }) {
       </form>
       {blurbVisible && <NarrativeBlurb text={blurb} id="goal_blurb" />}
 
-    </>
+    </div>
   );
 }

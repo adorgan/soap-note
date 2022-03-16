@@ -251,7 +251,7 @@ export default function Grooming({ title }) {
   );
 
   return (
-    <>
+    <div className="fade-in">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
         {/* Patient terminology */}
@@ -314,6 +314,6 @@ export default function Grooming({ title }) {
       </form>
 
       {blurbVisible && <NarrativeBlurb text={blurb} id="goal_blurb" />}
-    </>
+    </div>
   );
 }

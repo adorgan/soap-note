@@ -43,7 +43,7 @@ const Routes = () => {
         <Grooming title="Grooming" />
       </Route>
       <Route path="/toilet-transfer">
-        <ToiletTransfer />
+        <ToiletTransfer title="Toilet Transfers" />
       </Route>
       <Route path="/ADL">
         <ADL />

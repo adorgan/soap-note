@@ -7,7 +7,6 @@ const deleteNote = (req, res) => {
             console.log(err);
         }
         else{
-            console.log("deleted");
             res.send(result);
         }
     });

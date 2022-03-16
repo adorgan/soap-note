@@ -1,9 +1,9 @@
 const express = require("express");
-const createToiletTransfer = require("../controllers/Mobility/toiletTransfer");
+const createToiletTransfer = require("../controllers/FunctionalMobility/toiletTransfer")
 const makeFunctionalMobilityBlurb = require("../controllers/FunctionalMobility/functionalMobility");
 
 const router = express.Router();
 
-router.post("/toilet-transfer", createToiletTransfer);
+router.post("/toilet-transfers", createToiletTransfer);
 router.post("/functional-mobility", makeFunctionalMobilityBlurb);
 module.exports = router;

@@ -309,20 +309,7 @@ export default function Grooming({ title }) {
         />
 
         <Modal modalContent={modalContent} />
-        {/* <Accordian
-          categories={[
-            {
-              component: (
-                <Assessments handleChange={handleSingleSelectChange} />
-              ),
-              label: "Assessments",
-            },
-            {
-              component: <Vitals handleChange={handleSingleSelectChange} />,
-              label: "Vitals",
-            },
-          ]}
-        /> */}
+        
         <SubmitButton />
       </form>
 

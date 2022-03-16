@@ -71,6 +71,7 @@ function FIM({ title }) {
       modal.style.display = "none";
     } else {
       showToast("Create an account to save notes!");
+      
     }
   };
 

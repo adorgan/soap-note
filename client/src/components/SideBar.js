@@ -137,7 +137,7 @@ const SideBar = () => {
                 className="collapse fadedOut"
                 id="component-collapse-adl"
             >
-                <SideBarSubLink
+                {/* <SideBarSubLink
                     id="nav-ADL"
                     url="/ADL"
                     title="ADL Re-Training"
@@ -146,7 +146,7 @@ const SideBar = () => {
                     id="nav-hemi-dressing"
                     url="/hemi-dressing"
                     title="Hemi-Dressing"
-                />
+                /> */}
                 <SideBarSubLink
                     id="nav-grooming"
                     url="/grooming"

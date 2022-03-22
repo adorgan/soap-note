@@ -593,6 +593,10 @@ fieldset {
   align-self: center;
 }
 
+.soap-home {
+  color:#5158e2;
+}
+
 .header-right-nav{
   display: flex;
   flex: 1;

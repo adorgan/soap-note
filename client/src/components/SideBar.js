@@ -106,15 +106,16 @@ const SideBar = () => {
 
     return (
         <div className="sidebar-links-container">
-            <div className="sidebar-icon-container">
+            {/* <div className="sidebar-icon-container">
                 <Link to="/">
-                    <img
+                    {/* <img
                         style={{ width: "40px" }}
                         src="icons/Untitled.png"
                         alt=""
-                    />
+                    /> */}
+                    {/* <span className="soap-home">S</span>
                 </Link>
-            </div>
+            </div> */} 
 
             <Link
                 to={"/"}

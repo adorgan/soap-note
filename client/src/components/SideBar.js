@@ -46,60 +46,60 @@ const SideBar = () => {
     useEffect(() => {
         if (ADLDropDownShowing) {
             ADLDropDownArrow.current.classList.add("rotate");
-            ADLDropDown.current.classList.add("fade-in-sidebar-sublink");
-            ADLDropDown.current.classList.remove("fade-out-sidebar-sublink"); 
+            ADLDropDown.current.classList.add("open-sidebar-sublinks");
+            ADLDropDown.current.classList.remove("collapse-sidebar-sublinks"); 
 
         } else {
             ADLDropDownArrow.current.classList.remove("rotate");
-            ADLDropDown.current.classList.add("fade-out-sidebar-sublink");
-            ADLDropDown.current.classList.remove("fade-in-sidebar-sublink");
+            ADLDropDown.current.classList.add("collapse-sidebar-sublinks");
+            ADLDropDown.current.classList.remove("open-sidebar-sublinks");
         }
 
         if (therExDropDownShowing) {
             therExDropDownArrow.current.classList.add("rotate");
-            therExDropDown.current.classList.add("fade-in-sidebar-sublink");
-            therExDropDown.current.classList.remove("fade-out-sidebar-sublink");
+            therExDropDown.current.classList.add("open-sidebar-sublinks");
+            therExDropDown.current.classList.remove("collapse-sidebar-sublinks");
             
         } else {
             therExDropDownArrow.current.classList.remove("rotate");
-            therExDropDown.current.classList.add("fade-out-sidebar-sublink");
-            therExDropDown.current.classList.remove("fade-in-sidebar-sublink");
+            therExDropDown.current.classList.add("collapse-sidebar-sublinks");
+            therExDropDown.current.classList.remove("open-sidebar-sublinks");
             
         }
 
         if (funcMobDropDownShowing) {
             funcMobDropDownArrow.current.classList.add("rotate");
-            funcMobDropDown.current.classList.add("fade-in-sidebar-sublink");
-            funcMobDropDown.current.classList.remove("fade-out-sidebar-sublink");
+            funcMobDropDown.current.classList.add("open-sidebar-sublinks");
+            funcMobDropDown.current.classList.remove("collapse-sidebar-sublinks");
             
         } else {
             funcMobDropDownArrow.current.classList.remove("rotate");
-            funcMobDropDown.current.classList.add("fade-out-sidebar-sublink");
-            funcMobDropDown.current.classList.remove("fade-in-sidebar-sublink");
+            funcMobDropDown.current.classList.add("collapse-sidebar-sublinks");
+            funcMobDropDown.current.classList.remove("open-sidebar-sublinks");
             
         }
 
         if (balanceDropDownShowing) {
             balanceDropDownArrow.current.classList.add("rotate");
-            balanceDropDown.current.classList.add("fade-in-sidebar-sublink");
-            balanceDropDown.current.classList.remove("fade-out-sidebar-sublink");
+            balanceDropDown.current.classList.add("open-sidebar-sublinks");
+            balanceDropDown.current.classList.remove("collapse-sidebar-sublinks");
             
         } else {
             balanceDropDownArrow.current.classList.remove("rotate");
-            balanceDropDown.current.classList.add("fade-out-sidebar-sublink");
-            balanceDropDown.current.classList.remove("fade-in-sidebar-sublink");
+            balanceDropDown.current.classList.add("collapse-sidebar-sublinks");
+            balanceDropDown.current.classList.remove("open-sidebar-sublinks");
             
         }
 
         if (assessmentsDropDownShowing) {
             assessmentsDropDownArrow.current.classList.add("rotate");
-            assessmentsDropDown.current.classList.add("fade-in-sidebar-sublink");
-            assessmentsDropDown.current.classList.remove("fade-out-sidebar-sublink");
+            assessmentsDropDown.current.classList.add("open-sidebar-sublinks");
+            assessmentsDropDown.current.classList.remove("collapse-sidebar-sublinks");
             
         } else {
             assessmentsDropDownArrow.current.classList.remove("rotate");
-            assessmentsDropDown.current.classList.add("fade-out-sidebar-sublink");
-            assessmentsDropDown.current.classList.remove("fade-in-sidebar-sublink");
+            assessmentsDropDown.current.classList.add("collapse-sidebar-sublinks");
+            assessmentsDropDown.current.classList.remove("open-sidebar-sublinks");
             
         }
     });
@@ -135,7 +135,7 @@ const SideBar = () => {
 
             <div
                 ref={ADLDropDown}
-                className="collapse fade-out-sidebar-sublink"
+                className="collapse collapse-sidebar-sublinks"
                 id="component-collapse-adl"
             >
                 {/* <SideBarSubLink
@@ -164,7 +164,7 @@ const SideBar = () => {
                 onClick={() => setTherExDropDownShowing((prev) => !prev)}
             />
             <div
-                className="collapse fade-out-sidebar-sublink"
+                className="collapse collapse-sidebar-sublinks"
                 id="component-collapse-ther-ex"
                 ref={therExDropDown}
             >
@@ -190,7 +190,7 @@ const SideBar = () => {
             />
             <div
                 ref={funcMobDropDown}
-                className="collapse fade-out-sidebar-sublink"
+                className="collapse collapse-sidebar-sublinks"
                 id="component-collapse-mobility"
             >
                 <SideBarSubLink
@@ -215,7 +215,7 @@ const SideBar = () => {
             />
             <div
                 ref={balanceDropDown}
-                className="collapse fade-out-sidebar-sublink"
+                className="collapse collapse-sidebar-sublinks"
                 id="component-collapse-balance"
             >
                 <SideBarSubLink
@@ -239,7 +239,7 @@ const SideBar = () => {
                 onClick={() => setAssessmentsDropDownShowing((prev) => !prev)}
             />
             <div
-                className="collapse fade-out-sidebar-sublink"
+                className="collapse collapse-sidebar-sublinks"
                 id="component-collapse-assessments"
                 ref={assessmentsDropDown}
             >

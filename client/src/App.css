@@ -5,8 +5,12 @@
     --accent-hover: #6d73ec;
     --background-dark: #4a4a4a;
     --background-light: #f5f5f5;
+    --background-dark-hover: #5a5a5a;
     --form-text-light: #5e5e5e;
-    --form-background-hover: #ebebeb;
+    --background-light-hover: #ebebeb;
+    --black-with-opacity: rgba(0, 0, 0, 0.4);
+    --black: #000000;
+
     font-size: 62.5%;
   }
 
@@ -53,24 +57,17 @@
 
 
 /* Utilities */
-
-  .fade-in-sidebar-sublink {
-    visibility: visible;
-    overflow-y: hidden;
-    max-height: 100px;
-    transition: linear 0.15s;
+  
+  /* blue accent for coloring icons */
+  .accent {
+    filter: invert(39%) sepia(51%) saturate(5465%) hue-rotate(227deg)
+      brightness(91%) contrast(94%);
   }
 
-  .fade-out-sidebar-sublink {
+  .collapse-sidebar-sublinks {
     max-height: 0px;
     visibility: hidden;
     transition: linear 0.15s;
-  }
-
-  .loading {
-    position: relative;
-    top: 50%;
-    left: 48%;
   }
 
   .fade-in-component {
@@ -90,15 +87,33 @@
     }
   }
 
+  /* color hamburger icon in mobile view */
+  .hamburger {
+    filter: invert(31%) sepia(1%) saturate(2035%) hue-rotate(327deg) brightness(95%) contrast(99%);
+    display: none;
+  }
+
+  .loading {
+    position: relative;
+    top: 50%;
+    left: 48%;
+  }
+
   /* avoid selecting text on press on mobile devices */
   .noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Edge, Opera and Firefox */
+    -webkit-touch-callout: none;  /* iOS Safari */
+    -webkit-user-select: none;    /* Safari */
+    -khtml-user-select: none;     /* Konqueror HTML */
+    -moz-user-select: none;       /* Old versions of Firefox */
+    -ms-user-select: none;        /* Internet Explorer/Edge */
+    user-select: none;            /* Non-prefixed version, currentlymsupported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .open-sidebar-sublinks {
+    visibility: visible;
+    overflow-y: hidden;
+    max-height: 100px;
+    transition: linear 0.15s;
   }
 
   .rotate {
@@ -109,23 +124,11 @@
     transform: rotate(-90deg);
   }
 
-  /* blue accent for coloring icons */
-  .accent {
-    filter: invert(39%) sepia(51%) saturate(5465%) hue-rotate(227deg)
-      brightness(91%) contrast(94%);
-  }
-
-  /* color hamburger icon in mobile view */
-  .hamburger {
-    filter: invert(31%) sepia(1%) saturate(2035%) hue-rotate(327deg) brightness(95%) contrast(99%);
-    display: none;
-  }
-
-  /* Snackbar */
+  /* snackbar */
   #snackbar {
     visibility: hidden; /* Hidden by default. Visible on click */
     min-width: 250px; /* Set a default minimum width */
-    background-color: rgb(75, 75, 75); /* Black background color */
+    background-color: var(--background-dark); /* Black background color */
     color: #fff; /* White text color */
     text-align: center; /* Centered text */
     border-radius: 2px; /* Rounded borders */
@@ -192,44 +195,48 @@
     }
   }
 
-
 /* High Level Layout */
 
-.flex-container {
-  display: flex;
-  min-height: 100%;
-}
+  /* whole window */
+  .flex-container {
+    display: flex;
+    min-height: 100%;
+  }
 
-.nav-container {
-  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
-    0 2px 8px hsla(0, 0%, 0%, 0.05);
-  padding: 0;
-  height: 50px;
-  width: 100%;
-  background-color: white;
-  position: fixed;
-  display: block;
-  z-index: 4;
-}
+  /* top nav bar */
+  .nav-container {
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+      0 2px 8px hsla(0, 0%, 0%, 0.05);
+    padding: 0;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    display: block;
+    z-index: 4;
+  }
 
-.left-container {
-  background-color: var(--background-dark);
-  display: flex;
-  flex-direction: column;
-  padding-top: 10px;
-  width: 200px;
-  position: fixed;
-  height: 100%;
-  z-index: 3;
-}
+  /* left sidebar */
+  .left-container {
+    background-color: var(--background-dark);
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    z-index: 3;
+  }
 
-.right-container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  background-color: var(--background-light);
-  margin-left: 200px;
-}
+  /* right content */
+  .right-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: var(--background-light);
+    margin-left: 200px;
+  }
+
 
 /* Left Sidebar */
 
@@ -266,7 +273,7 @@
 
   .sidebar-primary-links:hover,
   .sidebar-sublink:hover {
-    background: rgb(90, 90, 90);
+    background: var(--background-dark-hover);
     border-radius: 5px;
   }
 
@@ -293,7 +300,6 @@
   .sidebar-text:hover {
     cursor: pointer;
   }
-
 
 /* Form */
 
@@ -326,7 +332,7 @@
   }
 
   .form-select-parent:hover {
-    background-color: var(--form-background-hover);
+    background-color: var(--background-light-hover);
     cursor: pointer;
   }
 
@@ -435,7 +441,7 @@
 
   .btn-modal:hover {
     cursor: pointer;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--background-light-hover);
   }
 
   .modal-btn-container {
@@ -452,8 +458,8 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    background-color: var(--black); /* Fallback color */
+    background-color: var(--black-with-opacity); /* Black w/ opacity */
   }
 
   .modal-content {
@@ -475,7 +481,7 @@
   }
 
   .modal-option-hover:hover {
-    background-color: rgb(235, 235, 235);
+    background-color: var(--background-light-hover);
   }
 
   .modal-option-selected {
@@ -491,7 +497,7 @@
     justify-content: center;
     font-size: 1.8rem;
     padding: 20px 10px 10px 10px;
-    border-bottom: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid var(--black);
   }
 
 
@@ -568,7 +574,7 @@
     width: 56px;
     color: white;
     border-radius: 30px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 8px 16px 0px var(--black-with-opacity);
     font-size: 2.8rem;
   }
   .float:hover {
@@ -754,7 +760,7 @@
     font-size: 1.3rem;
     top: 42px;
     right: 8px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px 0px var(--black-with-opacity);
     z-index: 1;
     border-radius: 3px;
   }

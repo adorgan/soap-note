@@ -18,7 +18,7 @@ const DropDown = (props) => {
     if (!props.show) return null;
     return (
         <div className="dropdown" ref={ref}>
-            <div className="dropdown-content fade-in">
+            <div className="dropdown-content fade-in-component">
                 <a href="#">Settings</a>
                 <Link to="/logout">Logout</Link>
             </div>

@@ -251,7 +251,7 @@ export default function Grooming({ title }) {
   );
 
   return (
-    <div className="fade-in">
+    <div className="fade-in-component">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
         {/* Patient terminology */}

@@ -313,7 +313,7 @@ const ArmBike = ({ title }) => {
 
   return (
     <>
-      <div className="wrapper fade-in">
+      <div className="wrapper fade-in-component">
         <div className="content-title">{title}</div>
         <form onSubmit={handleSubmit}>
           <fieldset>

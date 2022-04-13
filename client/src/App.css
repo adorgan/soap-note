@@ -73,7 +73,7 @@
     left: 48%;
   }
 
-  .fade-in {
+  .fade-in-component {
     opacity: 1;
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;

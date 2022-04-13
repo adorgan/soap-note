@@ -121,7 +121,7 @@ export default function Register() {
         Back to Home
       </Link>
       <div className="register-content-container">
-        <div className="registration-sidebar fade-in">
+        <div className="registration-sidebar fade-in-component">
           <p>Sign up for more features!</p>
           <ul>
             <li>Save custom notes</li>
@@ -132,7 +132,7 @@ export default function Register() {
         <form
           onSubmit={handleSubmit}
           autoComplete="off"
-          className="registration-form fade-in"
+          className="registration-form fade-in-component"
         >
           <div className="registration-title">Register</div>
           <div className="registration-div">

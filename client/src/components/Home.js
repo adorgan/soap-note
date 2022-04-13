@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-      <div className="home-container fade-in">
+      <div className="home-container fade-in-component">
           <div className="home-div-left">
               <div className="home-title">
                   Build Therapy <span className="soap-home">SOAP</span> Notes Efficiently

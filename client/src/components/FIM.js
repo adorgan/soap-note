@@ -245,7 +245,7 @@ function FIM({ title }) {
   );
 
   return (
-    <div className="fade-in">
+    <div className="fade-in-component">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
         <fieldset>

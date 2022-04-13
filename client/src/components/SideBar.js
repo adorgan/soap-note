@@ -46,60 +46,60 @@ const SideBar = () => {
     useEffect(() => {
         if (ADLDropDownShowing) {
             ADLDropDownArrow.current.classList.add("rotate");
-            ADLDropDown.current.classList.add("fadeIn");
-            ADLDropDown.current.classList.remove("fadedOut"); 
+            ADLDropDown.current.classList.add("fade-in-sidebar-sublink");
+            ADLDropDown.current.classList.remove("fade-out-sidebar-sublink"); 
 
         } else {
             ADLDropDownArrow.current.classList.remove("rotate");
-            ADLDropDown.current.classList.add("fadedOut");
-            ADLDropDown.current.classList.remove("fadeIn");
+            ADLDropDown.current.classList.add("fade-out-sidebar-sublink");
+            ADLDropDown.current.classList.remove("fade-in-sidebar-sublink");
         }
 
         if (therExDropDownShowing) {
             therExDropDownArrow.current.classList.add("rotate");
-            therExDropDown.current.classList.add("fadeIn");
-            therExDropDown.current.classList.remove("fadedOut");
+            therExDropDown.current.classList.add("fade-in-sidebar-sublink");
+            therExDropDown.current.classList.remove("fade-out-sidebar-sublink");
             
         } else {
             therExDropDownArrow.current.classList.remove("rotate");
-            therExDropDown.current.classList.add("fadedOut");
-            therExDropDown.current.classList.remove("fadeIn");
+            therExDropDown.current.classList.add("fade-out-sidebar-sublink");
+            therExDropDown.current.classList.remove("fade-in-sidebar-sublink");
             
         }
 
         if (funcMobDropDownShowing) {
             funcMobDropDownArrow.current.classList.add("rotate");
-            funcMobDropDown.current.classList.add("fadeIn");
-            funcMobDropDown.current.classList.remove("fadedOut");
+            funcMobDropDown.current.classList.add("fade-in-sidebar-sublink");
+            funcMobDropDown.current.classList.remove("fade-out-sidebar-sublink");
             
         } else {
             funcMobDropDownArrow.current.classList.remove("rotate");
-            funcMobDropDown.current.classList.add("fadedOut");
-            funcMobDropDown.current.classList.remove("fadeIn");
+            funcMobDropDown.current.classList.add("fade-out-sidebar-sublink");
+            funcMobDropDown.current.classList.remove("fade-in-sidebar-sublink");
             
         }
 
         if (balanceDropDownShowing) {
             balanceDropDownArrow.current.classList.add("rotate");
-            balanceDropDown.current.classList.add("fadeIn");
-            balanceDropDown.current.classList.remove("fadedOut");
+            balanceDropDown.current.classList.add("fade-in-sidebar-sublink");
+            balanceDropDown.current.classList.remove("fade-out-sidebar-sublink");
             
         } else {
             balanceDropDownArrow.current.classList.remove("rotate");
-            balanceDropDown.current.classList.add("fadedOut");
-            balanceDropDown.current.classList.remove("fadeIn");
+            balanceDropDown.current.classList.add("fade-out-sidebar-sublink");
+            balanceDropDown.current.classList.remove("fade-in-sidebar-sublink");
             
         }
 
         if (assessmentsDropDownShowing) {
             assessmentsDropDownArrow.current.classList.add("rotate");
-            assessmentsDropDown.current.classList.add("fadeIn");
-            assessmentsDropDown.current.classList.remove("fadedOut");
+            assessmentsDropDown.current.classList.add("fade-in-sidebar-sublink");
+            assessmentsDropDown.current.classList.remove("fade-out-sidebar-sublink");
             
         } else {
             assessmentsDropDownArrow.current.classList.remove("rotate");
-            assessmentsDropDown.current.classList.add("fadedOut");
-            assessmentsDropDown.current.classList.remove("fadeIn");
+            assessmentsDropDown.current.classList.add("fade-out-sidebar-sublink");
+            assessmentsDropDown.current.classList.remove("fade-in-sidebar-sublink");
             
         }
     });
@@ -135,7 +135,7 @@ const SideBar = () => {
 
             <div
                 ref={ADLDropDown}
-                className="collapse fadedOut"
+                className="collapse fade-out-sidebar-sublink"
                 id="component-collapse-adl"
             >
                 {/* <SideBarSubLink
@@ -164,7 +164,7 @@ const SideBar = () => {
                 onClick={() => setTherExDropDownShowing((prev) => !prev)}
             />
             <div
-                className="collapse fadedOut"
+                className="collapse fade-out-sidebar-sublink"
                 id="component-collapse-ther-ex"
                 ref={therExDropDown}
             >
@@ -190,7 +190,7 @@ const SideBar = () => {
             />
             <div
                 ref={funcMobDropDown}
-                className="collapse fadedOut"
+                className="collapse fade-out-sidebar-sublink"
                 id="component-collapse-mobility"
             >
                 <SideBarSubLink
@@ -215,7 +215,7 @@ const SideBar = () => {
             />
             <div
                 ref={balanceDropDown}
-                className="collapse fadedOut"
+                className="collapse fade-out-sidebar-sublink"
                 id="component-collapse-balance"
             >
                 <SideBarSubLink
@@ -239,7 +239,7 @@ const SideBar = () => {
                 onClick={() => setAssessmentsDropDownShowing((prev) => !prev)}
             />
             <div
-                className="collapse fadedOut"
+                className="collapse fade-out-sidebar-sublink"
                 id="component-collapse-assessments"
                 ref={assessmentsDropDown}
             >

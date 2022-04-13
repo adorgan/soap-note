@@ -120,7 +120,7 @@ const SideBar = () => {
             <Link
                 to={"/"}
                 onClick={handleClick}
-                className="side-bar-text sidebar-primary-links sidebar-home-link noselect"
+                className="sidebar-text sidebar-primary-links sidebar-home-link noselect"
             >
                 Home
             </Link>

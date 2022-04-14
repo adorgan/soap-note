@@ -176,7 +176,7 @@ export default function ToiletTransfer() {
             },
           ]}
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Create SOAP</button>
         <NarrativeBlurb text={blurb} id="blurb" />
       </form>
     </>

@@ -312,69 +312,71 @@ export default function ToiletTransfer({ title }) {
     <div className="fade-in-component wrapper">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
-        <FormSelect
-          title={"Terminology"}
-          subtitleID="pt-terminology-subtitle-id"
-          subtitle="Select setting-specific patient terminology"
-          onClick={() => handleModalVisit(terminologyModal)}
-        />
+        <div className="form-content">
+          <FormSelect
+            title={"Terminology"}
+            subtitleID="pt-terminology-subtitle-id"
+            subtitle="Select setting-specific patient terminology"
+            onClick={() => handleModalVisit(terminologyModal)}
+          />
 
-        <FormSelect
-          title="Location"
-          subtitleID="location-subtitle-id"
-          subtitle="Select location of activity"
-          onClick={() => handleModalVisit(locationModal)}
-        />
+          <FormSelect
+            title="Location"
+            subtitleID="location-subtitle-id"
+            subtitle="Select location of activity"
+            onClick={() => handleModalVisit(locationModal)}
+          />
 
-        <FormSelect
-          title={"Toilet Transfer Tasks Completed"}
-          subtitle="Select one or more tasks"
-          subtitleID="toilet-transfer-tasks-subtitle-id"
-          onClick={() => handleModalVisit(tasksModal)}
-        />
+          <FormSelect
+            title={"Toilet Transfer Tasks Completed"}
+            subtitle="Select one or more tasks"
+            subtitleID="toilet-transfer-tasks-subtitle-id"
+            onClick={() => handleModalVisit(tasksModal)}
+          />
 
-        <FormSelect
-          title={"Toilet Transfer Aids"}
-          subtitle="Select one or more transer aids"
-          subtitleID="toilet-transfer-aids-subtitle-id"
-          onClick={() => handleModalVisit(aidsModal)}
-        />
+          <FormSelect
+            title={"Toilet Transfer Aids"}
+            subtitle="Select one or more transer aids"
+            subtitleID="toilet-transfer-aids-subtitle-id"
+            onClick={() => handleModalVisit(aidsModal)}
+          />
 
-        <FormSelect
-          title={"Pre-Activity Education Topics"}
-          subtitle="Select one or more education topics"
-          subtitleID="education-subtitle-id"
-          onClick={() => handleModalVisit(educationModal)}
-        />
+          <FormSelect
+            title={"Pre-Activity Education Topics"}
+            subtitle="Select one or more education topics"
+            subtitleID="education-subtitle-id"
+            onClick={() => handleModalVisit(educationModal)}
+          />
 
-        <FormSelect
-          title="Activity-Specific Instructions"
-          subtitle="Select one or more instructional cues"
-          subtitleID="instruction-subtitle-id"
-          onClick={() => handleModalVisit(instructionsModal)}
-        />
-        <FormSelect
-          title="Activity-Specific Interventions"
-          subtitle="Select one or more interventions"
-          subtitleID="interventions-subtitle-id"
-          onClick={() => handleModalVisit(interventionsModal)}
-        />
+          <FormSelect
+            title="Activity-Specific Instructions"
+            subtitle="Select one or more instructional cues"
+            subtitleID="instruction-subtitle-id"
+            onClick={() => handleModalVisit(instructionsModal)}
+          />
+          <FormSelect
+            title="Activity-Specific Interventions"
+            subtitle="Select one or more interventions"
+            subtitleID="interventions-subtitle-id"
+            onClick={() => handleModalVisit(interventionsModal)}
+          />
 
-        <FormSelect
-          title="Verbal Cues"
-          subtitle="Select how many verbal cues were provided"
-          subtitleID="verbal-cues-subtitle-id"
-          onClick={() => handleModalVisit(verbalCuesModal)}
-        />
+          <FormSelect
+            title="Verbal Cues"
+            subtitle="Select how many verbal cues were provided"
+            subtitleID="verbal-cues-subtitle-id"
+            onClick={() => handleModalVisit(verbalCuesModal)}
+          />
 
-        <FormSelect
-          title={"FIM"}
-          subtitleID="physical-assistance-subtitle-id"
-          subtitle="Select how much assistance was provided"
-          onClick={() => handleModalVisit(fimModal)}
-        />
+          <FormSelect
+            title={"FIM"}
+            subtitleID="physical-assistance-subtitle-id"
+            subtitle="Select how much assistance was provided"
+            onClick={() => handleModalVisit(fimModal)}
+          />
 
-        <Modal modalContent={modalContent} />
+          <Modal modalContent={modalContent} />
+        </div>
 
         <SubmitButton />
       </form>

@@ -248,7 +248,7 @@ function FIM({ title }) {
     <div className="fade-in-component wrapper">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
-        <fieldset>
+        <fieldset className="form-content">
           <FormSelect
             title="Eating"
             subtitle="select FIM rating"

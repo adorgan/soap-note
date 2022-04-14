@@ -254,62 +254,64 @@ export default function Grooming({ title }) {
     <div className="fade-in-component wrapper">
       <div className="content-title">{title}</div>
       <form onSubmit={handleSubmit}>
-        {/* Patient terminology */}
-        <FormSelect
-          title={"Terminology"}
-          subtitleID="pt-terminology-subtitle-id"
-          subtitle="Select setting-specific patient terminology"
-          onClick={() => handleModalVisit(terminologyModal)}
-        />
-        <FormSelect
-          title="Position"
-          subtitleID="position-subtitle-id"
-          subtitle="Select the position the activity was performed in"
-          onClick={() => handleModalVisit(positionModal)}
-        />
+        <div className="form-content">
+          {/* Patient terminology */}
+          <FormSelect
+            title={"Terminology"}
+            subtitleID="pt-terminology-subtitle-id"
+            subtitle="Select setting-specific patient terminology"
+            onClick={() => handleModalVisit(terminologyModal)}
+          />
+          <FormSelect
+            title="Position"
+            subtitleID="position-subtitle-id"
+            subtitle="Select the position the activity was performed in"
+            onClick={() => handleModalVisit(positionModal)}
+          />
 
-        <FormSelect
-          title="Location"
-          subtitleID="location-subtitle-id"
-          subtitle="Select location of activity"
-          onClick={() => handleModalVisit(locationModal)}
-        />
-        <FormSelect
-          title={"Grooming Tasks Completed"}
-          subtitle="Select one or more grooming tasks"
-          subtitleID="grooming-tasks-subtitle-id"
-          onClick={() => handleModalVisit(tasksModal)}
-        />
+          <FormSelect
+            title="Location"
+            subtitleID="location-subtitle-id"
+            subtitle="Select location of activity"
+            onClick={() => handleModalVisit(locationModal)}
+          />
+          <FormSelect
+            title={"Grooming Tasks Completed"}
+            subtitle="Select one or more grooming tasks"
+            subtitleID="grooming-tasks-subtitle-id"
+            onClick={() => handleModalVisit(tasksModal)}
+          />
 
-        <FormSelect
-          title={"Pre-Activity Education Topics"}
-          subtitle="Select one or more education topics"
-          subtitleID="education-subtitle-id"
-          onClick={() => handleModalVisit(educationModal)}
-        />
+          <FormSelect
+            title={"Pre-Activity Education Topics"}
+            subtitle="Select one or more education topics"
+            subtitleID="education-subtitle-id"
+            onClick={() => handleModalVisit(educationModal)}
+          />
 
-        <FormSelect
-          title="Activity-Specific Instructions"
-          subtitle="Select one or more instructional cues"
-          subtitleID="instruction-subtitle-id"
-          onClick={() => handleModalVisit(instructionsModal)}
-        />
-        <FormSelect
-          title="Activity-Specific Interventions"
-          subtitle="Select one or more interventions"
-          subtitleID="interventions-subtitle-id"
-          onClick={() => handleModalVisit(interventionsModal)}
-        />
+          <FormSelect
+            title="Activity-Specific Instructions"
+            subtitle="Select one or more instructional cues"
+            subtitleID="instruction-subtitle-id"
+            onClick={() => handleModalVisit(instructionsModal)}
+          />
+          <FormSelect
+            title="Activity-Specific Interventions"
+            subtitle="Select one or more interventions"
+            subtitleID="interventions-subtitle-id"
+            onClick={() => handleModalVisit(interventionsModal)}
+          />
 
-        <FormSelect
-          title={"FIM"}
-          subtitleID="physical-assistance-subtitle-id"
-          subtitle="Select how much assistance was provided"
-          onClick={() => handleModalVisit(fimModal)}
-        />
+          <FormSelect
+            title={"FIM"}
+            subtitleID="physical-assistance-subtitle-id"
+            subtitle="Select how much assistance was provided"
+            onClick={() => handleModalVisit(fimModal)}
+          />
 
-        <Modal modalContent={modalContent} />
-        
+          <Modal modalContent={modalContent} />
+        </div>
+
         <SubmitButton />
       </form>
 

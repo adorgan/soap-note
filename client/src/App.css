@@ -38,8 +38,8 @@ body {
 form {
   width: 75%;
   background-color: white;
-  border: 1px solid rgb(224, 224, 224);
-  border-radius: 5px;
+  /* border: 1px solid rgb(224, 224, 224); */
+  /* border-radius: 5px; */
 }
 
 fieldset {
@@ -338,8 +338,8 @@ textarea {
   background-color: var(--accent);
   color: white;
   width: 100%;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  /* border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; */
   font-size: 1.8rem;
 }
 
@@ -348,8 +348,14 @@ textarea {
   background-color: var(--accent-hover);
 }
 
+.form-content{
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid rgb(224, 224, 224);
+}
 .form-select-arrow {
   color: var(--form-text-light);
+  font-size: 1.7rem;
 }
 
 .form-select-container-left {
@@ -762,6 +768,7 @@ textarea {
   .home-benefits-title{
     font-size: 3.0rem;
     font-weight: bold;
+    
   }
 
   .home-benefits-specifics-row {
@@ -898,6 +905,34 @@ textarea {
 
 .dropdown-content a:hover {
   background: var(--background-light-hover);
+}
+
+/* Get Started */
+.get-started-header{
+  
+  font-size: 5rem;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.get-started-title{
+  font-size: 3rem;
+  font-weight: bold;
+  padding-bottom: 12px;
+
+}
+
+.get-started-body{
+  font-size: 1.7rem;
+  line-height: 2.0;
+  padding-bottom: 20px;
+}
+
+.get-started-container{
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 @media only screen and (max-width: 900px) {

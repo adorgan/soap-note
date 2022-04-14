@@ -118,11 +118,11 @@ const SideBar = () => {
             </div> */} 
 
             <Link
-                to={"/"}
+                to={"/get-started"}
                 onClick={handleClick}
                 className="sidebar-text sidebar-primary-links sidebar-home-link noselect"
             >
-                Home
+                FAQ
             </Link>
             <SideBarDropDownLink
                 icon={"icons/angle-right-solid.png"}

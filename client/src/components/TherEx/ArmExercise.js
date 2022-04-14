@@ -378,98 +378,99 @@ export default function ArmExercise({ title }) {
       <div className="content-title">{title}</div>
 
       <form onSubmit={handleSubmit}>
-        <FormSelect
-          title="Patient Terminology"
-          subtitle="Select setting-specific patient terminology"
-          subtitleID="pt-terminology-subtitle-id"
-          onClick={() => handleModalVisit(terminologyModal)}
-        />
-        <FormSelect
-          title="Goals"
-          subtitle="Select one or more goal areas"
-          subtitleID="goals-subtitle-id"
-          onClick={() => handleModalVisit(goalsModal)}
-        />
-        <FormSelect
-          title="Impairments"
-          subtitle="Select one or more impairments"
-          subtitleID="impairments-subtitle-id"
-          onClick={() => handleModalVisit(impairmentsModal)}
-        />
-        <FormSelect
-          title={"Pre-Activity Education Topics"}
-          subtitle="Select one or more education topics"
-          subtitleID="education-subtitle-id"
-          onClick={() => handleModalVisit(educationModal)}
-        />
-        <FormSelect
-          title="Position"
-          subtitleID="position-subtitle-id"
-          subtitle="Select the position the activity was performed in"
-          onClick={() => handleModalVisit(positionModal)}
-        />
-        <FormSelect
-          title={"Extremeties Targeted"}
-          subtitleID="extremities-subtitle-id"
-          subtitle="Select extremeties used"
-          onClick={() => handleModalVisit(extremitiesModal)}
-        />
+        <div className="form-content">
+          <FormSelect
+            title="Patient Terminology"
+            subtitle="Select setting-specific patient terminology"
+            subtitleID="pt-terminology-subtitle-id"
+            onClick={() => handleModalVisit(terminologyModal)}
+          />
+          <FormSelect
+            title="Goals"
+            subtitle="Select one or more goal areas"
+            subtitleID="goals-subtitle-id"
+            onClick={() => handleModalVisit(goalsModal)}
+          />
+          <FormSelect
+            title="Impairments"
+            subtitle="Select one or more impairments"
+            subtitleID="impairments-subtitle-id"
+            onClick={() => handleModalVisit(impairmentsModal)}
+          />
+          <FormSelect
+            title={"Pre-Activity Education Topics"}
+            subtitle="Select one or more education topics"
+            subtitleID="education-subtitle-id"
+            onClick={() => handleModalVisit(educationModal)}
+          />
+          <FormSelect
+            title="Position"
+            subtitleID="position-subtitle-id"
+            subtitle="Select the position the activity was performed in"
+            onClick={() => handleModalVisit(positionModal)}
+          />
+          <FormSelect
+            title={"Extremeties Targeted"}
+            subtitleID="extremities-subtitle-id"
+            subtitle="Select extremeties used"
+            onClick={() => handleModalVisit(extremitiesModal)}
+          />
 
-        <FormSelect
-          title={"Muscle Groups Targeted"}
-          subtitleID="muscle-groups-subtitle-id"
-          subtitle="Select one or more muscle groups targeted"
-          onClick={() => handleModalVisit(muscleGroupsModal)}
-        />
-        <FormSelect
-          title="Sets"
-          subtitle="Select number of sets completed"
-          subtitleID="sets-subtitle-id"
-          onClick={() => handleModalVisit(setsModal)}
-        />
-        <FormSelect
-          title="Repetitions"
-          subtitle="Select number of repetitions completed per set"
-          subtitleID="repetitions-subtitle-id"
-          onClick={() => handleModalVisit(repsModal)}
-        />
-        <FormSelect
-          title="Weight"
-          subtitle="Select weight level used"
-          subtitleID="weight-subtitle-id"
-          onClick={() => handleModalVisit(weightModal)}
-        />
-        <FormSelect
-          title={"Exercise Band"}
-          subtitleID="exercise-band-subtitle-id"
-          subtitle="Select color of exercise band used"
-          onClick={() => handleModalVisit(exercseBandsModal)}
-        />
-        <FormSelect
-          title={"FIM"}
-          subtitleID="physical-assistance-subtitle-id"
-          subtitle="Select how much assistance was provided"
-          onClick={() => handleModalVisit(fimModal)}
-        />
-        <FormSelect
-          title="Verbal Cues"
-          subtitle="Select how many verbal cues were provided"
-          subtitleID="verbal-cues-subtitle-id"
-          onClick={() => handleModalVisit(verbalCuesModal)}
-        />
-        <FormSelect
-          title="Specific Verbal Cues"
-          subtitle="Select one or more verbal cues given"
-          subtitleID="verbal-cues-given-subtitle-id"
-          onClick={() => handleModalVisit(specificVerbalCuesModal)}
-        />
-        <FormSelect
-          title="Plan"
-          subtitle="Select plan for future treatments"
-          subtitleID="plan-subtitle-id"
-          onClick={() => handleModalVisit(planModal)}
-        />
-        {/* <Accordian
+          <FormSelect
+            title={"Muscle Groups Targeted"}
+            subtitleID="muscle-groups-subtitle-id"
+            subtitle="Select one or more muscle groups targeted"
+            onClick={() => handleModalVisit(muscleGroupsModal)}
+          />
+          <FormSelect
+            title="Sets"
+            subtitle="Select number of sets completed"
+            subtitleID="sets-subtitle-id"
+            onClick={() => handleModalVisit(setsModal)}
+          />
+          <FormSelect
+            title="Repetitions"
+            subtitle="Select number of repetitions completed per set"
+            subtitleID="repetitions-subtitle-id"
+            onClick={() => handleModalVisit(repsModal)}
+          />
+          <FormSelect
+            title="Weight"
+            subtitle="Select weight level used"
+            subtitleID="weight-subtitle-id"
+            onClick={() => handleModalVisit(weightModal)}
+          />
+          <FormSelect
+            title={"Exercise Band"}
+            subtitleID="exercise-band-subtitle-id"
+            subtitle="Select color of exercise band used"
+            onClick={() => handleModalVisit(exercseBandsModal)}
+          />
+          <FormSelect
+            title={"FIM"}
+            subtitleID="physical-assistance-subtitle-id"
+            subtitle="Select how much assistance was provided"
+            onClick={() => handleModalVisit(fimModal)}
+          />
+          <FormSelect
+            title="Verbal Cues"
+            subtitle="Select how many verbal cues were provided"
+            subtitleID="verbal-cues-subtitle-id"
+            onClick={() => handleModalVisit(verbalCuesModal)}
+          />
+          <FormSelect
+            title="Specific Verbal Cues"
+            subtitle="Select one or more verbal cues given"
+            subtitleID="verbal-cues-given-subtitle-id"
+            onClick={() => handleModalVisit(specificVerbalCuesModal)}
+          />
+          <FormSelect
+            title="Plan"
+            subtitle="Select plan for future treatments"
+            subtitleID="plan-subtitle-id"
+            onClick={() => handleModalVisit(planModal)}
+          />
+          {/* <Accordian
           categories={[
             {
               // FIM scoring for all ADLs
@@ -490,12 +491,12 @@ export default function ArmExercise({ title }) {
             },
           ]}
         /> */}
-        <Modal modalContent={modalContent} />
+          <Modal modalContent={modalContent} />
+        </div>
 
         <SubmitButton />
       </form>
       {blurbVisible && <NarrativeBlurb text={blurb} id="goal_blurb" />}
-
     </div>
   );
 }

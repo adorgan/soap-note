@@ -105,7 +105,7 @@ const SideBar = () => {
     });
 
     return (
-        <div className="sidebar-links-container">
+        <div className="sidebar-links-container fade-in-component">
             {/* <div className="sidebar-icon-container">
                 <Link to="/">
                     {/* <img

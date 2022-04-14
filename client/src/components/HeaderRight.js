@@ -14,15 +14,17 @@ const HeaderRight = () => {
     if (sidebar.classList.contains("mobile-nav")) {
       sidebar.classList.remove("mobile-nav");
       ham.classList.remove("rotate-backwards");
+
     } else {
       sidebar.classList.add("mobile-nav");
       ham.classList.add("rotate-backwards");
+      
     }
   };
 
   return (
     <nav id="navRight" className="nav-container">
-      <div className="nav-child-left">
+      <div className="nav-child-left-hamburger">
         <img
           id="hamburger-icon"
           onClick={handleHamburgerClick}
@@ -34,9 +36,18 @@ const HeaderRight = () => {
 
       <div className="header-right-nav">
         <div className="nav-child-left">
+          <Link to="/">
+            <img
+              src="icons/soap-solid.png"
+              alt=""
+              className="accent icon-nav "
+            />
+          </Link>
+
           <Link className=" header-link" to="/">
             Soap Note Generator
           </Link>
+
           <Link className=" header-link" to="/get-started">
             Get Started
           </Link>

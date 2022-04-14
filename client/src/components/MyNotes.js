@@ -65,6 +65,10 @@ const MyNotes = () => {
         getNotes();
     }, []);
 
+    useEffect(()=> {
+        document.getElementById("left-sidebar").classList.remove("home-display")
+    })
+
     useEffect(() => {
         if (modalVisible) {
             const modal = document.getElementById("myModal");

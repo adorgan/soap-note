@@ -3,10 +3,10 @@ import React, {useEffect} from 'react'
 const GetStarted = () => {
 
     useEffect(()=> {
-        document.getElementById("left-sidebar").style.display = "block";
+        document.getElementById("left-sidebar").classList.remove("home-display")
     })
   return (
-    <div>GetStarted</div>
+    <div className="fade-in-component">GetStarted</div>
   )
 }
 

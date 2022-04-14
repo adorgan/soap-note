@@ -36,7 +36,7 @@ function App() {
           </div>
         </div>
         <div className="footer">
-            
+            Copyright 2022
         </div>
       </Context.Provider>
     </Router>

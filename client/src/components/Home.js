@@ -27,7 +27,7 @@ const Home = () => {
           <strong>A</strong>ssessment <strong>P</strong>lan"
         </p>
         <div >
-          <Link className="home-banner-btn" to={"/get-started"}>Get Started</Link>
+          <Link className="get-started home-banner-btn" to={"/get-started"}>Get Started</Link>
         </div>
       </div>
       <div className="home-benefits-container">

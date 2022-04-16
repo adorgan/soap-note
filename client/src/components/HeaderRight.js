@@ -48,7 +48,7 @@ const HeaderRight = () => {
             Soap Note Generator
           </Link>
 
-          <Link className=" header-link" to="/get-started">
+          <Link className="get-started header-link" to="/get-started">
             Get Started
           </Link>
         </div>

@@ -390,6 +390,9 @@ textarea {
 
 /* Top Navigation Bar */
 
+a.get-started {
+    color: #dd4646;
+}
 .icon-nav {
   height: 25px;
   justify-content: center;
@@ -684,7 +687,7 @@ textarea {
   display: flex;
   flex: 1;
   flex-direction: column;
-  background: linear-gradient(to left, var(--accent), #e37575);
+  background: var(--background-dark);
 
   margin-left: 0px;
 }
@@ -796,7 +799,7 @@ textarea {
   }
 
 .home-title {
-  font-size: 8rem;
+  font-size: 6rem;
   margin-bottom: 20px;
   margin-top: 20px;
   
@@ -950,6 +953,10 @@ textarea {
     width: 100%;
   }
 
+  .get-started-container{
+    width: 100%;
+  }
+
   /* Top Navigation Bar */
 
   .nav-child-left {
@@ -1080,9 +1087,11 @@ textarea {
   .register-content-container {
     display: flex;
     flex-direction: column-reverse;
+    padding: 50px 0;
   }
 
   .registration-sidebar {
     margin-right: 0px;
+    padding-top: 20px;
   }
 }

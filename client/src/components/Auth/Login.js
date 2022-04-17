@@ -140,7 +140,7 @@ export default function Login() {
             <div>
                 <form
                     onSubmit={handleSubmit}
-                    className="registration-form fade-in"
+                    className="registration-form fade-in-component"
                 >
                     <div className="registration-title">Sign In</div>
 

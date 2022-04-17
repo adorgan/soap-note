@@ -91,92 +91,95 @@ export default function ToiletTransfer() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {/* Patient terminology */}
-        <SelectInput
-          label="Healthcare Receiver Terminology"
-          id="patient"
-          name="patient"
-          handleChange={handleSingleSelectChange}
-          options={constants.patientTerm}
-        />
-        <MultiSelectInput
-          label="Pre-Activity Education Topics"
-          id="education"
-          name="education"
-          handleChange={handleMultiSelectChange}
-          options={constants.functionalActivityEducationTopics}
-        />
-        <MultiSelectInput
-          label="Activity-Specific Instructions"
-          id="instruction"
-          name="instruction"
-          handleChange={handleMultiSelectChange}
-          options={constants.toiletTransfer.instruction}
-        />
-        <MultiSelectInput
-          label="Activity-Specific Interventions"
-          id="intervention"
-          name="intervention"
-          handleChange={handleMultiSelectChange}
-          options={constants.toiletTransfer.intervention}
-        />
-        {/* Physical assistance needed for activity */}
-        <SelectInput
-          label="Physical Assistance Provided"
-          id="physical_assistance"
-          name="physical_assistance"
-          handleChange={handleSingleSelectChange}
-          options={constants.assessments.fim}
-          isRequired={true}
-        />
-        {/* Verbal cueing required */}
-        <SelectInput
-          label="Verbal Cueing Required"
-          name="verbal_cueing"
-          id="verbal_cueing"
-          handleChange={handleSingleSelectChange}
-          options={constants.assessments.verbalCues}
-          isRequired={true}
-        />
-        {/* Specific verbal cues */}
-        <MultiSelectInput
-          label="Verbal Cues Given"
-          name="verbal_cues_given"
-          id="verbal_cues_given"
-          handleChange={handleMultiSelectChange}
-          options={constants.armBike.verbalCues}
-        />
-        {/* Plan for future sessions */}
-        <SelectInput
-          label="Plan"
-          name="plan"
-          id="plan"
-          handleChange={handleSingleSelectChange}
-          options={constants.plan}
-          isRequired={true}
-        />
-        <Accordian
-          categories={[
-            {
-              // FIM scoring for all ADLs
-              component: <FimBloc handleChange={handleSingleSelectChange} />,
-              label: "FIM",
-            },
-            {
-              // Other assessments to add
-              component: (
-                <Assessments handleChange={handleSingleSelectChange} />
-              ),
-              label: "Misc. Assessments",
-            },
-            {
-              // patient vital signs
-              component: <Vitals handleChange={handleSingleSelectChange} />,
-              label: "Vitals",
-            },
-          ]}
-        />
-        <button type="submit">Submit</button>
+        <div className="form-content">
+          {/* Patient terminology */}
+          <SelectInput
+            label="Healthcare Receiver Terminology"
+            id="patient"
+            name="patient"
+            handleChange={handleSingleSelectChange}
+            options={constants.patientTerm}
+          />
+          <MultiSelectInput
+            label="Pre-Activity Education Topics"
+            id="education"
+            name="education"
+            handleChange={handleMultiSelectChange}
+            options={constants.functionalActivityEducationTopics}
+          />
+          <MultiSelectInput
+            label="Activity-Specific Instructions"
+            id="instruction"
+            name="instruction"
+            handleChange={handleMultiSelectChange}
+            options={constants.toiletTransfer.instruction}
+          />
+          <MultiSelectInput
+            label="Activity-Specific Interventions"
+            id="intervention"
+            name="intervention"
+            handleChange={handleMultiSelectChange}
+            options={constants.toiletTransfer.intervention}
+          />
+          {/* Physical assistance needed for activity */}
+          <SelectInput
+            label="Physical Assistance Provided"
+            id="physical_assistance"
+            name="physical_assistance"
+            handleChange={handleSingleSelectChange}
+            options={constants.assessments.fim}
+            isRequired={true}
+          />
+          {/* Verbal cueing required */}
+          <SelectInput
+            label="Verbal Cueing Required"
+            name="verbal_cueing"
+            id="verbal_cueing"
+            handleChange={handleSingleSelectChange}
+            options={constants.assessments.verbalCues}
+            isRequired={true}
+          />
+          {/* Specific verbal cues */}
+          <MultiSelectInput
+            label="Verbal Cues Given"
+            name="verbal_cues_given"
+            id="verbal_cues_given"
+            handleChange={handleMultiSelectChange}
+            options={constants.armBike.verbalCues}
+          />
+          {/* Plan for future sessions */}
+          <SelectInput
+            label="Plan"
+            name="plan"
+            id="plan"
+            handleChange={handleSingleSelectChange}
+            options={constants.plan}
+            isRequired={true}
+          />
+          <Accordian
+            categories={[
+              {
+                // FIM scoring for all ADLs
+                component: <FimBloc handleChange={handleSingleSelectChange} />,
+                label: "FIM",
+              },
+              {
+                // Other assessments to add
+                component: (
+                  <Assessments handleChange={handleSingleSelectChange} />
+                ),
+                label: "Misc. Assessments",
+              },
+              {
+                // patient vital signs
+                component: <Vitals handleChange={handleSingleSelectChange} />,
+                label: "Vitals",
+              },
+            ]}
+          />
+        </div>
+
+        <button type="submit">Create SOAP</button>
         <NarrativeBlurb text={blurb} id="blurb" />
       </form>
     </>

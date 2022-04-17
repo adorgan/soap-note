@@ -16,7 +16,7 @@ const NewNoteModal = ({ onClickCancel, onClickAdd }) => {
     };
     
     return (
-        <div className=" modal-content fade-in">
+        <div className=" modal-content fade-in-component">
             <form className="new-note-form">
                 <div className="new-note-container">
                     <div className="new-note-title">

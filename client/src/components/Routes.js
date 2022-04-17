@@ -16,6 +16,7 @@ import StaticBalance from "./Balance/StaticBalance";
 import Logout from "./Auth/Logout";
 import Home from "./Home";
 import { Context } from "./Context";
+import GetStarted from "./GetStarted";
 
 const Routes = () => {
   const [loggedIn, setLoggedIn] = useContext(Context);
@@ -56,6 +57,9 @@ const Routes = () => {
       </Route>
       <Route path="/static-balance">
         <StaticBalance title="Static Balance" />
+      </Route>
+      <Route path="/get-started">
+        <GetStarted/>
       </Route>
       <Route path="/login">
         <Login />

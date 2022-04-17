@@ -155,6 +155,7 @@ textarea {
   left: 50%;
   transform: translateX(-50%);
   border-radius: 25px;
+  font-size: 1.5rem;
 }
 
 #snackbar.show {
@@ -573,6 +574,7 @@ a.get-started {
 .modal-narrative {
   width: 500px;
   padding: 16px;
+  font-size: 1.7rem;
 }
 
 .narrative_blurb {

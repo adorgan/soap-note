@@ -49,7 +49,7 @@ const Home = () => {
                     Better Readability
                 </div>
                 <div className="home-benefits-specifics-item-body">
-                    Don't worry about punctuation anymore. SOAP Notes are guaranteed to be free of spelling error or improper syntax.
+                    Don't worry about punctuation anymore. SOAP Notes are guaranteed to be free of spelling errors and improper syntax.
                 </div>
             </div>
             <div className="home-benefits-specifics-item">

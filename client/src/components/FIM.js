@@ -6,6 +6,7 @@ import NarrativeModal from "./ModalContent/NarrativeModal";
 import { Context } from "./Context";
 import postData from "../utils/postRequest";
 import capitalizeEveryWord from "../utils/capitalizeEveryWord"
+import SubmitButton from "./SubmitButton";
 
 const defaultState = {
   eating: "",
@@ -299,11 +300,12 @@ function FIM({ title }) {
           />
           <Modal modalContent={modalContent} />
         </fieldset>
-        <div className="div-submit-btn">
+        {/* <div className="div-submit-btn">
           <button className="btn-form" type="submit">
-            Submit
+            Create Soap
           </button>
-        </div>
+        </div> */}
+        <SubmitButton/>
       </form>
 
       {/* {showFimBlurb && (
